@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<ruleset name="10up PHPCS">
+	<description>10up PHPCS extended.</description>
+
+	<!-- General exclusions -->
+	<exclude-pattern>*/dist/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/tests/*</exclude-pattern>
+
+	<!-- Config -->
+	<arg name="extensions" value="php" />
+	<arg name="parallel" value="20" />
+	<arg name="colors"/>
+	<arg value="sp" />
+
+	<!-- Rules -->
+	<rule ref="10up-Default">
+		<!-- Yoda Conditions :shrug: -->
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda" />
+	</rule>
+</ruleset>

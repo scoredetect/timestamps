@@ -1,0 +1,44 @@
+.timestamps-options__profile {
+	align-items: center;
+	display: flex;
+	gap: 1rem;
+	margin-top: 1rem;
+
+	& .timestamps-options__profileImage {
+		display: none;
+	}
+
+	&.is-displayCreatedBy {
+
+		& .timestamps-options__profileImage {
+			display: block;
+		}
+
+		& .timestamps-options__profileImage-placeholder {
+			display: none;
+		}
+	}
+}
+
+.timestamps-options__profileImageWrapper {
+	border-radius: 9999px;
+	height: 32px;
+	overflow: hidden;
+	width: 32px;
+}
+
+.timestamps-options__profileDesc {
+	display: flex;
+	flex-direction: column;
+}
+
+.js-anim-show-init {
+	opacity: 1;
+	transform: translateY(0);
+	transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.js-anim-hidden-init {
+	opacity: 0;
+	transform: translateY(10px);
+}

@@ -1,0 +1,30 @@
+{
+  "name": "scoredetect/timestamps",
+  "description": "Timestamp your WordPress content into the blockchain to empower your content authenticity and increase user trust.",
+  "type": "wordpress-plugin",
+  "keywords": ["wordpress", "plugin", "timestamps", "blockchain", "content", "authenticity", "verification"],
+  "license": ["AGPL-3.0-only"],
+  "authors": [
+    {
+      "name": "ScoreDetect",
+      "email": "info@scoredetect.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "require-dev": {
+    "10up/phpcs-composer": "3.0.0"
+  },
+  "scripts": {
+    "lint": "phpcs .",
+    "lint-fix": "phpcbf ."
+  },
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
+}

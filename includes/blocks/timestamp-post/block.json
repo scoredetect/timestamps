@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "name": "sdcom-timestamps/timestamp-post",
+  "textdomain": "sdcom-timestamps",
+  "title": "Timestamps",
+  "description": "Timestamps prove that you keep your content regularly up-to-date.",
+  "icon": "clock",
+  "category": "sdcom-timestamps",
+  "keywords": [ "timestamps", "blockchain", "content", "authenticity", "verification" ],
+  "attributes": {
+    "sdcomPreviousCertificateId": {
+      "type": "string",
+      "default": ""
+    }
+  },
+  "editorScript": "file:../../../dist/blocks/block-timestamp-post/editor.js"
+}

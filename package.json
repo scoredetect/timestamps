@@ -1,0 +1,54 @@
+{
+  "name": "timestamps-plugin",
+  "version": "1.0.0",
+  "description": "Timestamp your WordPress content into the blockchain to empower your content authenticity and increase user trust.",
+  "homepage": "https://www.scoredetect.com/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/scoredetect/timestamps"
+  },
+  "scripts": {
+    "prepare": "husky install",
+    "start": "npm run watch",
+    "watch": "10up-toolkit watch --port=5010 --hot",
+    "build": "10up-toolkit build",
+    "format-js": "10up-toolkit format-js",
+    "lint-js": "10up-toolkit lint-js",
+    "lint-style": "10up-toolkit lint-style",
+    "test": "10up-toolkit test-unit-jest",
+    "clean-dist": "rm -rf ./dist"
+  },
+  "author": {
+    "name": "ScoreDetect",
+    "email": "info@scoredetect.com",
+    "url": "https://www.scoredetect.com",
+    "role": "developer"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@wordpress/create-block": "^4.25.0",
+    "10up-toolkit": "^5.2.2",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "2.6.2"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.39.3",
+    "prop-types": "^15.7.2"
+  },
+  "10up-toolkit": {
+    "entry": {
+      "timestamp-post": "./assets/js/timestamp-post/editor/index.js",
+      "notice-script": "./assets/js/notice.js",
+      "authenticate-script": "./assets/js/authenticate.js",
+      "settings-script": "./assets/js/settings.js",
+      "admin-styles": "./assets/css/admin.css",
+      "block-timestamp-post": "./includes/blocks/timestamp-post/index.js"
+    }
+  }
+}
