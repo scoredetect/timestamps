@@ -82,5 +82,9 @@ The plugin provides comprehensive customer support through email support@scorede
 You can reach out to our support team at any time for assistance.
 
 == Changelog ==
+
+You can find the full changelog in the plugin's GitHub repository:
+https://github.com/scoredetect/timestamps/
+
 = 1.0.0 - Unknown =
 * Initial plugin
