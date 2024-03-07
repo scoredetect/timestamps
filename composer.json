@@ -17,7 +17,8 @@
   "prefer-stable": true,
   "require-dev": {
     "10up/phpcs-composer": "3.0.0",
-    "brianhenryie/strauss": "^0.16.0"
+    "brianhenryie/strauss": "^0.16.0",
+    "phpcompatibility/phpcompatibility-wp": "*"
   },
   "scripts": {
     "lint": "phpcs .",
