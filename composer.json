@@ -22,10 +22,29 @@
   },
   "scripts": {
     "lint": "phpcs .",
-    "lint-fix": "phpcbf ."
+    "lint-fix": "phpcbf .",
+    "strauss": [ "vendor/bin/strauss" ],
+    "post-install-cmd": [
+      "@strauss"
+    ],
+    "post-update-cmd": [
+      "@strauss"
+    ]
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/{$name}/": ["type:wordpress-plugin", "type:wordpress-theme"]
+    },
+    "strauss": {
+      "target_directory": "vendor-prefixed",
+      "namespace_prefix": "SDCOM_Timestamps\\Vendor_Prefixed\\",
+      "classmap_prefix": "SDCOM_Timestamps_Vendor_Prefixed_",
+      "constant_prefix": "SDCOM_Timestamps_VENDOR_"
+    }
   },
   "config": {
     "allow-plugins": {
+      "composer/installers": true,
       "dealerdirect/phpcodesniffer-composer-installer": true
     }
   }
