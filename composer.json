@@ -17,30 +17,11 @@
   "prefer-stable": true,
   "require-dev": {
     "10up/phpcs-composer": "3.0.0",
-    "brianhenryie/strauss": "^0.16.0",
     "phpcompatibility/phpcompatibility-wp": "*"
   },
   "scripts": {
     "lint": "phpcs .",
-    "lint-fix": "phpcbf .",
-    "strauss": [ "vendor/bin/strauss" ],
-    "post-install-cmd": [
-      "@strauss"
-    ],
-    "post-update-cmd": [
-      "@strauss"
-    ]
-  },
-  "extra": {
-    "installer-paths": {
-      "vendor/{$name}/": ["type:wordpress-plugin", "type:wordpress-theme"]
-    },
-    "strauss": {
-      "target_directory": "vendor-prefixed",
-      "namespace_prefix": "SDCOM_Timestamps\\Vendor_Prefixed\\",
-      "classmap_prefix": "SDCOM_Timestamps_Vendor_Prefixed_",
-      "constant_prefix": "SDCOM_Timestamps_VENDOR_"
-    }
+    "lint-fix": "phpcbf ."
   },
   "config": {
     "allow-plugins": {

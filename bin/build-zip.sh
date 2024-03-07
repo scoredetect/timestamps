@@ -6,4 +6,4 @@ npm run build
 rm ./timestamps.zip
 
 git archive --output=timestamps.zip HEAD
-zip -ur timestamps.zip dist vendor-prefixed
+zip -ur timestamps.zip dist
