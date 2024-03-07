@@ -2,6 +2,7 @@ node_modules
 bower_components
 release
 vendor
+vendor-prefixed
 phpunit.xml
 .idea
 uploads
@@ -11,6 +12,7 @@ cache
 # Project Files
 dist
 backstop_data
+timestamps.zip
 
 # Editors
 *.esproj
