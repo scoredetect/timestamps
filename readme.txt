@@ -1,6 +1,6 @@
 === Timestamps ===
 Contributors: scoredetect
-Tags: timestamp, timestamps, blockchain, content, authenticity, verification
+Tags: timestamps, blockchain, content, authenticity, verification
 Requires at least: 6.0.0
 Tested up to: 6.4.2
 Requires PHP: 7.4
