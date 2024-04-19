@@ -4,7 +4,7 @@ Tags: timestamps, blockchain, content, authenticity, verification
 Requires at least: 6.0.0
 Tested up to: 6.4.2
 Requires PHP: 7.4
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -85,6 +85,9 @@ You can reach out to our support team at any time for assistance.
 
 You can find the full changelog in the plugin's GitHub repository:
 https://github.com/scoredetect/timestamps/
+
+= 1.1.0 =
+* Convert Timestamp Block into a Dynamic Block
 
 = 1.0.0 - Unknown =
 * Initial plugin
