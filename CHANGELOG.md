@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file, per [the Ke
 
 ## [Unreleased]
 
+## 1.1.0 - 2024-04-19
+
+### Changed
+* Convert Timestamp Block into a Dynamic Block by @michael-sumner in #2
+
 <!--
 ### Added
 ### Changed
