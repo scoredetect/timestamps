@@ -96,18 +96,22 @@ function is_block_editor_active() {
 
 	$classic_editor_replace = \get_option( 'classic-editor-replace' );
 
+	// We assume that the Block Editor is active, whilst the Classic Editor plugin never existed.
 	if ( empty( $classic_editor_replace ) ) {
-		return false;
+		return true;
 	}
 
+	// If the Classic Editor plugin is installed and activated, we check the setting.
 	if ( $classic_editor_replace === 'block' ) {
 		return true;
 	}
 
+	// If the Classic Editor plugin is installed and activated, we check the setting.
 	if ( $classic_editor_replace === 'classic' ) {
 		return false;
 	}
 
+	// We assume that the Block Editor is active by default.
 	return true;
 }
 
