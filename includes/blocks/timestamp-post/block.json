@@ -6,7 +6,7 @@
   "description": "Timestamps prove that you keep your content regularly up-to-date.",
   "icon": "clock",
   "category": "sdcom-timestamps",
-  "keywords": [ "timestamps", "blockchain", "content", "authenticity", "verification" ],
+  "keywords": [ "timestamp", "blockchain", "content", "authenticity", "copyright", "timestamps", "protection", "verification", "proof", "timestamping", "scoredetect" ],
   "attributes": {
     "sdcomPreviousCertificateId": {
       "type": "string",
