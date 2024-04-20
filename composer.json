@@ -1,8 +1,8 @@
 {
   "name": "scoredetect/timestamps",
-  "description": "Timestamp your WordPress content into the blockchain to empower your content authenticity and increase user trust.",
+  "description": "Timestamp your WordPress content to empower your content authenticity and increase user trust with our blockchain timestamping solution.",
   "type": "wordpress-plugin",
-  "keywords": ["wordpress", "plugin", "timestamps", "blockchain", "content", "authenticity", "verification"],
+  "keywords": ["wordpress", "plugin", "timestamp", "blockchain", "content", "authenticity", "copyright", "timestamps", "protection", "verification", "proof", "timestamping", "scoredetect"],
   "license": ["AGPL-3.0-only"],
   "authors": [
     {

@@ -1,14 +1,14 @@
 === Timestamps ===
 Contributors: scoredetect
-Tags: timestamps, blockchain, content, authenticity, verification
+Tags: timestamp, blockchain, content, authenticity, copyright, timestamps, protection, verification, proof, timestamping
 Requires at least: 6.0.0
-Tested up to: 6.4.2
+Tested up to: 6.5.2
 Requires PHP: 7.4
 Stable tag: 1.1.1
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
-Timestamp your WordPress content to empower your content authenticity and increase user trust.
+Timestamp your WordPress content to empower your content authenticity and increase user trust with our blockchain timestamping solution.
 
 == Description ==
 Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public, as a verification factor for your content.

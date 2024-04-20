@@ -13,7 +13,7 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Timestamps
- * Description:       Timestamp your WordPress content to empower your content authenticity and increase user trust.
+ * Description:       Timestamp your WordPress content to empower your content authenticity and increase user trust with our blockchain timestamping solution.
  * Version:           1.1.1
  * Author:            ScoreDetect.com
  * Author URI:        https://www.scoredetect.com/
