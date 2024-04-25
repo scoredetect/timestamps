@@ -68,6 +68,7 @@ class Timestamp extends Feature {
 		add_action( 'edit_post', array( $this, 'save_post_meta' ), 10, 2 );
 		add_action( 'rest_insert_post', array( $this, 'save_post_meta_rest' ), 10, 2 );
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
+		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
 	}
 
 	/**
@@ -168,6 +169,31 @@ class Timestamp extends Feature {
 				'api_key' => $timestamps_api_key,
 			)
 		);
+	}
+
+	/**
+	 * Outputs the shortcode for the feature.
+	 *
+	 * @see includes/blocks/timestamp-post/markup.php for the original code.
+	 *
+	 * @return string The shortcode output.
+	 */
+	public function shortcode(): string {
+		ob_start();
+
+		$sdcom_previous_certificate_id = get_post_meta( get_the_ID(), 'sdcom_previous_certificate_id', true );
+
+		// Bail early if there is no embed_code.
+		if ( empty( $sdcom_previous_certificate_id ) ) {
+			return '';
+		}
+
+		printf(
+			'<div class="sdcom-timestamps" data-id="%s"></div>',
+			esc_attr( $sdcom_previous_certificate_id )
+		);
+
+		return ob_get_clean();
 	}
 
 	/**
