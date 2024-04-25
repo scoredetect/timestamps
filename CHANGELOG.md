@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## 1.2.0 - 2024-04-25
+
+### Added
+* Add timestamps shortcode by @michael-sumner in #7
+
+<!-- ... -->
 ## 1.1.2 - 2024-04-20
 
 ### Added
