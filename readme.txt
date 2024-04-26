@@ -1,5 +1,5 @@
 === Timestamps ===
-Contributors: scoredetect
+Contributors: scoredetect, xmic
 Tags: timestamp, blockchain, content, authenticity, copyright, timestamps, protection, verification, proof, timestamping
 Requires at least: 6.0.0
 Tested up to: 6.5.2
