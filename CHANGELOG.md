@@ -14,6 +14,15 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## 1.2.1 - 2024-05-06
+
+### Added
+* Added plugin screenshots by @michael-sumner in #10
+
+### Changed
+* Updated plugin readme docs by @michael-sumner in #9
+
+<!-- ... -->
 ## 1.2.0 - 2024-04-25
 
 ### Added
