@@ -35,17 +35,47 @@ __Privacy Protection__: We strive for privacy, therefore __only administrators__
 
 The plugin connects to the api.scoredetect.com service to create and update the verification certificates. The service is free to use with a 7-day free trial guarantee, and the plugin is free to use.
 
+### GDPR Compliant
+
+The plugin is GDPR compliant. It does not store any personal data. The plugin only stores the SHA-256 checksum of the content on the blockchain. The plugin does not store any personal data of the users. The plugin does not track any user data. The plugin does not use cookies. You can view all of the plugin code on https://plugins.svn.wordpress.org/timestamps/
+
+### SEO Friendly
+
+We aim to make the plugin SEO friendly. By improving SEO in a way that enhances the user experience. Upon displaying timestamps of content, it encourages others to view you as having authority in your niche — intentionally standing out against the rest.
+
+### How to Use the Plugin
+
+1. First, you will need to properly install the Timestamps plugin.
+2. Activate the plugin in WordPress.
+3. Visit the __Settings__ › __Timestamps__ page, and follow the instructions to authenticate your account.
+4. Click the "Save Changes" button.
+5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
+
+### Need Help?
+
+The plugin provides comprehensive customer support through email support@scoredetect.com.
+You can reach out to our support team at any time for assistance.
+
 The API Documentation is available here: https://docs.scoredetect.com/
 
 We are transparent - here are our Terms and Conditions: https://www.scoredetect.com/terms-and-conditions
 We value privacy - here is our Privacy Policy: https://www.scoredetect.com/privacy-policy
 
+Example Verification Certificate: https://www.scoredetect.com/certificate/99f8b221-ff5c-4bea-b39a-a63b99880837
+
 == Installation ==
 1. First, you will need to properly install the Timestamps plugin.
 2. Activate the plugin in WordPress.
 3. Visit the __Settings__ › __Timestamps__ page, and follow the instructions to authenticate your account.
-4. Click the \"Save Changes\" button.
+4. Click the "Save Changes" button.
 5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
+
+== Screenshots ==
+1. Connect to your ScoreDetect.com account - if you don’t have one yet, you can register at www.scoredetect.com
+2. Enable Timestamps for any WordPress content
+3. Display a Timestamp to improve your content authenticity and user experience
+4. Output a Verification Certificate to prove your content authenticity with a rich timeline
+5. Also works with any WordPress eCommerce plugin to help prove ownership and copyright protection of your products
 
 == Frequently Asked Questions ==
 = What is the Timestamps plugin, and how can it benefit me? =
@@ -83,5 +113,5 @@ You can reach out to our support team at any time for assistance.
 
 == Changelog ==
 
-You can find the full changelog in the plugin's GitHub repository:
+You can find the full changelog in the plugin’s GitHub repository:
 https://github.com/scoredetect/timestamps/blob/main/CHANGELOG.md
