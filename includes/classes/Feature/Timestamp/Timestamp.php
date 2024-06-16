@@ -574,7 +574,7 @@ class Timestamp extends Feature {
 				'username'         => $sdcom_timestamps_username,
 			);
 
-			$body = json_encode(
+			$body = wp_json_encode(
 				array(
 					'certificateId' => $certificate_id,
 					'metadata'      => $metadata,
