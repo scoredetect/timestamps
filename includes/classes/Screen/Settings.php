@@ -256,6 +256,7 @@ class Settings extends Screen {
 					wp_kses_post( $date_and_time ),
 					wp_kses_post(
 						sprintf(
+							/* translators: %s: username */
 							__( 'by %s', 'timestamps' ),
 							$username
 						)
