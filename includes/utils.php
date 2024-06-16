@@ -151,3 +151,13 @@ function is_platform_script_in_content( $post = null ) {
 
 	return false;
 }
+
+/**
+ * Checks if the WooCommerce plugin is active.
+ *
+ * @since 1.3.0
+ * @return bool Returns true if the WooCommerce plugin is active, false otherwise.
+ */
+function is_woocommerce_active() {
+	return class_exists( 'WooCommerce' );
+}
