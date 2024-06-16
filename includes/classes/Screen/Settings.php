@@ -13,6 +13,7 @@ use SDCOM_Timestamps\Screen;
 use SDCOM_Timestamps\Utils;
 
 use function SDCOM_Timestamps\Utils\is_authenticated;
+use function SDCOM_Timestamps\Utils\is_woocommerce_active;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -145,6 +146,24 @@ class Settings extends Screen {
 				$this->settings_page,
 				'sdcom_timestamps_general_settings_section'
 			);
+
+			// WooCommerce Settings.
+			if ( is_woocommerce_active() ) {
+				add_settings_section(
+					'sdcom_timestamps_woocommerce_settings_section',
+					null,
+					[ $this, 'woocommerce_settings_section' ],
+					$this->settings_page
+				);
+
+				add_settings_field(
+					'sdcom_timestamps_enable_timestamps_woocommerce_orders',
+					__( 'Enable Timestamps on WooCommerce Orders', 'timestamps' ),
+					[ $this, 'enable_timestamps_woocommerce_orders_settings_field_callback' ],
+					$this->settings_page,
+					'sdcom_timestamps_woocommerce_settings_section'
+				);
+			}
 		}
 	}
 
@@ -179,6 +198,20 @@ class Settings extends Screen {
 			sprintf(
 				'<h2>%s</h2>',
 				__( 'General Settings', 'timestamps' )
+			)
+		);
+	}
+
+	/**
+	 * Outputs the WooCommerce settings section.
+	 *
+	 * @return void
+	 */
+	public function woocommerce_settings_section() {
+		echo wp_kses_post(
+			sprintf(
+				'<h2>%s</h2>',
+				__( 'WooCommerce Settings', 'timestamps' )
 			)
 		);
 	}
@@ -248,6 +281,25 @@ class Settings extends Screen {
 			checked( isset( $option['default_timestamps_enabled'] ), true, false ),
 			wp_kses_post( __( 'Active', 'timestamps' ) ),
 			wp_kses_post( __( 'Timestamps all posts by default.', 'timestamps' ) ),
+		);
+	}
+
+	/**
+	 * Outputs the "Enable Timestamps on WooCommerce Orders" settings input checkbox field.
+	 *
+	 * If the option value is present, the checkbox will be checked.
+	 * If the option value is not present, the checkbox will be unchecked.
+	 *
+	 * @return void
+	 */
+	public function enable_timestamps_woocommerce_orders_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		printf(
+			'<label><input type="checkbox" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[enable_timestamps_woocommerce_orders]" id="enable_timestamps_woocommerce_orders" value="true" %s> %s</label><p class="description">%s</p>',
+			checked( isset( $option['enable_timestamps_woocommerce_orders'] ), true, false ),
+			wp_kses_post( __( 'Active', 'timestamps' ) ),
+			wp_kses_post( __( 'Adds Timestamps to WooCommerce Orders.', 'timestamps' ) ),
 		);
 	}
 
