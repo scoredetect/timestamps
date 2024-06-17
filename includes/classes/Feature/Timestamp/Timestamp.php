@@ -679,7 +679,6 @@ class Timestamp extends Feature {
 	 * @param int $order_id The order ID.
 	 * @return mixed|void The data returned by the API on success, or void on failure.
 	 * @throws \Exception If the order is not valid, the order items are empty, the options are empty, or the API key is empty.
-	 * @since 1.2.1
 	 */
 	public function woocommerce_new_order( $order_id ) {
 
