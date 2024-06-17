@@ -69,6 +69,52 @@ class Timestamp extends Feature {
 		add_action( 'rest_insert_post', array( $this, 'save_post_meta_rest' ), 10, 2 );
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
 		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
+		add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ) );
+		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
+	}
+
+	/**
+	 * Adds a column to the WooCommerce orders page.
+	 *
+	 * @param array $columns The columns on the orders page.
+	 * @return array The columns on the orders page.
+	 */
+	public function add_order_timestamps_column( $columns ) {
+
+		// Add the column at the end.
+		$columns = array_merge( $columns, array( 'order_timestamps' => __( 'Latest Certificate', 'timestamps' ) ) );
+
+		return $columns;
+	}
+
+	/**
+	 * Outputs the content for the order timestamps column.
+	 *
+	 * @param string $column_name The column name.
+	 * @param int    $order_or_order_id The order or order ID.
+	 * @return void
+	 */
+	public function order_timestamps_column( $column_name, $order_or_order_id ) {
+
+		// Get the order object. Backwards compatibility for CPT-based orders.
+		$order = $order_or_order_id instanceof \WC_Order ? $order_or_order_id : wc_get_order( $order_or_order_id );
+
+		if ( 'order_timestamps' !== $column_name ) {
+			return;
+		}
+
+		$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+		if ( empty( $sdcom_previous_certificate_id ) ) {
+			return;
+		}
+
+		printf(
+			'<a class="button-link" href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a>',
+			esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
+			esc_html__( 'View Certificate', 'timestamps' )
+		);
 	}
 
 	/**
@@ -258,7 +304,7 @@ class Timestamp extends Feature {
 			try {
 				update_post_meta( $post_id, 'sdcom_timestamp_post', true );
 
-				$create_certificate = $this->create_certificate( $post );
+				$create_certificate = $this->create_certificate_post( $post );
 
 				// Handle the case where the method returned false.
 				if ( $create_certificate === false ) {
@@ -272,7 +318,7 @@ class Timestamp extends Feature {
 					throw new \Exception( 'Certificate id is empty.' );
 				}
 
-				$update_certificate = $this->update_certificate( $post, $certificate_id );
+				$update_certificate = $this->update_certificate_post( $post, $certificate_id );
 
 				// Handle the case where the method returned false.
 				if ( $update_certificate === false ) {
@@ -351,7 +397,7 @@ class Timestamp extends Feature {
 				return;
 			}
 
-			$create_certificate = $this->create_certificate( $post );
+			$create_certificate = $this->create_certificate_post( $post );
 
 			// Handle the case where the method returned false.
 			if ( $create_certificate === false ) {
@@ -365,7 +411,7 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Certificate id is empty.' );
 			}
 
-			$update_certificate = $this->update_certificate( $post, $certificate_id );
+			$update_certificate = $this->update_certificate_post( $post, $certificate_id );
 
 			// Handle the case where the method returned false.
 			if ( $update_certificate === false ) {
@@ -435,7 +481,7 @@ class Timestamp extends Feature {
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the options, post content, or API key is empty.
 	 */
-	private function create_certificate( $post ) {
+	private function create_certificate_post( $post ) {
 		try {
 			$post_id                       = $post->ID;
 			$post_content                  = $post->post_content;
@@ -517,6 +563,7 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Data is empty' );
 			}
 
+			// Return the data.
 			return $data;
 
 		} catch ( \Throwable $th ) {
@@ -533,7 +580,7 @@ class Timestamp extends Feature {
 	 * @throws \Exception If the certificate id, options, post content, or API key is empty.
 	 * @throws \Throwable If an exception occurs during the process.
 	 */
-	private function update_certificate( $post, $certificate_id ) {
+	private function update_certificate_post( $post, $certificate_id ) {
 		try {
 			$post_content     = $post->post_content;
 			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
@@ -618,6 +665,290 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Data is empty' );
 			}
 
+			// Return the data.
+			return $data;
+
+		} catch ( \Throwable $th ) {
+			throw $th;
+		}
+	}
+
+	/**
+	 * Creates a certificate for a new WooCommerce order.
+	 *
+	 * @param int $order_id The order ID.
+	 * @return mixed|void The data returned by the API on success, or void on failure.
+	 * @throws \Exception If the order is not valid, the order items are empty, the options are empty, or the API key is empty.
+	 * @since 1.2.1
+	 */
+	public function woocommerce_new_order( $order_id ) {
+
+		$order = wc_get_order( $order_id );
+
+		// Bail early if the order has already been timestamped.
+		$sdcom_is_timestamped = $order->get_meta( 'sdcom_is_timestamped' );
+		if ( $sdcom_is_timestamped === '1' ) {
+			return;
+		}
+
+		try {
+			$create_certificate = $this->create_certificate_shop_order( $order );
+
+			// Handle the case where the method returned false.
+			if ( $create_certificate === false ) {
+				throw new \Exception( 'Create certificate failed.' );
+			}
+
+			$certificate_id = ! empty( $create_certificate->{'certificate'}->{'id'} ) ? $create_certificate->{'certificate'}->{'id'} : '';
+
+			// Handle the case where the certificate id is empty.
+			if ( empty( $certificate_id ) ) {
+				throw new \Exception( 'Certificate id is empty.' );
+			}
+
+			$update_certificate = $this->update_certificate_shop_order( $order, $certificate_id );
+
+			// Handle the case where the method returned false.
+			if ( $update_certificate === false ) {
+				throw new \Exception( 'Update certificate failed.' );
+			}
+
+			// Update the post meta with the new certificate id.
+			$order->update_meta_data( 'sdcom_previous_certificate_id', $certificate_id );
+
+			// Save the order to update the meta data.
+			$order->save();
+		} catch ( \Exception $e ) {
+			// Handle the exception
+			error_log( 'An error occurred: ' . $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Creates a certificate for a WooCommerce order.
+	 *
+	 * @param WC_Order $order The order to create a certificate for.
+	 * @return object|false The data returned by the API on success, or false on failure.
+	 * @throws \Throwable If an exception occurs during the process.
+	 * @throws \Exception If the options, post content, or API key is empty.
+	 */
+	private function create_certificate_shop_order( $order ) {
+		try {
+
+			// Bail early if the order is not valid.
+			if ( ! $order instanceof \WC_Order ) {
+				return false;
+			}
+
+			$order_items = $order->get_items();
+
+			// Bail early if the order items are empty.
+			if ( empty( $order_items ) ) {
+				return false;
+			}
+
+			$order_id                      = $order->get_id();
+			$order_data                    = $order->get_data();
+			$sdcom_timestamps              = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+			$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+			// Bail early if the options are empty.
+			if ( empty( $sdcom_timestamps ) ) {
+				throw new \Exception( 'Options are empty.' );
+			}
+
+			// Bail early if the order data is empty.
+			if ( empty( $order_data ) ) {
+				throw new \Exception( 'Order data is empty.' );
+			}
+
+			$sdcom_timestamps_display_created_by = ! empty( $sdcom_timestamps['display_created_by'] ) ? $sdcom_timestamps['display_created_by'] : false;
+			$sdcom_timestamps_username           = 'anonymous';
+			$sdcom_timestamps_api_key            = ! empty( $sdcom_timestamps['api_key'] ) ? $sdcom_timestamps['api_key'] : '';
+
+			// Bail early if the api key is empty.
+			if ( empty( $sdcom_timestamps_api_key ) ) {
+				throw new \Exception( 'API key is empty.' );
+			}
+
+			if ( $sdcom_timestamps_display_created_by === 'true' ) {
+				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : 'anonymous';
+			}
+
+			$url = 'https://api.scoredetect.com/create-certificate';
+
+			$metadata = array(
+				'certificateType'  => 'plain_text_upload',
+				'displayCreatedBy' => $sdcom_timestamps_display_created_by === 'true' ? true : false,
+				'username'         => $sdcom_timestamps_username,
+			);
+
+			$form_data = array(
+				'file'     => wp_json_encode( $order_data ),
+				'username' => $metadata['username'],
+			);
+
+			if ( ! empty( $sdcom_previous_certificate_id ) ) {
+				$form_data['previous_certificate_id'] = $sdcom_previous_certificate_id;
+			}
+
+			$request = wp_remote_post(
+				$url,
+				array(
+					'timeout' => 30,
+					'headers' => array(
+						'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
+					),
+					'body'    => $form_data,
+				)
+			);
+
+			if ( is_wp_error( $request ) ) {
+				throw new \Exception( 'WP Error' );
+			}
+
+			/**
+			 * Ensure we have a successful response code.
+			 */
+			if ( 200 !== wp_remote_retrieve_response_code( $request ) ) {
+				throw new \Exception( 'Response code is not 200' );
+			}
+
+			/**
+			 * Retrieve and parse the contents of the API response, which is JSON.
+			 */
+			$content = wp_remote_retrieve_body( $request );
+			$data    = json_decode( $content );
+
+			/**
+			 * Detect any issues with decoding the JSON string into a PHP object.
+			 */
+			if ( empty( $data ) ) {
+				throw new \Exception( 'Data is empty' );
+			}
+
+			// Mark the order as timestamped.
+			$order->update_meta_data( 'sdcom_is_timestamped', '1' );
+
+			// Save the order to update the meta data.
+			$order->save();
+
+			// Return the data.
+			return $data;
+
+		} catch ( \Throwable $th ) {
+			throw $th;
+		}
+	}
+
+	/**
+	 * Updates a certificate for a WooCommerce order.
+	 *
+	 * @param WC_Order $order The order to update a certificate for.
+	 * @param string   $certificate_id The id of the certificate to update.
+	 * @return object|false The data returned by the API on success, or false on failure.
+	 * @throws \Exception If the certificate id, options, post content, or API key is empty.
+	 * @throws \Throwable If an exception occurs during the process.
+	 */
+	private function update_certificate_shop_order( $order, $certificate_id ) {
+		try {
+
+			// Bail early if the order is not valid.
+			if ( ! $order instanceof \WC_Order ) {
+				return;
+			}
+
+			$order_items = $order->get_items();
+
+			// Bail early if the order items are empty.
+			if ( empty( $order_items ) ) {
+				return;
+			}
+
+			$order_data       = $order->get_data();
+			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+			// Bail early if the certificate id is empty.
+			if ( empty( $certificate_id ) ) {
+				throw new \Exception( 'Certificate id is empty.' );
+			}
+
+			// Bail early if the options are empty.
+			if ( empty( $sdcom_timestamps ) ) {
+				throw new \Exception( 'Options are empty.' );
+			}
+
+			// Bail early if the order data is empty.
+			if ( empty( $order_data ) ) {
+				throw new \Exception( 'Order data is empty.' );
+			}
+
+			$sdcom_timestamps_display_created_by = ! empty( $sdcom_timestamps['display_created_by'] ) ? $sdcom_timestamps['display_created_by'] : false;
+			$sdcom_timestamps_username           = 'anonymous';
+			$sdcom_timestamps_api_key            = ! empty( $sdcom_timestamps['api_key'] ) ? $sdcom_timestamps['api_key'] : '';
+
+			// Bail early if the api key is empty.
+			if ( empty( $sdcom_timestamps_api_key ) ) {
+				throw new \Exception( 'API key is empty.' );
+			}
+
+			if ( $sdcom_timestamps_display_created_by === 'true' ) {
+				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : $sdcom_timestamps_username;
+			}
+
+			$url = 'https://api.scoredetect.com/update-certificate';
+
+			$metadata = array(
+				'certificateType'  => 'plain_text_upload',
+				'displayCreatedBy' => $sdcom_timestamps_display_created_by === 'true' ? true : false,
+				'username'         => $sdcom_timestamps_username,
+			);
+
+			$body = wp_json_encode(
+				array(
+					'certificateId' => $certificate_id,
+					'metadata'      => $metadata,
+				)
+			);
+
+			$request = wp_remote_request(
+				$url,
+				array(
+					'method'  => 'PATCH',
+					'timeout' => 30,
+					'headers' => array(
+						'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
+						'Content-Type'  => 'application/json',
+					),
+					'body'    => $body,
+				)
+			);
+
+			if ( is_wp_error( $request ) ) {
+				throw new \Exception( 'WP Error' );
+			}
+
+			/**
+			 * Ensure we have a successful response code.
+			 */
+			if ( 200 !== wp_remote_retrieve_response_code( $request ) ) {
+				throw new \Exception( 'Response code is not 200' );
+			}
+
+			/**
+			 * Retrieve and parse the contents of the API response, which is JSON.
+			 */
+			$content = wp_remote_retrieve_body( $request );
+			$data    = json_decode( $content );
+
+			/**
+			 * Detect any issues with decoding the JSON string into a PHP object.
+			 */
+			if ( empty( $data ) ) {
+				throw new \Exception( 'Data is empty' );
+			}
+
+			// Return the data.
 			return $data;
 
 		} catch ( \Throwable $th ) {
