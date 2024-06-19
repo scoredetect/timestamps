@@ -161,3 +161,16 @@ function is_platform_script_in_content( $post = null ) {
 function is_woocommerce_active() {
 	return class_exists( 'WooCommerce' );
 }
+
+/**
+ * Gets the WooCommerce volatile order data keys.
+ *
+ * This function returns an array of keys that represent volatile data in a WooCommerce order.
+ *
+ * @return array Filtered volatile order data keys.
+ */
+function get_wc_volatile_order_data_keys() {
+	$wc_volatile_order_data_keys = [ 'date_modified', 'meta_data', 'version' ];
+
+	return apply_filters( 'sdcom_timestamps_wc_volatile_order_data_keys', $wc_volatile_order_data_keys );
+}
