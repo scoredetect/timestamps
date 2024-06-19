@@ -186,3 +186,20 @@ function is_timestamps_woocommerce_orders_active(): bool {
 
 	return ! empty( $timestamps_woocommerce_orders_enabled );
 }
+
+/**
+ * Gets the certificate URL for a WooCommerce order.
+ *
+ * @param \WC_Order $order The WooCommerce order object.
+ * @return string The certificate URL.
+ */
+function get_certificate_url_wc_order( $order ): string {
+	$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+	// Bail early if there is no previous certificate id.
+	if ( empty( $sdcom_previous_certificate_id ) ) {
+		return '';
+	}
+
+	return apply_filters( 'get_certificate_url_wc_order', esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ), $order );
+}
