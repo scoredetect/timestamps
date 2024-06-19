@@ -70,7 +70,7 @@ class Timestamp extends Feature {
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
 		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
 		add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
-		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ) );
+		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
 		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
 	}
 
