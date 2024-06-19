@@ -11,6 +11,8 @@ namespace SDCOM_Timestamps\Feature\Timestamp;
 use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
+use function SDCOM_Timestamps\Utils\get_wc_volatile_order_data_keys;
+
 /**
  * Timestamp feature class
  */
@@ -70,6 +72,7 @@ class Timestamp extends Feature {
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
 		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
 		add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
+		add_action( 'woocommerce_update_order', array( $this, 'woocommerce_update_order' ) );
 		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
 		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
 	}
@@ -698,6 +701,84 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Create certificate failed.' );
 			}
 
+			$certificate_id   = ! empty( $create_certificate->{'certificate'}->{'id'} ) ? $create_certificate->{'certificate'}->{'id'} : '';
+			$certificate_hash = ! empty( $create_certificate->{'certificate'}->{'verificationCertificate'}->{'associatedMedia'}->{'sha256'} ) ? $create_certificate->{'certificate'}->{'verificationCertificate'}->{'associatedMedia'}->{'sha256'} : '';
+
+			// Handle the case where the certificate id is empty.
+			if ( empty( $certificate_id ) ) {
+				throw new \Exception( 'Certificate id is empty.' );
+			}
+
+			$update_certificate = $this->update_certificate_shop_order( $order, $certificate_id );
+
+			// Handle the case where the method returned false.
+			if ( $update_certificate === false ) {
+				throw new \Exception( 'Update certificate failed.' );
+			}
+
+			// Update the post meta with the new certificate id.
+			$order->update_meta_data( 'sdcom_previous_certificate_id', $certificate_id );
+
+			// Update the post meta with the new certificate hash.
+			$order->update_meta_data( 'sdcom_previous_certificate_hash', $certificate_hash );
+
+			// Save the order to update the meta data.
+			$order->save();
+		} catch ( \Exception $e ) {
+			// Handle the exception
+			error_log( 'An error occurred: ' . $e->getMessage() );
+		}
+	}
+
+	/**
+	 * Creates a certificate for an updated WooCommerce order.
+	 *
+	 * @param int $order_id The order ID.
+	 * @return mixed|void The data returned by the API on success, or void on failure.
+	 * @throws \Exception If the order is not valid, the order items are empty, the options are empty, or the API key is empty.
+	 */
+	public function woocommerce_update_order( $order_id ) {
+
+		$order = wc_get_order( $order_id );
+
+		// Bail early if the the order has __not__ already been timestamped.
+		$sdcom_is_timestamped = $order->get_meta( 'sdcom_is_timestamped' );
+		if ( empty( $sdcom_is_timestamped ) ) {
+			return;
+		}
+
+		$sdcom_previous_certificate_hash = $order->get_meta( 'sdcom_previous_certificate_hash' );
+
+		// Bail early if the previous certificate hash is empty.
+		if ( empty( $sdcom_previous_certificate_hash ) ) {
+			return;
+		}
+
+		$order_data = $order->get_data();
+
+		// List of keys for data that changes frequently.
+		$wc_volatile_order_data_keys = get_wc_volatile_order_data_keys();
+
+		// Remove volatile data from the order data.
+		foreach ( $wc_volatile_order_data_keys as $key ) {
+			unset( $order_data[ $key ] );
+		}
+
+		$order_data_checksum = hash( 'sha256', wp_json_encode( $order_data ) );
+
+		// Bail early if the order data checksum is the same as the previous certificate hash.
+		if ( $order_data_checksum === $sdcom_previous_certificate_hash ) {
+			return;
+		}
+
+		try {
+			$create_certificate = $this->create_certificate_shop_order( $order );
+
+			// Handle the case where the method returned false.
+			if ( $create_certificate === false ) {
+				throw new \Exception( 'Create certificate failed.' );
+			}
+
 			$certificate_id = ! empty( $create_certificate->{'certificate'}->{'id'} ) ? $create_certificate->{'certificate'}->{'id'} : '';
 
 			// Handle the case where the certificate id is empty.
@@ -714,6 +795,9 @@ class Timestamp extends Feature {
 
 			// Update the post meta with the new certificate id.
 			$order->update_meta_data( 'sdcom_previous_certificate_id', $certificate_id );
+
+			// Update the post meta with the new certificate hash.
+			$order->update_meta_data( 'sdcom_previous_certificate_hash', $order_data_checksum );
 
 			// Save the order to update the meta data.
 			$order->save();
@@ -746,7 +830,6 @@ class Timestamp extends Feature {
 				return false;
 			}
 
-			$order_id                      = $order->get_id();
 			$order_data                    = $order->get_data();
 			$sdcom_timestamps              = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 			$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
@@ -759,6 +842,14 @@ class Timestamp extends Feature {
 			// Bail early if the order data is empty.
 			if ( empty( $order_data ) ) {
 				throw new \Exception( 'Order data is empty.' );
+			}
+
+			// List of keys for data that changes frequently.
+			$wc_volatile_order_data_keys = get_wc_volatile_order_data_keys();
+
+			// Remove volatile data from the order data.
+			foreach ( $wc_volatile_order_data_keys as $key ) {
+				unset( $order_data[ $key ] );
 			}
 
 			$sdcom_timestamps_display_created_by = ! empty( $sdcom_timestamps['display_created_by'] ) ? $sdcom_timestamps['display_created_by'] : false;
