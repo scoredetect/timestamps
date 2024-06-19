@@ -80,6 +80,7 @@ class Timestamp extends Feature {
 			add_action( 'woocommerce_update_order', array( $this, 'woocommerce_update_order' ) );
 			add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
 			add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
+			add_filter( 'woocommerce_email_format_string', array( $this, 'timestamps_placeholder_wc_email' ), 10, 2 );
 		}
 	}
 
@@ -1050,5 +1051,37 @@ class Timestamp extends Feature {
 		} catch ( \Throwable $th ) {
 			throw $th;
 		}
+	}
+
+	/**
+	 * Allows a {timestamps} placeholder to display a "View Certificate" link on the WooCommerce order emails.
+	 *
+	 * @param string    $_string The email placeholders.
+	 * @param \WC_Email $email The WooCommerce email object.
+	 * @return string The email placeholders.
+	 */
+	public function timestamps_placeholder_wc_email( $_string, $email ): string {
+		$order = $email->object;
+
+		$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+		// Bail early if there is no previous certificate id.
+		if ( empty( $sdcom_previous_certificate_id ) ) {
+			return $_string;
+		}
+
+		$placeholders = [
+			'{timestamps}' => apply_filters(
+				'timestamps_placeholder_wc_email',
+				sprintf(
+					'<a class="button-link" href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a>',
+					esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
+					esc_html__( 'View Certificate', 'timestamps' )
+				),
+				$order
+			),
+		];
+
+		return str_replace( array_keys( $placeholders ), array_values( $placeholders ), $_string );
 	}
 }
