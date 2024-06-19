@@ -174,3 +174,15 @@ function get_wc_volatile_order_data_keys() {
 
 	return apply_filters( 'sdcom_timestamps_wc_volatile_order_data_keys', $wc_volatile_order_data_keys );
 }
+
+/**
+ * Checks if timestamps for WooCommerce orders are active.
+ *
+ * @return bool True if the option is active, false otherwise.
+ */
+function is_timestamps_woocommerce_orders_active(): bool {
+	$timestamps_options                    = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+	$timestamps_woocommerce_orders_enabled = isset( $timestamps_options['enable_timestamps_woocommerce_orders'] ) ? $timestamps_options['enable_timestamps_woocommerce_orders'] : '';
+
+	return ! empty( $timestamps_woocommerce_orders_enabled );
+}
