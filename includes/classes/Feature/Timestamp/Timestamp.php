@@ -12,6 +12,8 @@ use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
 use function SDCOM_Timestamps\Utils\get_wc_volatile_order_data_keys;
+use function SDCOM_Timestamps\Utils\is_timestamps_woocommerce_orders_active;
+use function SDCOM_Timestamps\Utils\is_woocommerce_active;
 
 /**
  * Timestamp feature class
@@ -71,10 +73,14 @@ class Timestamp extends Feature {
 		add_action( 'rest_insert_post', array( $this, 'save_post_meta_rest' ), 10, 2 );
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
 		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
-		add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
-		add_action( 'woocommerce_update_order', array( $this, 'woocommerce_update_order' ) );
-		add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
-		add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
+
+		// WooCommerce Orders.
+		if ( is_woocommerce_active() && is_timestamps_woocommerce_orders_active() ) {
+			add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
+			add_action( 'woocommerce_update_order', array( $this, 'woocommerce_update_order' ) );
+			add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
+			add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
+		}
 	}
 
 	/**
