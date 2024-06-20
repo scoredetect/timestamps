@@ -83,6 +83,9 @@ class Settings extends Screen {
 	 * @since 1.0.0
 	 */
 	public function register_settings() {
+
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
 		register_setting(
 			SDCOM_TIMESTAMPS_OPTIONS,
 			SDCOM_TIMESTAMPS_OPTIONS,
@@ -163,6 +166,25 @@ class Settings extends Screen {
 					$this->settings_page,
 					'sdcom_timestamps_woocommerce_settings_section'
 				);
+
+				// Check if the option "enable_timestamps_woocommerce_orders" is present and is true.
+				if ( ! empty( $option['enable_timestamps_woocommerce_orders'] ) && $option['enable_timestamps_woocommerce_orders'] === 'true' ) {
+					add_settings_field(
+						'sdcom_timestamps_delete_old_certificates_woocommerce_orders',
+						__( 'Delete Old Certificates from WooCommerce Orders', 'timestamps' ),
+						[ $this, 'delete_old_certificates_woocommerce_orders_settings_field_callback' ],
+						$this->settings_page,
+						'sdcom_timestamps_woocommerce_settings_section'
+					);
+
+					add_settings_field(
+						'sdcom_timestamps_woocommerce_order_statuses_marked_old_certificates',
+						__( 'WooCommerce Order Statuses Marked for Old Certificates', 'timestamps' ),
+						[ $this, 'woocommerce_order_statuses_marked_old_certificates_settings_field_callback' ],
+						$this->settings_page,
+						'sdcom_timestamps_woocommerce_settings_section'
+					);
+				}
 			}
 		}
 	}
@@ -301,6 +323,65 @@ class Settings extends Screen {
 			checked( isset( $option['enable_timestamps_woocommerce_orders'] ), true, false ),
 			wp_kses_post( __( 'Active', 'timestamps' ) ),
 			wp_kses_post( __( 'Adds Timestamps to WooCommerce Orders.', 'timestamps' ) ),
+		);
+	}
+
+	/**
+	 * Outputs the "Delete Old Certificates from WooCommerce Orders" settings input number field.
+	 *
+	 * The default value is 365 days.
+	 *
+	 * @return void
+	 */
+	public function delete_old_certificates_woocommerce_orders_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		// Get the value from the option, or use the default value of 365 days.
+		$value = isset( $option['delete_old_certificates_woocommerce_orders'] ) && ! empty( $option['delete_old_certificates_woocommerce_orders'] ) ? $option['delete_old_certificates_woocommerce_orders'] : 365;
+
+		printf(
+			'<label><input type="number" min="0" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[delete_old_certificates_woocommerce_orders]" id="delete_old_certificates_woocommerce_orders" value="' . esc_attr( $value ) . '"> %s</label><p class="description">%s</p>',
+			wp_kses_post( __( 'Days', 'timestamps' ) ),
+			wp_kses_post( __( 'Automatically delete old certificates after a set duration. Defaults to 365 days.', 'timestamps' ) ),
+		);
+	}
+
+	/**
+	 * Outputs the "WooCommerce Order Statuses Marked for Old Certificates" settings input checkbox field.
+	 *
+	 * The default value is _all_ WooCommerce order statuses.
+	 *
+	 * @return void
+	 */
+	public function woocommerce_order_statuses_marked_old_certificates_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		// Get the WooCommerce order statuses.
+		$order_statuses = wc_get_order_statuses();
+
+		// Sort the $order_statuses in alphabetical order.
+		ksort( $order_statuses );
+
+		// If the option value is not present, set the default value to all WooCommerce order statuses.
+		if ( empty( $option['woocommerce_order_statuses_marked_old_certificates'] ) ) {
+			$option['woocommerce_order_statuses_marked_old_certificates'] = array_keys( $order_statuses );
+		}
+
+		// Loop through the WooCommerce order statuses as checkbox elements.
+		foreach ( $order_statuses as $key => $value ) {
+			$is_checked = in_array( $key, $option['woocommerce_order_statuses_marked_old_certificates'], true );
+			printf(
+				'<input type="checkbox" name="%s[woocommerce_order_statuses_marked_old_certificates][]" value="%s" %s>%s<br>',
+				esc_attr( SDCOM_TIMESTAMPS_OPTIONS ),
+				esc_attr( $key ),
+				checked( $is_checked, true, false ),
+				esc_html( $value )
+			);
+		}
+
+		printf(
+			'<p class="description">%s</p>',
+			wp_kses_post( __( 'Select the statuses to mark for old certificates.', 'timestamps' ) ),
 		);
 	}
 
