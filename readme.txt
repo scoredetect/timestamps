@@ -8,10 +8,10 @@ Stable tag: 1.2.1
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
-Timestamp your WordPress content to empower your content authenticity and increase user trust with our blockchain timestamping solution.
+Timestamp your WordPress content to empower your content authenticity and increase user trust. No blockchain skills needed.
 
 == Description ==
-Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public, as a verification factor for your content.
+Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
 
 Here is a list of features included in the plugin:
 
