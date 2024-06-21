@@ -1,6 +1,6 @@
 # Timestamps
 
-> Timestamp your WordPress content into the blockchain to empower your content authenticity and increase user trust.
+> Timestamp your WordPress content to empower your content authenticity and increase user trust. No blockchain skills needed.
 
 [![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/scoredetect/timestamps.svg)](https://github.com/scoredetect/timestamps/releases/latest) [![AGPL-3.0-only](https://img.shields.io/github/license/scoredetect/timestamps.svg)](https://github.com/scoredetect/timestamps/blob/develop/LICENSE.md)
 
@@ -8,7 +8,7 @@
 
 ## Overview
 
-Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public, as a verification factor for your content.
+Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
 
 ## Documentation
 
