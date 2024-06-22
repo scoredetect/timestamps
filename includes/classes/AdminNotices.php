@@ -13,6 +13,8 @@ namespace SDCOM_Timestamps;
 use SDCOM_Timestamps\Utils;
 use SDCOM_Timestamps\Screen;
 
+use function SDCOM_Timestamps\Utils\get_plugin_option;
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
 }
@@ -69,8 +71,7 @@ class AdminNotices {
 	 */
 	protected function process_need_setup_notice() {
 
-		$timestamps_options = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-		$timestamps_api_key = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
+		$timestamps_api_key = get_plugin_option( 'api_key', '' );
 
 		if ( ! empty( $timestamps_api_key ) ) {
 			return false;
