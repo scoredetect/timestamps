@@ -76,7 +76,7 @@ class AdminNotices {
 			return false;
 		}
 
-		$dismiss = Utils\get_option( 'sdcom_timestamps_hide_need_setup_notice', false );
+		$dismiss = get_option( 'sdcom_timestamps_hide_need_setup_notice', false );
 
 		if ( $dismiss ) {
 			return false;
@@ -127,7 +127,7 @@ class AdminNotices {
 	public function dismiss_notice( $notice ) {
 		$value = true;
 
-		Utils\update_option( 'timestamps_hide_' . $notice . '_notice', $value );
+		update_option( 'timestamps_hide_' . $notice . '_notice', $value );
 	}
 
 	/**
