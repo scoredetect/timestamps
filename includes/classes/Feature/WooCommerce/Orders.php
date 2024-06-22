@@ -286,9 +286,9 @@ class Orders extends Feature {
 				unset( $order_data[ $key ] );
 			}
 
-			$sdcom_timestamps_display_created_by = ! empty( $sdcom_timestamps['display_created_by'] ) ? $sdcom_timestamps['display_created_by'] : false;
+			$sdcom_timestamps_display_created_by = get_plugin_option( 'display_created_by', false );
 			$sdcom_timestamps_username           = 'anonymous';
-			$sdcom_timestamps_api_key            = ! empty( $sdcom_timestamps['api_key'] ) ? $sdcom_timestamps['api_key'] : '';
+			$sdcom_timestamps_api_key            = get_plugin_option( 'api_key', '' );
 
 			// Bail early if the api key is empty.
 			if ( empty( $sdcom_timestamps_api_key ) ) {
@@ -296,7 +296,7 @@ class Orders extends Feature {
 			}
 
 			if ( $sdcom_timestamps_display_created_by === 'true' ) {
-				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : 'anonymous';
+				$sdcom_timestamps_username = get_plugin_option( 'username', $sdcom_timestamps_username );
 			}
 
 			$url = 'https://api.scoredetect.com/create-certificate';
@@ -407,9 +407,9 @@ class Orders extends Feature {
 				throw new \Exception( 'Order data is empty.' );
 			}
 
-			$sdcom_timestamps_display_created_by = ! empty( $sdcom_timestamps['display_created_by'] ) ? $sdcom_timestamps['display_created_by'] : false;
+			$sdcom_timestamps_display_created_by = get_plugin_option( 'display_created_by', false );
 			$sdcom_timestamps_username           = 'anonymous';
-			$sdcom_timestamps_api_key            = ! empty( $sdcom_timestamps['api_key'] ) ? $sdcom_timestamps['api_key'] : '';
+			$sdcom_timestamps_api_key            = get_plugin_option( 'api_key', '' );
 
 			// Bail early if the api key is empty.
 			if ( empty( $sdcom_timestamps_api_key ) ) {
@@ -417,7 +417,7 @@ class Orders extends Feature {
 			}
 
 			if ( $sdcom_timestamps_display_created_by === 'true' ) {
-				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : $sdcom_timestamps_username;
+				$sdcom_timestamps_username = get_plugin_option( 'username', $sdcom_timestamps_username );
 			}
 
 			$url = 'https://api.scoredetect.com/update-certificate';
