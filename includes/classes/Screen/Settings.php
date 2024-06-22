@@ -170,9 +170,9 @@ class Settings extends Screen {
 				// Check if the option "enable_timestamps_woocommerce_orders" is present and is true.
 				if ( ! empty( $option['enable_timestamps_woocommerce_orders'] ) && $option['enable_timestamps_woocommerce_orders'] === 'true' ) {
 					add_settings_field(
-						'sdcom_timestamps_delete_old_certificates_woocommerce_orders',
-						__( 'Delete Old Certificates from WooCommerce Orders', 'timestamps' ),
-						[ $this, 'delete_old_certificates_woocommerce_orders_settings_field_callback' ],
+						'sdcom_timestamps_delete_old_certificates_woocommerce_orders_age',
+						__( 'Delete Old Certificates from WooCommerce Orders Age', 'timestamps' ),
+						[ $this, 'delete_old_certificates_woocommerce_orders_age_settings_field_callback' ],
 						$this->settings_page,
 						'sdcom_timestamps_woocommerce_settings_section'
 					);
@@ -327,22 +327,22 @@ class Settings extends Screen {
 	}
 
 	/**
-	 * Outputs the "Delete Old Certificates from WooCommerce Orders" settings input number field.
+	 * Outputs the "Delete Old Certificates from WooCommerce Orders Age" settings input number field.
 	 *
 	 * The default value is 365 days.
 	 *
 	 * @return void
 	 */
-	public function delete_old_certificates_woocommerce_orders_settings_field_callback() {
+	public function delete_old_certificates_woocommerce_orders_age_settings_field_callback() {
 		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 
 		// Get the value from the option, or use the default value of 365 days.
-		$value = isset( $option['delete_old_certificates_woocommerce_orders'] ) && ! empty( $option['delete_old_certificates_woocommerce_orders'] ) ? $option['delete_old_certificates_woocommerce_orders'] : 365;
+		$value = isset( $option['delete_old_certificates_woocommerce_orders_age'] ) && ! empty( $option['delete_old_certificates_woocommerce_orders_age'] ) ? $option['delete_old_certificates_woocommerce_orders_age'] : 365;
 
 		printf(
-			'<label><input type="number" min="0" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[delete_old_certificates_woocommerce_orders]" id="delete_old_certificates_woocommerce_orders" value="' . esc_attr( $value ) . '"> %s</label><p class="description">%s</p>',
+			'<label><input type="number" min="0" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[delete_old_certificates_woocommerce_orders_age]" id="delete_old_certificates_woocommerce_orders_age" value="' . esc_attr( $value ) . '"> %s</label><p class="description">%s</p>',
 			wp_kses_post( __( 'Days', 'timestamps' ) ),
-			wp_kses_post( __( 'Automatically delete old certificates after a set duration. Defaults to 365 days.', 'timestamps' ) ),
+			wp_kses_post( __( 'Automatically delete old certificates after a certain age. Defaults to 365 days.', 'timestamps' ) ),
 		);
 	}
 
