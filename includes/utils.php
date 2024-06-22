@@ -130,6 +130,7 @@ function is_woocommerce_active() {
  *
  * This function returns an array of keys that represent volatile data in a WooCommerce order.
  *
+ * @since 1.3.0
  * @return array Filtered volatile order data keys.
  */
 function get_wc_volatile_order_data_keys() {
@@ -141,6 +142,7 @@ function get_wc_volatile_order_data_keys() {
 /**
  * Checks if timestamps for WooCommerce orders are active.
  *
+ * @since 1.3.0
  * @return bool True if the option is active, false otherwise.
  */
 function is_timestamps_woocommerce_orders_active(): bool {
@@ -153,6 +155,7 @@ function is_timestamps_woocommerce_orders_active(): bool {
  * Gets the certificate URL for a WooCommerce order.
  *
  * @param \WC_Order $order The WooCommerce order object.
+ * @since 1.3.0
  * @return string The certificate URL.
  */
 function get_certificate_url_wc_order( $order ): string {
@@ -173,6 +176,7 @@ function get_certificate_url_wc_order( $order ): string {
  *
  * @param string $option_key    Name of the option to retrieve. Expected to not be SQL-escaped.
  * @param mixed  $default_value Optional. Default value to return if the option does not exist.
+ * @since 1.3.0
  * @return mixed Value of the option. A value of any type may be returned, including
  *               scalar (string, boolean, float, integer), null, array, object.
  *               Scalar and null values will be returned as strings as long as they originate
