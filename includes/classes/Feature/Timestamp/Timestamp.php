@@ -11,6 +11,8 @@ namespace SDCOM_Timestamps\Feature\Timestamp;
 use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
+use function SDCOM_Timestamps\Utils\get_plugin_option;
+
 /**
  * Timestamp feature class
  */
@@ -47,8 +49,7 @@ class Timestamp extends Feature {
 	}
 
 	/**
-	 * We need to delay setup up since it will fire after protected content and protected
-	 * content filters into the setup.
+	 * We need to delay setup up until init to ensure all plugins are loaded.
 	 *
 	 * @since 1.0.0
 	 */
@@ -159,8 +160,7 @@ class Timestamp extends Feature {
 
 		wp_set_script_translations( 'timestamp-post-editor', 'timestamps' );
 
-		$timestamps_options = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-		$timestamps_api_key = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
+		$timestamps_api_key = get_plugin_option( 'api_key', '' );
 
 		wp_localize_script(
 			'timestamp-post-editor',
@@ -258,7 +258,7 @@ class Timestamp extends Feature {
 			try {
 				update_post_meta( $post_id, 'sdcom_timestamp_post', true );
 
-				$create_certificate = $this->create_certificate( $post );
+				$create_certificate = $this->create_certificate_post( $post );
 
 				// Handle the case where the method returned false.
 				if ( $create_certificate === false ) {
@@ -272,7 +272,7 @@ class Timestamp extends Feature {
 					throw new \Exception( 'Certificate id is empty.' );
 				}
 
-				$update_certificate = $this->update_certificate( $post, $certificate_id );
+				$update_certificate = $this->update_certificate_post( $post, $certificate_id );
 
 				// Handle the case where the method returned false.
 				if ( $update_certificate === false ) {
@@ -351,7 +351,7 @@ class Timestamp extends Feature {
 				return;
 			}
 
-			$create_certificate = $this->create_certificate( $post );
+			$create_certificate = $this->create_certificate_post( $post );
 
 			// Handle the case where the method returned false.
 			if ( $create_certificate === false ) {
@@ -365,7 +365,7 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Certificate id is empty.' );
 			}
 
-			$update_certificate = $this->update_certificate( $post, $certificate_id );
+			$update_certificate = $this->update_certificate_post( $post, $certificate_id );
 
 			// Handle the case where the method returned false.
 			if ( $update_certificate === false ) {
@@ -435,7 +435,7 @@ class Timestamp extends Feature {
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the options, post content, or API key is empty.
 	 */
-	private function create_certificate( $post ) {
+	private function create_certificate_post( $post ) {
 		try {
 			$post_id                       = $post->ID;
 			$post_content                  = $post->post_content;
@@ -517,6 +517,7 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Data is empty' );
 			}
 
+			// Return the data.
 			return $data;
 
 		} catch ( \Throwable $th ) {
@@ -533,7 +534,7 @@ class Timestamp extends Feature {
 	 * @throws \Exception If the certificate id, options, post content, or API key is empty.
 	 * @throws \Throwable If an exception occurs during the process.
 	 */
-	private function update_certificate( $post, $certificate_id ) {
+	private function update_certificate_post( $post, $certificate_id ) {
 		try {
 			$post_content     = $post->post_content;
 			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
@@ -574,7 +575,7 @@ class Timestamp extends Feature {
 				'username'         => $sdcom_timestamps_username,
 			);
 
-			$body = json_encode(
+			$body = wp_json_encode(
 				array(
 					'certificateId' => $certificate_id,
 					'metadata'      => $metadata,
@@ -618,6 +619,7 @@ class Timestamp extends Feature {
 				throw new \Exception( 'Data is empty' );
 			}
 
+			// Return the data.
 			return $data;
 
 		} catch ( \Throwable $th ) {

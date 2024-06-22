@@ -99,6 +99,9 @@ function register_features() {
 	Features::factory()->register_feature(
 		new Feature\Timestamp\Timestamp()
 	);
+	Features::factory()->register_feature(
+		new Feature\WooCommerce\Orders()
+	);
 }
 add_action( 'plugins_loaded', __NAMESPACE__ . '\register_features' );
 

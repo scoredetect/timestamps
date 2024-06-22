@@ -12,7 +12,9 @@ use SDCOM_Timestamps\AdminNotices;
 use SDCOM_Timestamps\Screen;
 use SDCOM_Timestamps\Utils;
 
+use function SDCOM_Timestamps\Utils\get_plugin_option;
 use function SDCOM_Timestamps\Utils\is_authenticated;
+use function SDCOM_Timestamps\Utils\is_woocommerce_active;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly.
@@ -82,6 +84,9 @@ class Settings extends Screen {
 	 * @since 1.0.0
 	 */
 	public function register_settings() {
+
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
 		register_setting(
 			SDCOM_TIMESTAMPS_OPTIONS,
 			SDCOM_TIMESTAMPS_OPTIONS,
@@ -145,6 +150,43 @@ class Settings extends Screen {
 				$this->settings_page,
 				'sdcom_timestamps_general_settings_section'
 			);
+
+			// WooCommerce Settings.
+			if ( is_woocommerce_active() ) {
+				add_settings_section(
+					'sdcom_timestamps_woocommerce_settings_section',
+					null,
+					[ $this, 'woocommerce_settings_section' ],
+					$this->settings_page
+				);
+
+				add_settings_field(
+					'sdcom_timestamps_enable_timestamps_woocommerce_orders',
+					__( 'Enable Timestamps on WooCommerce Orders', 'timestamps' ),
+					[ $this, 'enable_timestamps_woocommerce_orders_settings_field_callback' ],
+					$this->settings_page,
+					'sdcom_timestamps_woocommerce_settings_section'
+				);
+
+				// Check if the option "enable_timestamps_woocommerce_orders" is present and is true.
+				if ( ! empty( $option['enable_timestamps_woocommerce_orders'] ) && $option['enable_timestamps_woocommerce_orders'] === 'true' ) {
+					add_settings_field(
+						'sdcom_timestamps_delete_certificates_old_woocommerce_orders_age',
+						__( 'Delete Old Certificates by WooCommerce Order Age', 'timestamps' ),
+						[ $this, 'delete_certificates_old_woocommerce_orders_age_settings_field_callback' ],
+						$this->settings_page,
+						'sdcom_timestamps_woocommerce_settings_section'
+					);
+
+					add_settings_field(
+						'sdcom_timestamps_woocommerce_order_statuses_marked_old_certificates',
+						__( 'WooCommerce Order Statuses Marked for Old Certificates', 'timestamps' ),
+						[ $this, 'woocommerce_order_statuses_marked_old_certificates_settings_field_callback' ],
+						$this->settings_page,
+						'sdcom_timestamps_woocommerce_settings_section'
+					);
+				}
+			}
 		}
 	}
 
@@ -184,6 +226,20 @@ class Settings extends Screen {
 	}
 
 	/**
+	 * Outputs the WooCommerce settings section.
+	 *
+	 * @return void
+	 */
+	public function woocommerce_settings_section() {
+		echo wp_kses_post(
+			sprintf(
+				'<h2>%s</h2>',
+				__( 'WooCommerce Settings', 'timestamps' )
+			)
+		);
+	}
+
+	/**
 	 * Outputs the "Display Created By" settings input checkbox field.
 	 *
 	 * If the option value is present, the checkbox will be checked.
@@ -194,7 +250,7 @@ class Settings extends Screen {
 	public function display_created_by_settings_field_callback() {
 		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 
-		$display_created_by = ! empty( $option['display_created_by'] ) ? $option['display_created_by'] : false;
+		$display_created_by = get_plugin_option( 'display_created_by', false );
 		$username           = ! empty( $option['username'] ) && $display_created_by ? $option['username'] : 'anonymous';
 		$date_and_time      = current_time( 'l, F j, Y \a\t g:i:s A' );
 		$logo_url           = SDCOM_TIMESTAMPS_URL . 'dist/images/logo.png';
@@ -223,6 +279,7 @@ class Settings extends Screen {
 					wp_kses_post( $date_and_time ),
 					wp_kses_post(
 						sprintf(
+							/* translators: %s: username */
 							__( 'by %s', 'timestamps' ),
 							$username
 						)
@@ -252,16 +309,93 @@ class Settings extends Screen {
 	}
 
 	/**
+	 * Outputs the "Enable Timestamps on WooCommerce Orders" settings input checkbox field.
+	 *
+	 * If the option value is present, the checkbox will be checked.
+	 * If the option value is not present, the checkbox will be unchecked.
+	 *
+	 * @return void
+	 */
+	public function enable_timestamps_woocommerce_orders_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		printf(
+			'<label><input type="checkbox" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[enable_timestamps_woocommerce_orders]" id="enable_timestamps_woocommerce_orders" value="true" %s> %s</label><p class="description">%s</p>',
+			checked( isset( $option['enable_timestamps_woocommerce_orders'] ), true, false ),
+			wp_kses_post( __( 'Active', 'timestamps' ) ),
+			wp_kses_post( __( 'Adds Timestamps to WooCommerce Orders.', 'timestamps' ) ),
+		);
+	}
+
+	/**
+	 * Outputs the "Delete Old Certificates by WooCommerce Order Age" settings input number field.
+	 *
+	 * The default value is 365 days.
+	 *
+	 * @return void
+	 */
+	public function delete_certificates_old_woocommerce_orders_age_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		// Get the value from the option, or use the default value of 365 days.
+		$value = isset( $option['delete_certificates_old_woocommerce_orders_age'] ) && ! empty( $option['delete_certificates_old_woocommerce_orders_age'] ) ? $option['delete_certificates_old_woocommerce_orders_age'] : 365;
+
+		printf(
+			'<label><input type="number" min="0" name="' . esc_attr( SDCOM_TIMESTAMPS_OPTIONS ) . '[delete_certificates_old_woocommerce_orders_age]" id="delete_certificates_old_woocommerce_orders_age" value="' . esc_attr( $value ) . '"> %s</label><p class="description">%s</p>',
+			wp_kses_post( __( 'Days', 'timestamps' ) ),
+			wp_kses_post( __( 'Automatically delete old certificates after a certain age. Defaults to 365 days.', 'timestamps' ) ),
+		);
+	}
+
+	/**
+	 * Outputs the "WooCommerce Order Statuses Marked for Old Certificates" settings input checkbox field.
+	 *
+	 * The default value is _all_ WooCommerce order statuses.
+	 *
+	 * @return void
+	 */
+	public function woocommerce_order_statuses_marked_old_certificates_settings_field_callback() {
+		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+		// Get the WooCommerce order statuses.
+		$order_statuses = wc_get_order_statuses();
+
+		// Sort the $order_statuses in alphabetical order.
+		ksort( $order_statuses );
+
+		// If the option value is not present, set the default value to all WooCommerce order statuses.
+		if ( empty( $option['woocommerce_order_statuses_marked_old_certificates'] ) ) {
+			$option['woocommerce_order_statuses_marked_old_certificates'] = array_keys( $order_statuses );
+		}
+
+		// Loop through the WooCommerce order statuses as checkbox elements.
+		foreach ( $order_statuses as $key => $value ) {
+			$is_checked = in_array( $key, $option['woocommerce_order_statuses_marked_old_certificates'], true );
+			printf(
+				'<input type="checkbox" name="%s[woocommerce_order_statuses_marked_old_certificates][]" value="%s" %s>%s<br>',
+				esc_attr( SDCOM_TIMESTAMPS_OPTIONS ),
+				esc_attr( $key ),
+				checked( $is_checked, true, false ),
+				esc_html( $value )
+			);
+		}
+
+		printf(
+			'<p class="description">%s</p>',
+			wp_kses_post( __( 'Select the statuses to mark for old certificates.', 'timestamps' ) ),
+		);
+	}
+
+	/**
 	 * Render settings page.
 	 *
 	 * @since 1.0.0
 	 */
 	public function render_settings_page() {
-		// get the timestamps options.
-		$timestamps_options    = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-		$timestamps_api_key    = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
-		$timestamps_username   = isset( $timestamps_options['username'] ) ? $timestamps_options['username'] : '';
-		$timestamps_avatar_url = isset( $timestamps_options['avatar_url'] ) ? $timestamps_options['avatar_url'] : '';
+		// Get the timestamps options.
+		$timestamps_api_key    = get_plugin_option( 'api_key', '' );
+		$timestamps_username   = get_plugin_option( 'username', '' );
+		$timestamps_avatar_url = get_plugin_option( 'avatar_url', '' );
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>

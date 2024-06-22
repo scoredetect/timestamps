@@ -36,42 +36,6 @@ function get_asset_info( $slug, $attribute = null ) {
 }
 
 /**
- * Use the correct update option function depending on the context.
- *
- * @since 1.0.0
- * @param string $option   Name of the option to update.
- * @param mixed  $value    Option value.
- * @param mixed  $autoload Whether to load the option when WordPress starts up.
- * @return bool
- */
-function update_option( $option, $value, $autoload = null ) {
-	return \update_option( $option, $value, $autoload );
-}
-
-/**
- * Use the correct get option function depending on the context.
- *
- * @since 1.0.0
- * @param string $option        Name of the option to get.
- * @param mixed  $default_value Default value.
- * @return mixed
- */
-function get_option( $option, $default_value = false ) {
-	return \get_option( $option, $default_value );
-}
-
-/**
- * Use the correct delete option function depending on the context.
- *
- * @since 1.0.0
- * @param string $option Name of the option to delete.
- * @return bool
- */
-function delete_option( $option ) {
-	return \delete_option( $option );
-}
-
-/**
  * Checks if the user is authenticated.
  *
  * This function checks if the user is authenticated by checking if the 'api_key' in the 'timestamps' options is set and not empty.
@@ -80,8 +44,7 @@ function delete_option( $option ) {
  * @return bool Returns true if the 'api_key' is set and not empty, false otherwise.
  */
 function is_authenticated() {
-	$timestamps_options = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-	$timestamps_api_key = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
+	$timestamps_api_key = get_plugin_option( 'api_key', '' );
 
 	return ! empty( $timestamps_api_key );
 }
@@ -94,7 +57,7 @@ function is_authenticated() {
  */
 function is_block_editor_active() {
 
-	$classic_editor_replace = \get_option( 'classic-editor-replace' );
+	$classic_editor_replace = get_option( 'classic-editor-replace' );
 
 	// We assume that the Block Editor is active, whilst the Classic Editor plugin never existed.
 	if ( empty( $classic_editor_replace ) ) {
@@ -150,4 +113,82 @@ function is_platform_script_in_content( $post = null ) {
 	}
 
 	return false;
+}
+
+/**
+ * Checks if the WooCommerce plugin is active.
+ *
+ * @since 1.3.0
+ * @return bool Returns true if the WooCommerce plugin is active, false otherwise.
+ */
+function is_woocommerce_active() {
+	return class_exists( 'WooCommerce' );
+}
+
+/**
+ * Gets the WooCommerce volatile order data keys.
+ *
+ * This function returns an array of keys that represent volatile data in a WooCommerce order.
+ *
+ * @return array Filtered volatile order data keys.
+ */
+function get_wc_volatile_order_data_keys() {
+	$wc_volatile_order_data_keys = [ 'date_modified', 'meta_data', 'version' ];
+
+	return apply_filters( 'sdcom_timestamps_wc_volatile_order_data_keys', $wc_volatile_order_data_keys );
+}
+
+/**
+ * Checks if timestamps for WooCommerce orders are active.
+ *
+ * @return bool True if the option is active, false otherwise.
+ */
+function is_timestamps_woocommerce_orders_active(): bool {
+	$timestamps_woocommerce_orders_enabled = get_plugin_option( 'enable_timestamps_woocommerce_orders', '' );
+
+	return ! empty( $timestamps_woocommerce_orders_enabled );
+}
+
+/**
+ * Gets the certificate URL for a WooCommerce order.
+ *
+ * @param \WC_Order $order The WooCommerce order object.
+ * @return string The certificate URL.
+ */
+function get_certificate_url_wc_order( $order ): string {
+	$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+	// Bail early if there is no previous certificate id.
+	if ( empty( $sdcom_previous_certificate_id ) ) {
+		return '';
+	}
+
+	return apply_filters( 'get_certificate_url_wc_order', esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ), $order );
+}
+
+/**
+ * Gets the plugin option.
+ *
+ * If the option does not exist, the default value is returned.
+ *
+ * @param string $option_key    Name of the option to retrieve. Expected to not be SQL-escaped.
+ * @param mixed  $default_value Optional. Default value to return if the option does not exist.
+ * @return mixed Value of the option. A value of any type may be returned, including
+ *               scalar (string, boolean, float, integer), null, array, object.
+ *               Scalar and null values will be returned as strings as long as they originate
+ *               from a database stored option value. If there is no option in the database,
+ *               boolean `false` is returned.
+ */
+function get_plugin_option( $option_key, $default_value = false ) {
+	$timestamps_options = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+	if ( empty( $timestamps_options ) ) {
+		return false;
+	}
+
+	if ( isset( $timestamps_options[ $option_key ] ) ) {
+		return $timestamps_options[ $option_key ];
+	}
+
+	return $default_value;
 }
