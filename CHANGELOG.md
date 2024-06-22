@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## 1.3.1 - 2024-06-22
+
+### Added
+* Update Docs by @michael-sumner in #17
+
+<!-- ... -->
 ## 1.3.0 - 2024-06-22
 
 ### Added

@@ -84,6 +84,7 @@ const handleError = (error) => {
 	console.error(error);
 	const errorMessage = document.createElement('p');
 	errorMessage.textContent = sprintf(
+		/* translators: %s: error message */
 		__(`Error: %s. Refresh the page to continue.`, 'timestamps'),
 		error.message,
 	);
