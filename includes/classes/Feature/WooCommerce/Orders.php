@@ -2,7 +2,7 @@
 /**
  * WooCommerce Orders feature.
  *
- * @since 1.0.0
+ * @since 1.3.0
  * @package  SDCOM_Timestamps
  */
 
@@ -23,7 +23,7 @@ class Orders extends Feature {
 	/**
 	 * Initialize feature setting it's config
 	 *
-	 * @since 1.0.0
+	 * @since 1.3.0
 	 */
 	public function __construct() {
 		$this->slug = 'woocommerce-orders';
@@ -40,7 +40,7 @@ class Orders extends Feature {
 	/**
 	 * We need to delay setup up until init to ensure all plugins are loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 1.3.0
 	 */
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_init' ) );
@@ -49,7 +49,7 @@ class Orders extends Feature {
 	/**
 	 * Setup feature on each page load.
 	 *
-	 * @since 1.0.0
+	 * @since 1.3.0
 	 */
 	public function setup_init() {
 
@@ -71,6 +71,7 @@ class Orders extends Feature {
 	 * Adds a column to the WooCommerce orders page.
 	 *
 	 * @param array $columns The columns on the orders page.
+	 * @since 1.3.0
 	 * @return array The columns on the orders page.
 	 */
 	public function add_order_timestamps_column( $columns ) {
@@ -86,6 +87,7 @@ class Orders extends Feature {
 	 *
 	 * @param string $column_name The column name.
 	 * @param int    $order_or_order_id The order or order ID.
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function order_timestamps_column( $column_name, $order_or_order_id ) {
@@ -114,6 +116,7 @@ class Orders extends Feature {
 	 * Creates a certificate for a new WooCommerce order.
 	 *
 	 * @param int $order_id The order ID.
+	 * @since 1.3.0
 	 * @return mixed|void The data returned by the API on success, or void on failure.
 	 * @throws \Exception If the order is not valid, the order items are empty, the options are empty, or the API key is empty.
 	 */
@@ -168,6 +171,7 @@ class Orders extends Feature {
 	 * Creates a certificate for an updated WooCommerce order.
 	 *
 	 * @param int $order_id The order ID.
+	 * @since 1.3.0
 	 * @return mixed|void The data returned by the API on success, or void on failure.
 	 * @throws \Exception If the order is not valid, the order items are empty, the options are empty, or the API key is empty.
 	 */
@@ -245,6 +249,7 @@ class Orders extends Feature {
 	 * Creates a certificate for a WooCommerce order.
 	 *
 	 * @param WC_Order $order The order to create a certificate for.
+	 * @since 1.3.0
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the options, post content, or API key is empty.
@@ -370,6 +375,7 @@ class Orders extends Feature {
 	 *
 	 * @param WC_Order $order The order to update a certificate for.
 	 * @param string   $certificate_id The id of the certificate to update.
+	 * @since 1.3.0
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Exception If the certificate id, options, post content, or API key is empty.
 	 * @throws \Throwable If an exception occurs during the process.
@@ -485,6 +491,7 @@ class Orders extends Feature {
 	 *
 	 * @param string    $_string The email placeholders.
 	 * @param \WC_Email $email The WooCommerce email object.
+	 * @since 1.3.0
 	 * @return string The email placeholders.
 	 */
 	public function timestamps_placeholder_wc_email( $_string, $email ): string {
@@ -515,6 +522,7 @@ class Orders extends Feature {
 	/**
 	 * Schedules the event to delete certificates from old WooCommerce Orders.
 	 *
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function maybe_delete_certificates_old_woocommerce_orders() {
@@ -532,6 +540,7 @@ class Orders extends Feature {
 	/**
 	 * Cron job to delete certificates from old WooCommerce Orders.
 	 *
+	 * @since 1.3.0
 	 * @return void
 	 * @throws \Exception If the method fails.
 	 */
@@ -567,6 +576,7 @@ class Orders extends Feature {
 	 * Deletes the certificate meta data from a WooCommerce order.
 	 *
 	 * @param \WC_Order $order The order to delete the meta data from.
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function delete_order_certificate_meta_data( $order ) {
@@ -588,6 +598,7 @@ class Orders extends Feature {
 	/**
 	 * Retrieves old WooCommerce orders with certificates.
 	 *
+	 * @since 1.3.0
 	 * @return array|object of WC_Order objects
 	 */
 	public function get_old_orders_with_certificates(): array|object {
@@ -635,6 +646,7 @@ class Orders extends Feature {
 	 * Deletes certificates from a list of certificate IDs.
 	 *
 	 * @param array $certificate_ids The certificate ids to delete.
+	 * @since 1.3.0
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the certificate ids is not an array, the options are empty, or the API key is empty.

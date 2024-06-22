@@ -228,6 +228,7 @@ class Settings extends Screen {
 	/**
 	 * Outputs the WooCommerce settings section.
 	 *
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function woocommerce_settings_section() {
@@ -314,6 +315,7 @@ class Settings extends Screen {
 	 * If the option value is present, the checkbox will be checked.
 	 * If the option value is not present, the checkbox will be unchecked.
 	 *
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function enable_timestamps_woocommerce_orders_settings_field_callback() {
@@ -332,6 +334,7 @@ class Settings extends Screen {
 	 *
 	 * The default value is 365 days.
 	 *
+	 * @since 1.3.0
 	 * @return void
 	 */
 	public function delete_certificates_old_woocommerce_orders_age_settings_field_callback() {
@@ -351,6 +354,8 @@ class Settings extends Screen {
 	 * Outputs the "WooCommerce Order Statuses Marked for Old Certificates" settings input checkbox field.
 	 *
 	 * The default value is _all_ WooCommerce order statuses.
+	 *
+	 * @since 1.3.0
 	 *
 	 * @return void
 	 */
