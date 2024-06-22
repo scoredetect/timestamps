@@ -11,6 +11,8 @@ namespace SDCOM_Timestamps\Feature\Timestamp;
 use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
+use function SDCOM_Timestamps\Utils\get_plugin_option;
+
 /**
  * Timestamp feature class
  */
@@ -158,8 +160,7 @@ class Timestamp extends Feature {
 
 		wp_set_script_translations( 'timestamp-post-editor', 'timestamps' );
 
-		$timestamps_options = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-		$timestamps_api_key = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
+		$timestamps_api_key = get_plugin_option( 'api_key', '' );
 
 		wp_localize_script(
 			'timestamp-post-editor',
