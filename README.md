@@ -26,7 +26,7 @@ The plugin requires these software with the following versions:
 
 ## Building Assets
 
-Simply downloading the repository files is not enough to have the plugin working, as CSS and JavaScript files are built during the release process. If you want to use a development version of the plugin you will to run:
+Simply downloading the repository files is not enough to have the plugin working, as CSS and JavaScript files are built during the release process. If you want to use a development version of the plugin you will need to run:
 
 ```sh
 nvm use && composer i && npm install && npm run build
