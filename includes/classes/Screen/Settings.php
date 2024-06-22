@@ -12,6 +12,7 @@ use SDCOM_Timestamps\AdminNotices;
 use SDCOM_Timestamps\Screen;
 use SDCOM_Timestamps\Utils;
 
+use function SDCOM_Timestamps\Utils\get_plugin_option;
 use function SDCOM_Timestamps\Utils\is_authenticated;
 use function SDCOM_Timestamps\Utils\is_woocommerce_active;
 
@@ -249,7 +250,7 @@ class Settings extends Screen {
 	public function display_created_by_settings_field_callback() {
 		$option = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 
-		$display_created_by = ! empty( $option['display_created_by'] ) ? $option['display_created_by'] : false;
+		$display_created_by = get_plugin_option( 'display_created_by', false );
 		$username           = ! empty( $option['username'] ) && $display_created_by ? $option['username'] : 'anonymous';
 		$date_and_time      = current_time( 'l, F j, Y \a\t g:i:s A' );
 		$logo_url           = SDCOM_TIMESTAMPS_URL . 'dist/images/logo.png';
@@ -391,11 +392,10 @@ class Settings extends Screen {
 	 * @since 1.0.0
 	 */
 	public function render_settings_page() {
-		// get the timestamps options.
-		$timestamps_options    = get_option( SDCOM_TIMESTAMPS_OPTIONS );
-		$timestamps_api_key    = isset( $timestamps_options['api_key'] ) ? $timestamps_options['api_key'] : '';
-		$timestamps_username   = isset( $timestamps_options['username'] ) ? $timestamps_options['username'] : '';
-		$timestamps_avatar_url = isset( $timestamps_options['avatar_url'] ) ? $timestamps_options['avatar_url'] : '';
+		// Get the timestamps options.
+		$timestamps_api_key    = get_plugin_option( 'api_key', '' );
+		$timestamps_username   = get_plugin_option( 'username', '' );
+		$timestamps_avatar_url = get_plugin_option( 'avatar_url', '' );
 		?>
 		<div class="wrap">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
