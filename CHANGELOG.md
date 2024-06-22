@@ -14,6 +14,15 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## 1.3.0 - 2024-06-22
+
+### Added
+* Added WooCommerce Orders integration by @michael-sumner in #13
+
+### Changed
+* Updated plugin readme docs by @michael-sumner in #12 #14
+
+<!-- ... -->
 ## 1.2.1 - 2024-05-06
 
 ### Added
