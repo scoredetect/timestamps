@@ -1,4 +1,4 @@
-=== Timestamps ===
+=== Timestamps – Blockchain Integration for WordPress ===
 Contributors: scoredetect, xmic
 Tags: timestamp, blockchain, content, authenticity, copyright, timestamps, protection, verification, proof, timestamping
 Requires at least: 6.0.0
@@ -8,10 +8,10 @@ Stable tag: 1.2.1
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
-Timestamp your WordPress content to empower your content authenticity and increase user trust with our blockchain timestamping solution.
+No blockchain skills needed. Timestamp your WordPress content to empower your content authenticity and increase user trust.
 
 == Description ==
-Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public, as a verification factor for your content.
+Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
 
 Here is a list of features included in the plugin:
 
