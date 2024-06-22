@@ -1,0 +1,220 @@
+# Copyright (C) 2024 ScoreDetect.com
+# This file is distributed under the AGPL-3.0-only.
+msgid ""
+msgstr ""
+"Project-Id-Version: Timestamps 1.3.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/timestamps\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2024-06-22T17:00:04+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.9.0\n"
+"X-Domain: timestamps\n"
+
+#. Plugin Name of the plugin
+#: includes/classes/Screen/Settings.php:74
+#: dist/blocks/block-timestamp-post/editor.js:1
+#: includes/blocks/timestamp-post/edit.js:16
+msgid "Timestamps"
+msgstr ""
+
+#. Description of the plugin
+msgid "Timestamp your WordPress content to empower your content authenticity and increase user trust. No blockchain skills needed."
+msgstr ""
+
+#. Author of the plugin
+msgid "ScoreDetect.com"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.scoredetect.com/"
+msgstr ""
+
+#. translators: Sync Page URL
+#: includes/classes/AdminNotices.php:99
+msgid "The Timestamps plugin is almost ready. Click to <a href=\"%s\">enter your settings here</a>."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:42
+msgid "Post Timestamp"
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:44
+msgid "Timestamps are a way to prove that you’ve published your content at a certain time."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:46
+#: includes/classes/Feature/WooCommerce/Orders.php:35
+msgid "https://docs.scoredetect.com/"
+msgstr ""
+
+#. translators: %s: post type name
+#: includes/classes/Feature/Timestamp/Timestamp.php:220
+#: assets/js/timestamp-post/editor/plugins/timestamp-post.js:223
+#: dist/js/timestamp-post.js:1
+msgid "Enable timestamps for this %s"
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:225
+#: assets/js/timestamp-post/editor/plugins/timestamp-post.js:226
+#: dist/js/timestamp-post.js:1
+msgid "Timestamps prove that you keep your content regularly up-to-date."
+msgstr ""
+
+#: includes/classes/Feature/WooCommerce/Orders.php:31
+msgid "WooCommerce Orders"
+msgstr ""
+
+#: includes/classes/Feature/WooCommerce/Orders.php:33
+msgid "Easily create timestamps when creating and updating your WooCommerce orders."
+msgstr ""
+
+#: includes/classes/Feature/WooCommerce/Orders.php:80
+msgid "Latest Certificate"
+msgstr ""
+
+#: includes/classes/Feature/WooCommerce/Orders.php:111
+#: includes/classes/Feature/WooCommerce/Orders.php:513
+msgid "View Certificate"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:59
+msgid "Settings"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:73
+msgid "Timestamps Settings"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:133
+msgid "Display “Created by”"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:148
+msgid "Timestamp All Posts"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:165
+msgid "Enable Timestamps on WooCommerce Orders"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:175
+msgid "Delete Old Certificates by WooCommerce Order Age"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:183
+msgid "WooCommerce Order Statuses Marked for Old Certificates"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:202
+msgid "Certificate Settings"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:209
+msgid "Click the \"Save Changes\" button below to save your settings."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:223
+msgid "General Settings"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:238
+msgid "WooCommerce Settings"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:262
+#: includes/classes/Screen/Settings.php:307
+#: includes/classes/Screen/Settings.php:327
+msgid "Active"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:263
+msgid "Displays your profile name on the certificate."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:277
+#: includes/classes/Screen/Settings.php:279
+msgid "Profile image"
+msgstr ""
+
+#. translators: %s: username
+#: includes/classes/Screen/Settings.php:284
+#: assets/js/settings.js:20
+#: assets/js/settings.js:33
+#: dist/js/settings-script.js:1
+msgid "by %s"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:308
+msgid "Timestamps all posts by default."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:328
+msgid "Adds Timestamps to WooCommerce Orders."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:348
+msgid "Days"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:349
+msgid "Automatically delete old certificates after a certain age. Defaults to 365 days."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:390
+msgid "Select the statuses to mark for old certificates."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:411
+msgid "Welcome to the Timestamps plugin! You will first have to <b>authenticate your ScoreDetect account</b>. Please follow the instructions below:"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:419
+msgid "Authentication"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:428
+msgid "Click the \"Authenticate\" button below."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:431
+msgid "A popup will open. Log into your <b>ScoreDetect</b> account."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:434
+msgid "Close the popup and return to your WordPress site."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:444
+msgid "You are now <b>authenticated</b>. You can now use the Timestamps plugin."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:447
+msgid "You may re-authenticate your <b>ScoreDetect</b> account at anytime."
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:455
+msgid "Re-authenticate"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:455
+msgid "Authenticate"
+msgstr ""
+
+#: includes/classes/Screen/Settings.php:472
+msgid "Save Changes"
+msgstr ""
+
+#. translators: %s: error message
+#: assets/js/authenticate.js:88
+#: dist/js/authenticate-script.js:1
+msgid "Error: %s. Refresh the page to continue."
+msgstr ""
+
+#: assets/js/timestamp-post/editor/plugins/timestamp-post.js:204
+#: dist/js/timestamp-post.js:1
+msgid "Certificate created successfully."
+msgstr ""
