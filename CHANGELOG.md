@@ -14,6 +14,16 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## 1.4.0 - 2024-06-27
+
+### Added
+* Delete Certificate on Order Deletion by @michael-sumner in #23
+
+### Fixed
+* Bump WP to 6.6 by @michael-sumner in #24
+* Fix Return Type Declaration by @michael-sumner in #21
+
+<!-- ... -->
 ## 1.3.1 - 2024-06-22
 
 ### Added
