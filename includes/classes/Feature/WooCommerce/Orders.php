@@ -260,6 +260,7 @@ class Orders extends Feature {
 	 *
 	 * @param int       $order_id The order ID.
 	 * @param \WC_Order $order The order object.
+	 * @since 1.4.0
 	 * @return void
 	 */
 	public function woocommerce_before_delete_order( $order_id, $order ) {
@@ -633,7 +634,7 @@ class Orders extends Feature {
 	/**
 	 * Retrieves old WooCommerce orders with certificates.
 	 *
-	 * @since 1.3.0
+	 * @since 1.4.0
 	 * @return \WC_Order[] An array of old WooCommerce orders with certificates.
 	 */
 	public function get_old_orders_with_certificates(): array {
