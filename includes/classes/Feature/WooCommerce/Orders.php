@@ -57,6 +57,7 @@ class Orders extends Feature {
 		if ( is_woocommerce_active() && is_timestamps_woocommerce_orders_active() ) {
 			add_action( 'woocommerce_new_order', array( $this, 'woocommerce_new_order' ) );
 			add_action( 'woocommerce_update_order', array( $this, 'woocommerce_update_order' ) );
+			add_action( 'woocommerce_before_delete_order', array( $this, 'woocommerce_before_delete_order' ), 10, 2 );
 			add_filter( 'manage_woocommerce_page_wc-orders_columns', array( $this, 'add_order_timestamps_column' ), 30 );
 			add_action( 'manage_woocommerce_page_wc-orders_custom_column', array( $this, 'order_timestamps_column' ), 30, 2 );
 			add_filter( 'woocommerce_email_format_string', array( $this, 'timestamps_placeholder_wc_email' ), 10, 2 );
@@ -243,6 +244,40 @@ class Orders extends Feature {
 			// Handle the exception
 			error_log( 'An error occurred: ' . $e->getMessage() );
 		}
+	}
+
+	/**
+	 * Deletes a certificate for a WooCommerce order when the order is permanently deleted (not in trash).
+	 *
+	 * This does not delete the blockchain transaction. It only deletes the certificate from the API.
+	 * This is because the blockchain transaction can never be deleted, as written in the smart contract.
+	 *
+	 * This will clear up unused certificates and help save money for you by giving more space for more certificates.
+	 *
+	 * We recommend visiting the certificate URL and saving to PDF / printing it, before deleting it.
+	 *
+	 * You can also visit https://docs.scoredetect.com/certificates/how-can-i-download-export-my-certificates to bulk export your certificates.
+	 *
+	 * @param int       $order_id The order ID.
+	 * @param \WC_Order $order The order object.
+	 * @return void
+	 */
+	public function woocommerce_before_delete_order( $order_id, $order ) {
+
+		// Bail early if the order is not valid.
+		if ( ! $order instanceof \WC_Order ) {
+			return;
+		}
+
+		$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
+
+		// Bail early if there is no previous certificate id.
+		if ( empty( $sdcom_previous_certificate_id ) ) {
+			return;
+		}
+
+		// Delete the certificate from the API.
+		$this->delete_certificates( [ $sdcom_previous_certificate_id ] );
 	}
 
 	/**
@@ -644,6 +679,10 @@ class Orders extends Feature {
 
 	/**
 	 * Deletes certificates from a list of certificate IDs.
+	 *
+	 * We recommend visiting the certificate URL and saving to PDF / printing it, before deleting it.
+	 *
+	 * You can also visit https://docs.scoredetect.com/certificates/how-can-i-download-export-my-certificates to bulk export your certificates.
 	 *
 	 * @param array $certificate_ids The certificate ids to delete.
 	 * @since 1.3.0
