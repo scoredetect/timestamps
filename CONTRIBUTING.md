@@ -30,12 +30,12 @@ Open a [new blank issue](https://github.com/scoredetect/timestamps/issues/new) w
 
 - [ ] 1. Branch: Starting from `develop`, cut a release branch named `release/X.Y.Z` for your changes.
 - [ ] 2. Version bump: Bump the version number in `timestamps.php`, `package.json`, `package-lock.json`, `readme.txt`, and any other relevant files if it does not already reflect the version being released. In `timestamps.php` update both the plugin "Version:" property and the plugin `SDCOM_TIMESTAMPS_VERSION` constant.
-- [ ] 3. Changelog: Add/update the changelog in `CHANGELOG.md` and `readme.txt`, ensuring to link the [X.Y.Z] release reference in the footer of `CHANGELOG.md` (e.g., https://github.com/scoredetect/timestamps/compare/X.Y.Z-1...X.Y.Z).
+- [ ] 3. Changelog: Add/update the changelog in `CHANGELOG.md`, ensuring to link the [X.Y.Z] release reference in the footer of `CHANGELOG.md` (e.g., https://github.com/scoredetect/timestamps/compare/X.Y.Z-1...X.Y.Z).
 - [ ] 4. Props: Update `CREDITS.md` file with any new contributors, confirm maintainers are accurate.
 - [ ] 5. Readme updates: Make any other readme changes as necessary. `README.md` is geared toward GitHub and `readme.txt` contains WordPress.org-specific content. The two are slightly different.
 - [ ] 6. New files: Check to be sure any new files/paths that are unnecessary in the production version are included in `.distignore`.
 - [ ] 7. POT file: Run `wp i18n make-pot . lang/timestamps.pot` and commit the file. In case of errors, try to disable Xdebug.
-- [ ] 8. Release date: Double check the release date in both changelog files.
+- [ ] 8. Release date: Double check the release date in the `CHANGELOG.md` file.
 - [ ] 9. Merge: Merge the release branch/PR into `develop`, then make a non-fast-forward merge from `develop` into `main` (`git checkout main && git merge --no-ff develop`). `main` contains the stable development version.
 - [ ] 10. Test: While still on the `main` branch, test for functionality locally.
 - [ ] 11. Push: Push your `main` branch to GitHub (e.g. `git push origin main`).

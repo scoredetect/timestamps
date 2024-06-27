@@ -2,14 +2,14 @@
 # This file is distributed under the AGPL-3.0-only.
 msgid ""
 msgstr ""
-"Project-Id-Version: Timestamps 1.3.0\n"
+"Project-Id-Version: Timestamps 1.4.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/timestamps\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-22T17:00:04+00:00\n"
+"POT-Creation-Date: 2024-06-27T08:22:24+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: timestamps\n"
@@ -72,12 +72,12 @@ msgstr ""
 msgid "Easily create timestamps when creating and updating your WooCommerce orders."
 msgstr ""
 
-#: includes/classes/Feature/WooCommerce/Orders.php:80
+#: includes/classes/Feature/WooCommerce/Orders.php:81
 msgid "Latest Certificate"
 msgstr ""
 
-#: includes/classes/Feature/WooCommerce/Orders.php:111
-#: includes/classes/Feature/WooCommerce/Orders.php:513
+#: includes/classes/Feature/WooCommerce/Orders.php:112
+#: includes/classes/Feature/WooCommerce/Orders.php:549
 msgid "View Certificate"
 msgstr ""
 
