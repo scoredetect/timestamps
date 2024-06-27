@@ -14,7 +14,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
-## 1.4.0 - 2024-06-27
+## [1.4.0] - 2024-06-27
 
 ### Added
 * Delete Certificate on Order Deletion by @michael-sumner in #23
@@ -24,13 +24,13 @@ All notable changes to this project will be documented in this file, per [the Ke
 * Fix Return Type Declaration by @michael-sumner in #21
 
 <!-- ... -->
-## 1.3.1 - 2024-06-22
+## [1.3.1] - 2024-06-22
 
 ### Added
 * Update Docs by @michael-sumner in #17
 
 <!-- ... -->
-## 1.3.0 - 2024-06-22
+## [1.3.0] - 2024-06-22
 
 ### Added
 * Added WooCommerce Orders integration by @michael-sumner in #13
@@ -39,7 +39,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 * Updated plugin readme docs by @michael-sumner in #12 #14
 
 <!-- ... -->
-## 1.2.1 - 2024-05-06
+## [1.2.1] - 2024-05-06
 
 ### Added
 * Added plugin screenshots by @michael-sumner in #10
@@ -48,13 +48,13 @@ All notable changes to this project will be documented in this file, per [the Ke
 * Updated plugin readme docs by @michael-sumner in #9
 
 <!-- ... -->
-## 1.2.0 - 2024-04-25
+## [1.2.0] - 2024-04-25
 
 ### Added
 * Add timestamps shortcode by @michael-sumner in #7
 
 <!-- ... -->
-## 1.1.2 - 2024-04-20
+## [1.1.2] - 2024-04-20
 
 ### Added
 * GitHub Workflow: Push Releases to SVN Repository by @michael-sumner in #5
@@ -63,25 +63,28 @@ All notable changes to this project will be documented in this file, per [the Ke
 * Docs by @michael-sumner in #4
 
 <!-- ... -->
-## 1.1.0 - 2024-04-19
-
-### Changed
-* Convert Timestamp Block into a Dynamic Block by @michael-sumner in #2
-
-<!-- ... -->
-## 1.1.1 - 2024-04-19
+## [1.1.1] - 2024-04-19
 
 ### Changed
 * Fix Changelog Issues by @michael-sumner in #3
 
 <!-- ... -->
-## 1.1.0 - 2024-04-19
+## [1.1.0] - 2024-04-19
 
 ### Changed
 * Convert Timestamp Block into a Dynamic Block by @michael-sumner in #2
 
 <!-- ... -->
-## 1.0.0 - Unknown
+## [1.0.0] - Unknown
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.4.0]: https://github.com/scoredetect/timestamps/compare/1.3.1...1.4.0
+[1.3.1]: https://github.com/scoredetect/timestamps/releases/tag/1.3.1
+[1.3.0]: https://github.com/scoredetect/timestamps/releases/tag/1.3.0
+[1.2.1]: https://github.com/scoredetect/timestamps/releases/tag/1.2.1
+[1.2.0]: https://github.com/scoredetect/timestamps/releases/tag/1.2.0
+[1.1.2]: https://github.com/scoredetect/timestamps/releases/tag/1.1.2
+[1.1.1]: https://github.com/scoredetect/timestamps/compare/1.1.1...1.1.0
+[1.1.0]: https://github.com/scoredetect/timestamps/releases/tag/1.1.0
+[1.0.0]: https://github.com/scoredetect/timestamps/releases/tag/1.0.0
