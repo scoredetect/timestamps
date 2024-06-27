@@ -599,9 +599,9 @@ class Orders extends Feature {
 	 * Retrieves old WooCommerce orders with certificates.
 	 *
 	 * @since 1.3.0
-	 * @return array|object of WC_Order objects
+	 * @return \WC_Order[] An array of old WooCommerce orders with certificates.
 	 */
-	public function get_old_orders_with_certificates(): array|object {
+	public function get_old_orders_with_certificates(): array {
 
 		// Bail early if the WooCommerce plugin is not active.
 		if ( ! is_woocommerce_active() ) {
