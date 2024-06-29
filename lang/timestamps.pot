@@ -2,14 +2,14 @@
 # This file is distributed under the AGPL-3.0-only.
 msgid ""
 msgstr ""
-"Project-Id-Version: Timestamps 1.4.0\n"
+"Project-Id-Version: Timestamps 1.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/timestamps\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-27T08:22:24+00:00\n"
+"POT-Creation-Date: 2024-06-29T16:00:07+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.9.0\n"
 "X-Domain: timestamps\n"
@@ -89,122 +89,122 @@ msgstr ""
 msgid "Timestamps Settings"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:133
+#: includes/classes/Screen/Settings.php:142
 msgid "Display “Created by”"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:148
+#: includes/classes/Screen/Settings.php:157
 msgid "Timestamp All Posts"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:165
+#: includes/classes/Screen/Settings.php:174
 msgid "Enable Timestamps on WooCommerce Orders"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:175
+#: includes/classes/Screen/Settings.php:184
 msgid "Delete Old Certificates by WooCommerce Order Age"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:183
+#: includes/classes/Screen/Settings.php:192
 msgid "WooCommerce Order Statuses Marked for Old Certificates"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:202
+#: includes/classes/Screen/Settings.php:211
 msgid "Certificate Settings"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:209
+#: includes/classes/Screen/Settings.php:218
 msgid "Click the \"Save Changes\" button below to save your settings."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:223
+#: includes/classes/Screen/Settings.php:232
 msgid "General Settings"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:238
+#: includes/classes/Screen/Settings.php:247
 msgid "WooCommerce Settings"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:262
-#: includes/classes/Screen/Settings.php:307
-#: includes/classes/Screen/Settings.php:327
+#: includes/classes/Screen/Settings.php:271
+#: includes/classes/Screen/Settings.php:316
+#: includes/classes/Screen/Settings.php:336
 msgid "Active"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:263
+#: includes/classes/Screen/Settings.php:272
 msgid "Displays your profile name on the certificate."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:277
-#: includes/classes/Screen/Settings.php:279
+#: includes/classes/Screen/Settings.php:286
+#: includes/classes/Screen/Settings.php:288
 msgid "Profile image"
 msgstr ""
 
 #. translators: %s: username
-#: includes/classes/Screen/Settings.php:284
+#: includes/classes/Screen/Settings.php:293
 #: assets/js/settings.js:20
 #: assets/js/settings.js:33
 #: dist/js/settings-script.js:1
 msgid "by %s"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:308
+#: includes/classes/Screen/Settings.php:317
 msgid "Timestamps all posts by default."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:328
+#: includes/classes/Screen/Settings.php:337
 msgid "Adds Timestamps to WooCommerce Orders."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:348
+#: includes/classes/Screen/Settings.php:357
 msgid "Days"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:349
+#: includes/classes/Screen/Settings.php:358
 msgid "Automatically delete old certificates after a certain age. Defaults to 365 days."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:390
+#: includes/classes/Screen/Settings.php:399
 msgid "Select the statuses to mark for old certificates."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:411
+#: includes/classes/Screen/Settings.php:420
 msgid "Welcome to the Timestamps plugin! You will first have to <b>authenticate your ScoreDetect account</b>. Please follow the instructions below:"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:419
+#: includes/classes/Screen/Settings.php:428
 msgid "Authentication"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:428
+#: includes/classes/Screen/Settings.php:437
 msgid "Click the \"Authenticate\" button below."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:431
+#: includes/classes/Screen/Settings.php:440
 msgid "A popup will open. Log into your <b>ScoreDetect</b> account."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:434
+#: includes/classes/Screen/Settings.php:443
 msgid "Close the popup and return to your WordPress site."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:444
+#: includes/classes/Screen/Settings.php:453
 msgid "You are now <b>authenticated</b>. You can now use the Timestamps plugin."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:447
+#: includes/classes/Screen/Settings.php:456
 msgid "You may re-authenticate your <b>ScoreDetect</b> account at anytime."
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:455
+#: includes/classes/Screen/Settings.php:464
 msgid "Re-authenticate"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:455
+#: includes/classes/Screen/Settings.php:464
 msgid "Authenticate"
 msgstr ""
 
-#: includes/classes/Screen/Settings.php:472
+#: includes/classes/Screen/Settings.php:481
 msgid "Save Changes"
 msgstr ""
 
