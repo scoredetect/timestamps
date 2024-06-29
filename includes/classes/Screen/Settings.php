@@ -111,6 +111,15 @@ class Settings extends Screen {
 							'default_timestamps_enabled' => [
 								'type' => 'string',
 							],
+							'enable_timestamps_woocommerce_orders' => [
+								'type' => 'string',
+							],
+							'delete_certificates_old_woocommerce_orders_age' => [
+								'type' => 'string',
+							],
+							'woocommerce_order_statuses_marked_old_certificates' => [
+								'type' => 'array',
+							],
 						],
 					],
 				],
