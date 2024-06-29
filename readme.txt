@@ -1,6 +1,6 @@
 === Timestamps – Blockchain Integration for WordPress ===
 Contributors: scoredetect, xmic
-Tags: timestamp, blockchain, content, authenticity, copyright, timestamps, protection, verification, proof, timestamping
+Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
 Tested up to: 6.6
 Requires PHP: 7.4
