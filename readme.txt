@@ -35,6 +35,10 @@ __Privacy Protection__: We strive for privacy, therefore __only administrators__
 
 The plugin connects to the api.scoredetect.com service to create and update the verification certificates. The service is free to use with a 7-day free trial guarantee, and the plugin is free to use.
 
+### WooCommerce
+
+The plugin is compatible with WooCommerce. You can timestamp your orders and products and protect your digital assets.
+
 ### GDPR Compliant
 
 The plugin is GDPR compliant. It does not store any personal data. The plugin only stores the SHA-256 checksum of the content on the blockchain. The plugin does not store any personal data of the users. The plugin does not track any user data. The plugin does not use cookies. You can view all of the plugin code on https://plugins.svn.wordpress.org/timestamps/
