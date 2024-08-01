@@ -40,11 +40,15 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.8.2",
     "prop-types": "^15.7.2"
   },
   "10up-toolkit": {
     "entry": {
       "timestamp-post": "./assets/js/timestamp-post/editor/index.js",
+      "timestamps-screenshot-shortcode": "./assets/js/timestamps-screenshot-shortcode/index.js",
       "notice-script": "./assets/js/notice.js",
       "authenticate-script": "./assets/js/authenticate.js",
       "settings-script": "./assets/js/settings.js",
