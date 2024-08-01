@@ -282,7 +282,12 @@ function onClick(btn) {
 							for (let i = 1; i <= totalPagesExp; i++) {
 								doc.setPage(i);
 								doc.text(
-									sprintf(__('Page %s of %s', 'timestamps'), i, totalPagesExp),
+									sprintf(
+										/* translators: %1$s: current page number, %2$s: total number of pages */
+										__('Page %1$s of %2$s', 'timestamps'),
+										i,
+										totalPagesExp,
+									),
 									marginLeft,
 									pageHeight - 10,
 								);
