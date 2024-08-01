@@ -46,6 +46,13 @@ function onClick(btn) {
 	// Update the loading text every second.
 	const loadingInterval = setInterval(updateLoadingText, 200);
 
+	// Temporarily hide the WP admin bar, if it exists. It will be restored after the screenshot is taken.
+	const adminBar = document.getElementById('wpadminbar');
+
+	if (adminBar) {
+		adminBar.style.display = 'none';
+	}
+
 	// Get the screenshot of the webpage.
 	html2canvas(body).then(function (canvas) {
 		canvas.toBlob(function (blob) {
@@ -81,6 +88,11 @@ function onClick(btn) {
 
 			// Remove the canvas element.
 			canvas.remove();
+
+			// Restore the WP admin bar.
+			if (adminBar) {
+				adminBar.style.display = 'block';
+			}
 
 			try {
 				// @todo remove jQuery dependency. Replace with a solution that allows for file uploads.
