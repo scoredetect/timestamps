@@ -200,7 +200,8 @@ function get_plugin_option( $option_key, $default_value = false ) {
 /**
  * Returns timestamp post types for the current site.
  *
- * @since 1.0.0
+ * @since 1.5.0
+ *
  * @return mixed|void
  */
 function get_timestamp_post_types() {
