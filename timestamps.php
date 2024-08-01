@@ -100,6 +100,9 @@ function register_features() {
 		new Feature\Timestamp\Timestamp()
 	);
 	Features::factory()->register_feature(
+		new Feature\Timestamp\Screenshot()
+	);
+	Features::factory()->register_feature(
 		new Feature\WooCommerce\Orders()
 	);
 }
