@@ -14,6 +14,14 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.5.0] - 2024-08-01
+
+### Added
+* Add Button to Timestamp current webpage screenshot by @michael-sumner in #32
+* Add WooCommerce Support to readme.txt file by @michael-sumner in #31
+* Limit readme.txt file to 5 Tags by @michael-sumner in #30
+
+<!-- ... -->
 ## [1.4.1] - 2024-06-29
 
 ### Fixed
@@ -85,6 +93,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.5.0]: https://github.com/scoredetect/timestamps/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/scoredetect/timestamps/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/scoredetect/timestamps/compare/1.3.1...1.4.0
 [1.3.1]: https://github.com/scoredetect/timestamps/releases/tag/1.3.1

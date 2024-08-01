@@ -2,7 +2,7 @@
 /**
  * Screenshot feature.
  *
- * @since 1.0.0
+ * @since 1.5.0
  * @package  SDCOM_Timestamps
  */
 
@@ -30,7 +30,7 @@ class Screenshot extends Feature {
 	/**
 	 * Initialize feature setting it's config
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.0
 	 */
 	public function __construct() {
 		$this->slug = 'screenshot_timestamp';
@@ -47,7 +47,7 @@ class Screenshot extends Feature {
 	/**
 	 * We need to delay setup up until init to ensure all plugins are loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.0
 	 */
 	public function setup() {
 		add_action( 'init', array( $this, 'setup_init' ) );
@@ -56,7 +56,7 @@ class Screenshot extends Feature {
 	/**
 	 * Setup feature on each page load.
 	 *
-	 * @since 1.0.0
+	 * @since 1.5.0
 	 */
 	public function setup_init() {
 		add_action( 'wp_enqueue_scripts', array( $this, 'scripts' ) );
@@ -67,6 +67,8 @@ class Screenshot extends Feature {
 
 	/**
 	 * Enqueue scripts.
+	 *
+	 * @since 1.5.0
 	 */
 	public function scripts() {
 
@@ -98,6 +100,8 @@ class Screenshot extends Feature {
 
 	/**
 	 * AJAX handler for the screenshot timestamp.
+	 *
+	 * @since 1.5.0
 	 */
 	public function ajax_sdcom_timestamps_screenshot() {
 
@@ -183,6 +187,8 @@ class Screenshot extends Feature {
 	/**
 	 * Outputs the shortcode for the feature.
 	 *
+	 * @since 1.5.0
+	 *
 	 * @see includes/blocks/timestamp-post/markup.php for the original code.
 	 *
 	 * @return string The shortcode output.
@@ -200,6 +206,8 @@ class Screenshot extends Feature {
 
 	/**
 	 * Creates a certificate for a file.
+	 *
+	 * @since 1.5.0
 	 *
 	 * @param File $file The file to create a certificate for.
 	 * @return object|false The data returned by the API on success, or false on failure.
@@ -300,6 +308,8 @@ class Screenshot extends Feature {
 	/**
 	 * Updates a certificate.
 	 *
+	 * @since 1.5.0
+	 *
 	 * @param string $certificate_id The id of the certificate to update.
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Exception If the certificate id, options, or API key is empty.
@@ -394,6 +404,8 @@ class Screenshot extends Feature {
 
 	/**
 	 * Gets a certificate.
+	 *
+	 * @since 1.5.0
 	 *
 	 * @param string $certificate_id The id of the certificate to get.
 	 * @return object|false The data returned by the API on success, or false on failure.
