@@ -2,19 +2,20 @@
 # This file is distributed under the AGPL-3.0-only.
 msgid ""
 msgstr ""
-"Project-Id-Version: Timestamps 1.4.1\n"
+"Project-Id-Version: Timestamps 1.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/timestamps\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-06-29T16:00:07+00:00\n"
+"POT-Creation-Date: 2024-08-01T19:51:23+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.9.0\n"
+"X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: timestamps\n"
 
 #. Plugin Name of the plugin
+#: timestamps.php
 #: includes/classes/Screen/Settings.php:74
 #: dist/blocks/block-timestamp-post/editor.js:1
 #: includes/blocks/timestamp-post/edit.js:16
@@ -22,14 +23,17 @@ msgid "Timestamps"
 msgstr ""
 
 #. Description of the plugin
+#: timestamps.php
 msgid "Timestamp your WordPress content to empower your content authenticity and increase user trust. No blockchain skills needed."
 msgstr ""
 
 #. Author of the plugin
+#: timestamps.php
 msgid "ScoreDetect.com"
 msgstr ""
 
 #. Author URI of the plugin
+#: timestamps.php
 msgid "https://www.scoredetect.com/"
 msgstr ""
 
@@ -38,27 +42,57 @@ msgstr ""
 msgid "The Timestamps plugin is almost ready. Click to <a href=\"%s\">enter your settings here</a>."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Timestamp.php:42
-msgid "Post Timestamp"
+#: includes/classes/Feature/Timestamp/Screenshot.php:38
+msgid "Screenshot Timestamp"
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Timestamp.php:44
-msgid "Timestamps are a way to prove that you’ve published your content at a certain time."
+#: includes/classes/Feature/Timestamp/Screenshot.php:40
+msgid "Create a timestamp from a browser screenshot of the current page."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Timestamp.php:46
+#: includes/classes/Feature/Timestamp/Screenshot.php:42
+#: includes/classes/Feature/Timestamp/Timestamp.php:47
 #: includes/classes/Feature/WooCommerce/Orders.php:35
 msgid "https://docs.scoredetect.com/"
 msgstr ""
 
+#: includes/classes/Feature/Timestamp/Screenshot.php:117
+msgid "The file is not set."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Screenshot.php:126
+msgid "The file type is not allowed."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Screenshot.php:135
+msgid "The file is not an image."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Screenshot.php:145
+msgid "The API key is not set."
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Screenshot.php:201
+msgctxt "timestamps screenshot button"
+msgid "Create Timestamp"
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:43
+msgid "Post Timestamp"
+msgstr ""
+
+#: includes/classes/Feature/Timestamp/Timestamp.php:45
+msgid "Timestamps are a way to prove that you’ve published your content at a certain time."
+msgstr ""
+
 #. translators: %s: post type name
-#: includes/classes/Feature/Timestamp/Timestamp.php:220
+#: includes/classes/Feature/Timestamp/Timestamp.php:197
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:223
 #: dist/js/timestamp-post.js:1
 msgid "Enable timestamps for this %s"
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Timestamp.php:225
+#: includes/classes/Feature/Timestamp/Timestamp.php:202
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:226
 #: dist/js/timestamp-post.js:1
 msgid "Timestamps prove that you keep your content regularly up-to-date."
@@ -217,4 +251,29 @@ msgstr ""
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:204
 #: dist/js/timestamp-post.js:1
 msgid "Certificate created successfully."
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:42
+msgid "Loading"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:61
+msgid "screenshot-ORIGINAL"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:113
+msgid "certificate"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:114
+msgid "Verification Certificate"
+msgstr ""
+
+#. translators: %1$s: current page number, %2$s: total number of pages
+#: assets/js/timestamps-screenshot-shortcode/index.js:287
+msgid "Page %1$s of %2$s"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:301
+msgid "Reference only. Valid original image is downloaded separately for security purposes."
 msgstr ""

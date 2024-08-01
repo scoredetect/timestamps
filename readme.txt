@@ -1,10 +1,10 @@
 === Timestamps – Blockchain Integration for WordPress ===
 Contributors: scoredetect, xmic
-Tags: timestamp, blockchain, content, authenticity, copyright, timestamps, protection, verification, proof, timestamping
+Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
-Tested up to: 6.6
+Tested up to: 6.6.1
 Requires PHP: 7.4
-Stable tag: 1.4.1
+Stable tag: 1.5.0
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -34,6 +34,10 @@ __Classic Editor Ready__: The plugin is also ready for the __Classic Editor__, s
 __Privacy Protection__: We strive for privacy, therefore __only administrators__ with the __manage_options__ capability can have access to perform actions with this plugin.
 
 The plugin connects to the api.scoredetect.com service to create and update the verification certificates. The service is free to use with a 7-day free trial guarantee, and the plugin is free to use.
+
+### WooCommerce
+
+The plugin is compatible with WooCommerce. You can timestamp your orders and products and protect your digital assets.
 
 ### GDPR Compliant
 

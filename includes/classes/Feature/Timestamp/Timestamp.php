@@ -12,6 +12,7 @@ use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
 use function SDCOM_Timestamps\Utils\get_plugin_option;
+use function SDCOM_Timestamps\Utils\get_timestamp_post_types;
 
 /**
  * Timestamp feature class
@@ -73,30 +74,6 @@ class Timestamp extends Feature {
 	}
 
 	/**
-	 * Returns timestamp post types for the current site.
-	 *
-	 * @since 1.0.0
-	 * @return mixed|void
-	 */
-	public function get_timestamp_post_types() {
-		/*
-		 * Get all public post types.
-		 *
-		 * Defaults to 'post' and 'page'.
-		 */
-		$post_types = get_post_types( array( 'public' => true ) );
-
-		/**
-		 * Filter timestamp post types
-		 *
-		 * @hook sdcom_timestamp_post_types
-		 * @param  {array} $post_types Post types
-		 * @return  {array} New post types
-		 */
-		return apply_filters( 'sdcom_timestamp_post_types', $post_types );
-	}
-
-	/**
 	 * Registers post meta for the feature.
 	 *
 	 * This function iterates over the $post_meta array, where each key-value pair represents
@@ -145,7 +122,7 @@ class Timestamp extends Feature {
 		}
 
 		// Bail early if $post is not a valid post type.
-		$post_types = $this->get_timestamp_post_types();
+		$post_types = get_timestamp_post_types();
 		if ( ! in_array( $post->post_type, $post_types, true ) ) {
 			return;
 		}
@@ -203,7 +180,7 @@ class Timestamp extends Feature {
 	 */
 	public function output_setting( $post ) {
 
-		$post_types = $this->get_timestamp_post_types();
+		$post_types = get_timestamp_post_types();
 		if ( ! in_array( $post->post_type, $post_types, true ) ) {
 			return;
 		}
