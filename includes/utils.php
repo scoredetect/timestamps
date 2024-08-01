@@ -196,3 +196,28 @@ function get_plugin_option( $option_key, $default_value = false ) {
 
 	return $default_value;
 }
+
+/**
+ * Returns timestamp post types for the current site.
+ *
+ * @since 1.0.0
+ * @return mixed|void
+ */
+function get_timestamp_post_types() {
+
+	/**
+	 * Get all public post types.
+	 *
+	 * Defaults to 'post' and 'page'.
+	 */
+	$post_types = get_post_types( array( 'public' => true ) );
+
+	/**
+	 * Filter timestamp post types
+	 *
+	 * @hook sdcom_timestamp_post_types
+	 * @param  {array} $post_types Post types
+	 * @return  {array} New post types
+	 */
+	return apply_filters( 'sdcom_timestamp_post_types', $post_types );
+}
