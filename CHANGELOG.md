@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.6.0] - 2024-08-19
+
+### Added
+* Add Screenshot HUD in screenshots PDF download by @michael-sumner in #35
+
+<!-- ... -->
 ## [1.5.0] - 2024-08-01
 
 ### Added
@@ -93,6 +99,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.6.0]: https://github.com/scoredetect/timestamps/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/scoredetect/timestamps/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/scoredetect/timestamps/compare/1.4.0...1.4.1
 [1.4.0]: https://github.com/scoredetect/timestamps/compare/1.3.1...1.4.0
