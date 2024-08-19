@@ -12,6 +12,7 @@ import { __, sprintf } from '@wordpress/i18n';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf'; // eslint-disable-line import/no-extraneous-dependencies
 import autoTable from 'jspdf-autotable'; // eslint-disable-line import/no-extraneous-dependencies
+import QRCode from 'easyqrcodejs'; // eslint-disable-line import/no-extraneous-dependencies
 
 /**
  * Internal dependencies.
@@ -112,6 +113,7 @@ function onClick(btn) {
 						const certificateId = certificate.id;
 						const filename = `${__('certificate', 'timestamps')}-${certificateId}.pdf`;
 						const docTitle = __('Verification Certificate', 'timestamps');
+						const publicLedgerUrl = `${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`;
 
 						const doc = new jsPDF(); // eslint-disable-line new-cap
 
@@ -211,7 +213,7 @@ function onClick(btn) {
 
 						autoTable(doc, {
 							head: [['Public Ledger URL']],
-							body: [[`${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`]],
+							body: [[publicLedgerUrl]],
 							headStyles,
 						});
 
@@ -271,6 +273,78 @@ function onClick(btn) {
 						// Add the sample screenshot image using the page dimensions.
 						doc.addImage(screenshot, 'PNG', 0, 0, newWidth, newHeight);
 
+						// Draw a black rectangle around the image.
+						doc.setLineWidth(1);
+						doc.setDrawColor(0, 0, 0);
+						doc.rect(0, 0, newWidth, newHeight).stroke();
+
+						// Create QR Code HTML image element.
+						const qrCodeSize = 30;
+						const qrCodeElement = document.createElement('div');
+						const qrCodeId = 'qrcode';
+						qrCodeElement.id = qrCodeId;
+						document.body.appendChild(qrCodeElement);
+						document.getElementById(qrCodeId).style.display = 'none';
+
+						// Add a text above the QR code.
+						doc.setFontSize(8);
+						doc.setFont(undefined, 'bold');
+						doc.text(
+							__('Blockchain Safety', 'timestamps'),
+							pageWidth - qrCodeSize - 10,
+							10,
+						);
+
+						// Create QR Code Object.
+						const qrcode = new QRCode(document.getElementById(qrCodeId), {
+							text: publicLedgerUrl,
+						});
+
+						// Get QR Code Data URL.
+						const qrCodeDataUrl = qrcode._el.childNodes[0].toDataURL('image/png');
+
+						// Remove the QR Code element from the DOM.
+						document.body.removeChild(qrCodeElement);
+
+						// Add the QR code to the PDF.
+						doc.addImage(
+							qrCodeDataUrl,
+							'PNG',
+							pageWidth - qrCodeSize - 10,
+							10 + 2,
+							qrCodeSize,
+							qrCodeSize,
+						);
+
+						// Add the `certificate checksum` under the QR code.
+						doc.setFont(undefined, 'normal');
+						doc.setFontSize(5);
+						doc.text(
+							`sha256:${certificate.blockchain_transaction_checksum}`,
+							pageWidth - 10 - 1, // hard-coded x-coordinate to place it under the QR code.
+							qrCodeSize + 15, // hard-coded y-coordinate to place it under the QR code.
+							{
+								angle: -90,
+							},
+						);
+
+						// Add the `certificate created_at` under the QR code.
+						doc.text(
+							sprintf(
+								/* translators: %s: Created at date */
+								__('Created at: %s UTC+0', 'timestamps'),
+								certificate.created_at,
+							),
+							pageWidth - 10 - 1 - 2, // hard-coded x-coordinate to place it under the QR code.
+							qrCodeSize + 15, // hard-coded y-coordinate to place it under the QR code.
+							{
+								angle: -90,
+							},
+						);
+
+						// Reset the font size.
+						doc.setFontSize(10);
+
 						const totalPagesExp = doc.internal.getNumberOfPages();
 
 						const setFooter = () => {
@@ -312,9 +386,9 @@ function onClick(btn) {
 
 						// Setup PDF footer.
 						autoTable(doc, {
-							didDrawPage(data) {
+							didDrawPage() {
 								doc.setFontSize(10);
-								setFooter({ data });
+								setFooter();
 							},
 							margin: { top: 30 },
 						});
