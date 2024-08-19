@@ -40,6 +40,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.3",
+    "easyqrcodejs": "^4.6.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.8.2",
