@@ -4,7 +4,7 @@ Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -31,7 +31,7 @@ __Gutenberg / Block Editor Ready__: We aim for the latest technology. The plugin
 
 __Classic Editor Ready__: The plugin is also ready for the __Classic Editor__, so you can use it with the editor you prefer.
 
-__Screenshots Button__: Allow your users to easily timestamp their screenshots by adding a `[timestamps_screenshot]` shortcode button.
+__Screenshots Button__: Allow your users to easily timestamp their screenshots by adding a `[timestamps_screenshot]` shortcode button. Each screenshot is unique with a QR code, date/time, and certificate ID.
 
 __Privacy Protection__: We strive for privacy, therefore __only administrators__ with the __manage_options__ capability can have access to perform actions with this plugin.
 

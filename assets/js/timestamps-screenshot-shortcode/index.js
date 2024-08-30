@@ -20,15 +20,129 @@ import QRCode from 'easyqrcodejs'; // eslint-disable-line import/no-extraneous-d
 import { PUBLIC_SCOREDETECT_URL } from '../lib/constants';
 
 /**
- * Handles the click event on the element.
+ * Displays a HUD with the certificate ID and a QR code.
  *
- * This function will take a screenshot of the webpage and create a PDF certificate.
+ * @param {string} certificateId - The certificate ID.
  *
- * @param {HTMLButtonElement} btn - The button element.
+ * @returns {void}
  */
-function onClick(btn) {
-	const { body } = document;
+function displayHud({ certificateId = '' }) {
+	// Create a canvas element.
+	const canvas = document.createElement('canvas');
+	canvas.id = 'sdcom_timestamps_hud';
+	canvas.width = 300;
+	canvas.height = 300;
+	canvas.style.position = 'absolute';
+	canvas.style.top = '0';
+	canvas.style.right = '0';
+	canvas.style.zIndex = '999999999'; // Force to be on top.
+	canvas.style.backgroundColor = 'white';
+	canvas.style.border = '2px solid black';
+	canvas.style.padding = '10px';
+	canvas.style.fontFamily = 'Arial';
+	canvas.style.fontSize = '12px';
 
+	// Get the canvas context.
+	const ctx = canvas.getContext('2d');
+
+	const maxWidth = canvas.width - 20; // Set a maximum width for the text.
+	const lineHeight = 12; // Set the line height.
+
+	// Create QR Code HTML image element.
+	const qrCodeSize = 200;
+	const qrCodeId = 'qrcode';
+
+	const qrCodeElement = new Image();
+	qrCodeElement.width = qrCodeSize;
+	qrCodeElement.height = qrCodeSize;
+	qrCodeElement.id = qrCodeId;
+
+	document.body.appendChild(qrCodeElement);
+
+	document.getElementById(qrCodeId).style.display = 'none';
+
+	const publicLedgerUrl = `${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`;
+
+	// Create QR Code Object.
+	const qrcode = new QRCode(document.getElementById(qrCodeId), {
+		text: publicLedgerUrl,
+	});
+
+	// Get QR Code Data URL.
+	const qrCodeDataUrl = qrcode._el.childNodes[0].toDataURL('image/png');
+
+	qrCodeElement.src = qrCodeDataUrl;
+
+	// Draw the QR code on the canvas.
+	qrCodeElement.onload = () => {
+		ctx.drawImage(qrCodeElement, 50, 55, canvas.width - 100, canvas.height - 100);
+	};
+
+	// Remove the QR Code element from the DOM.
+	document.body.removeChild(qrCodeElement);
+
+	// Wrap the text. Defaults to every 50 characters.
+	function wrapText(context, text, x, y, maxWidth, lineHeight, maxChars = 50) {
+		const lines = [];
+		for (let i = 0; i < text.length; i += maxChars) {
+			lines.push(text.substring(i, i + maxChars));
+		}
+
+		for (let k = 0; k < lines.length; k++) {
+			context.fillText(lines[k], x, y + k * lineHeight);
+		}
+	}
+
+	ctx.fillStyle = 'black';
+	ctx.textAlign = 'center';
+	ctx.font = '20px Arial';
+
+	wrapText(
+		ctx,
+		__('Blockchain Safety', 'timestamps'),
+		canvas.width / 2,
+		45,
+		maxWidth,
+		lineHeight,
+		30,
+	);
+
+	ctx.font = '12px Arial';
+
+	// Display the date and time to the bottom but inside the square.
+	const now = new Date();
+	const dateTimeString = `${now.toUTCString()} UTC+0`;
+	wrapText(ctx, dateTimeString, canvas.width / 2, canvas.height - 25, maxWidth, lineHeight, 40);
+
+	// Display the certificate ID to the bottom but inside the square.
+	wrapText(ctx, certificateId, canvas.width / 2, canvas.height - 10, maxWidth, lineHeight, 40);
+
+	// Display the canvas element.
+	document.body.appendChild(canvas);
+}
+
+/**
+ * Removes the HUD from the DOM.
+ *
+ * @returns {void}
+ */
+function removeHud() {
+	const hud = document.getElementById('sdcom_timestamps_hud');
+	if (hud) {
+		hud.remove();
+	}
+}
+
+/**
+ * Handles the screenshot and creates a PDF certificate.
+ *
+ * @param {HTMLElement} body - The body element.
+ * @param {HTMLButtonElement} btn - The button element.
+ * @param {string} certificateId - The certificate ID.
+ *
+ * @returns {void}
+ */
+function handleScreenshot({ body, btn, certificateId }) {
 	// Get the original button text.
 	const originalText = btn.innerHTML;
 
@@ -74,6 +188,10 @@ function onClick(btn) {
 			formData.append('file', file);
 			formData.append('action', 'sdcom_timestamps_screenshot');
 
+			if (certificateId) {
+				formData.append('id', certificateId);
+			}
+
 			const a = document.createElement('a');
 			const img = URL.createObjectURL(blob);
 			a.href = img;
@@ -89,6 +207,9 @@ function onClick(btn) {
 
 			// Remove the canvas element.
 			canvas.remove();
+
+			// Remove the HUD.
+			removeHud();
 
 			// Restore the WP admin bar.
 			if (adminBar) {
@@ -278,73 +399,6 @@ function onClick(btn) {
 						doc.setDrawColor(0, 0, 0);
 						doc.rect(0, 0, newWidth, newHeight).stroke();
 
-						// Create QR Code HTML image element.
-						const qrCodeSize = 30;
-						const qrCodeElement = document.createElement('div');
-						const qrCodeId = 'qrcode';
-						qrCodeElement.id = qrCodeId;
-						document.body.appendChild(qrCodeElement);
-						document.getElementById(qrCodeId).style.display = 'none';
-
-						// Add a text above the QR code.
-						doc.setFontSize(8);
-						doc.setFont(undefined, 'bold');
-						doc.text(
-							__('Blockchain Safety', 'timestamps'),
-							pageWidth - qrCodeSize - 10,
-							10,
-						);
-
-						// Create QR Code Object.
-						const qrcode = new QRCode(document.getElementById(qrCodeId), {
-							text: publicLedgerUrl,
-						});
-
-						// Get QR Code Data URL.
-						const qrCodeDataUrl = qrcode._el.childNodes[0].toDataURL('image/png');
-
-						// Remove the QR Code element from the DOM.
-						document.body.removeChild(qrCodeElement);
-
-						// Add the QR code to the PDF.
-						doc.addImage(
-							qrCodeDataUrl,
-							'PNG',
-							pageWidth - qrCodeSize - 10,
-							10 + 2,
-							qrCodeSize,
-							qrCodeSize,
-						);
-
-						// Add the `certificate checksum` under the QR code.
-						doc.setFont(undefined, 'normal');
-						doc.setFontSize(5);
-						doc.text(
-							`sha256:${certificate.blockchain_transaction_checksum}`,
-							pageWidth - 10 - 1, // hard-coded x-coordinate to place it under the QR code.
-							qrCodeSize + 15, // hard-coded y-coordinate to place it under the QR code.
-							{
-								angle: -90,
-							},
-						);
-
-						// Add the `certificate created_at` under the QR code.
-						doc.text(
-							sprintf(
-								/* translators: %s: Created at date */
-								__('Created at: %s UTC+0', 'timestamps'),
-								certificate.created_at,
-							),
-							pageWidth - 10 - 1 - 2, // hard-coded x-coordinate to place it under the QR code.
-							qrCodeSize + 15, // hard-coded y-coordinate to place it under the QR code.
-							{
-								angle: -90,
-							},
-						);
-
-						// Reset the font size.
-						doc.setFontSize(10);
-
 						const totalPagesExp = doc.internal.getNumberOfPages();
 
 						const setFooter = () => {
@@ -382,7 +436,10 @@ function onClick(btn) {
 						const centerY = pageHeight / 2 + 10;
 
 						// Set the text alignment to center.
-						doc.text(watermarkText, centerX, centerY, { align: 'center', angle: 30 });
+						doc.text(watermarkText, centerX, centerY, {
+							align: 'center',
+							angle: 30,
+						});
 
 						// Setup PDF footer.
 						autoTable(doc, {
@@ -418,6 +475,54 @@ function onClick(btn) {
 			}
 		}, 'image/png');
 	});
+}
+
+/**
+ * Handles the click event on the element.
+ *
+ * This function will take a screenshot of the webpage and create a PDF certificate.
+ *
+ * @param {HTMLButtonElement} btn - The button element.
+ */
+function onClick(btn) {
+	const formDataCertificateId = new FormData();
+	formDataCertificateId.append(
+		'nonce',
+		sdcom_timestamps_screenshot.generate_certificate_id_nonce,
+	);
+	formDataCertificateId.append('action', 'sdcom_timestamps_screenshot_generate_certificate_id');
+
+	try {
+		fetch(sdcom_timestamps_screenshot.ajaxurl, {
+			method: 'POST',
+			body: formDataCertificateId,
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				if (!data.success) {
+					throw new Error(data.data.message);
+				}
+
+				const { uuid } = data.data;
+
+				const certificateId = uuid;
+
+				// Display the HUD.
+				displayHud({
+					certificateId,
+				});
+
+				// Wait a bit for the HUD to be displayed before taking the screenshot.
+				setTimeout(() => {
+					handleScreenshot({ body: document.body, btn, certificateId: uuid });
+				}, 1);
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 /**

@@ -63,6 +63,8 @@ class Screenshot extends Feature {
 		add_shortcode( $this->shortcode, array( $this, 'shortcode' ) );
 		add_action( 'wp_ajax_sdcom_timestamps_screenshot', array( $this, 'ajax_sdcom_timestamps_screenshot' ) );
 		add_action( 'wp_ajax_nopriv_sdcom_timestamps_screenshot', array( $this, 'ajax_sdcom_timestamps_screenshot' ) );
+		add_action( 'wp_ajax_sdcom_timestamps_screenshot_generate_certificate_id', array( $this, 'ajax_sdcom_timestamps_screenshot_generate_certificate_id' ) );
+		add_action( 'wp_ajax_nopriv_sdcom_timestamps_screenshot_generate_certificate_id', array( $this, 'ajax_sdcom_timestamps_screenshot_generate_certificate_id' ) );
 	}
 
 	/**
@@ -91,9 +93,10 @@ class Screenshot extends Feature {
 			'timestamps-screenshot-shortcode',
 			'sdcom_timestamps_screenshot',
 			array(
-				'nonce'           => wp_create_nonce( 'sdcom_timestamps_screenshot' ),
-				'ajaxurl'         => admin_url( 'admin-ajax.php' ),
-				'plugin_dist_url' => SDCOM_TIMESTAMPS_DIST_URL,
+				'nonce'                         => wp_create_nonce( 'sdcom_timestamps_screenshot' ),
+				'generate_certificate_id_nonce' => wp_create_nonce( 'sdcom_timestamps_screenshot_generate_certificate_id' ),
+				'ajaxurl'                       => admin_url( 'admin-ajax.php' ),
+				'plugin_dist_url'               => SDCOM_TIMESTAMPS_DIST_URL,
 			)
 		);
 	}
@@ -137,6 +140,8 @@ class Screenshot extends Feature {
 			);
 		}
 
+		$id = ! empty( sanitize_text_field( wp_unslash( $_POST['id'] ) ) ) ? sanitize_text_field( wp_unslash( $_POST['id'] ) ) : '';
+
 		// Bail early if the API key is not set.
 		$timestamps_api_key = get_plugin_option( 'api_key', '' );
 		if ( empty( $timestamps_api_key ) ) {
@@ -149,7 +154,7 @@ class Screenshot extends Feature {
 
 		$file = file_get_contents( $_FILES['file']['tmp_name'] );
 
-		$create_certificate = $this->create_certificate( $file );
+		$create_certificate = $this->create_certificate( $file, $id );
 
 		// Handle the case where the method returned false.
 		if ( $create_certificate === false ) {
@@ -185,6 +190,46 @@ class Screenshot extends Feature {
 	}
 
 	/**
+	 * AJAX handler for generating the screenshot certificate id.
+	 *
+	 * @since 1.7.0
+	 */
+	public function ajax_sdcom_timestamps_screenshot_generate_certificate_id() {
+
+		// Check the nonce.
+		check_ajax_referer( 'sdcom_timestamps_screenshot_generate_certificate_id', 'nonce' );
+
+		// Bail early if the API key is not set.
+		$timestamps_api_key = get_plugin_option( 'api_key', '' );
+		if ( empty( $timestamps_api_key ) ) {
+			wp_send_json_error(
+				array(
+					'message' => esc_html__( 'The API key is not set.', 'timestamps' ),
+				)
+			);
+		}
+
+		$generate_certificate_id = $this->generate_certificate_id();
+
+		// Handle the case where the method returned false.
+		if ( $generate_certificate_id === false ) {
+			throw new \Exception( 'Generate certificate ID failed.' );
+		}
+
+		if ( empty( $generate_certificate_id->{'uuid'} ) ) {
+			throw new \Exception( 'UUID is empty.' );
+		}
+
+		$uuid = $generate_certificate_id->{'uuid'} ?? '';
+
+		$data = [
+			'uuid' => $uuid,
+		];
+
+		return wp_send_json_success( $data );
+	}
+
+	/**
 	 * Outputs the shortcode for the feature.
 	 *
 	 * @since 1.5.0
@@ -207,14 +252,15 @@ class Screenshot extends Feature {
 	/**
 	 * Creates a certificate for a file.
 	 *
-	 * @since 1.5.0
+	 * @since 1.7.0
 	 *
-	 * @param File $file The file to create a certificate for.
+	 * @param File   $file The file to create a certificate for.
+	 * @param string $id The id of the certificate to create. Optional.
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the options, file, or API key is empty.
 	 */
-	private function create_certificate( $file ) {
+	private function create_certificate( $file, $id = '' ) {
 		try {
 			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 
@@ -269,6 +315,13 @@ class Screenshot extends Feature {
 				],
 			];
 
+			if ( ! empty( $id ) ) {
+				$multipart[] = [
+					'name'     => 'id',
+					'contents' => $id,
+				];
+			}
+
 			// Send the POST request.
 			$request = $client->post(
 				$url,
@@ -278,6 +331,70 @@ class Screenshot extends Feature {
 						'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
 					],
 					'multipart' => $multipart,
+				]
+			);
+
+			// Handle the response.
+			$response_body = $request->getBody()->getContents();
+
+			/**
+			 * Retrieve and parse the contents of the API response, which is JSON.
+			 */
+			$content = $response_body;
+			$data    = json_decode( $content );
+
+			/**
+			 * Detect any issues with decoding the JSON string into a PHP object.
+			 */
+			if ( empty( $data ) ) {
+				throw new \Exception( 'Data is empty' );
+			}
+
+			// Return the data.
+			return $data;
+
+		} catch ( \Throwable $th ) {
+			throw $th;
+		}
+	}
+
+	/**
+	 * Generates a unique certificate ID for use.
+	 *
+	 * @since 1.7.0
+	 *
+	 * @return object|false The data returned by the API on success, or false on failure.
+	 * @throws \Throwable If an exception occurs during the process.
+	 * @throws \Exception If the options, file, or API key is empty.
+	 */
+	private function generate_certificate_id() {
+		try {
+			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
+
+			// Bail early if the options are empty.
+			if ( empty( $sdcom_timestamps ) ) {
+				throw new \Exception( 'Options are empty.' );
+			}
+
+			$sdcom_timestamps_api_key = ! empty( $sdcom_timestamps['api_key'] ) ? $sdcom_timestamps['api_key'] : '';
+
+			// Bail early if the api key is empty.
+			if ( empty( $sdcom_timestamps_api_key ) ) {
+				throw new \Exception( 'API key is empty.' );
+			}
+
+			$url = 'https://api.scoredetect.com/generate-certificate-id';
+
+			$client = new Client();
+
+			// Send the POST request.
+			$request = $client->post(
+				$url,
+				[
+					'timeout' => 30,
+					'headers' => [
+						'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
+					],
 				]
 			);
 
