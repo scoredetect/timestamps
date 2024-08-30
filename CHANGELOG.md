@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.7.0] - 2024-08-30
+
+### Changed
+* Refactored Screenshot HUD to appear in the screenshot by @michael-sumner in #38
+
+<!-- ... -->
 ## [1.6.0] - 2024-08-19
 
 ### Added
@@ -99,6 +105,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.7.0]: https://github.com/scoredetect/timestamps/compare/1.6.0...1.7.0
 [1.6.0]: https://github.com/scoredetect/timestamps/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/scoredetect/timestamps/compare/1.4.1...1.5.0
 [1.4.1]: https://github.com/scoredetect/timestamps/compare/1.4.0...1.4.1

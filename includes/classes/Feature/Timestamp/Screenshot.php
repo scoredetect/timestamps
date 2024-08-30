@@ -190,9 +190,9 @@ class Screenshot extends Feature {
 	}
 
 	/**
-	 * AJAX handler for generating the screenshot timestamp hash.
+	 * AJAX handler for generating the screenshot certificate id.
 	 *
-	 * @since 1.5.0
+	 * @since 1.7.0
 	 */
 	public function ajax_sdcom_timestamps_screenshot_generate_certificate_id() {
 
@@ -213,7 +213,7 @@ class Screenshot extends Feature {
 
 		// Handle the case where the method returned false.
 		if ( $generate_certificate_id === false ) {
-			throw new \Exception( 'Generate checksum failed.' );
+			throw new \Exception( 'Generate certificate ID failed.' );
 		}
 
 		if ( empty( $generate_certificate_id->{'uuid'} ) ) {
@@ -252,7 +252,7 @@ class Screenshot extends Feature {
 	/**
 	 * Creates a certificate for a file.
 	 *
-	 * @since 1.5.0
+	 * @since 1.7.0
 	 *
 	 * @param File   $file The file to create a certificate for.
 	 * @param string $id The id of the certificate to create. Optional.
@@ -361,7 +361,7 @@ class Screenshot extends Feature {
 	/**
 	 * Generates a unique certificate ID for use.
 	 *
-	 * @since 1.5.0
+	 * @since 1.7.0
 	 *
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Throwable If an exception occurs during the process.
