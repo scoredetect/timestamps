@@ -31,7 +31,7 @@ __Gutenberg / Block Editor Ready__: We aim for the latest technology. The plugin
 
 __Classic Editor Ready__: The plugin is also ready for the __Classic Editor__, so you can use it with the editor you prefer.
 
-__Screenshots Button__: Allow your users to easily timestamp their screenshots by adding a `[timestamps_screenshot]` shortcode button.
+__Screenshots Button__: Allow your users to easily timestamp their screenshots by adding a `[timestamps_screenshot]` shortcode button. Each screenshot is unique with a QR code, date/time, and certificate ID.
 
 __Privacy Protection__: We strive for privacy, therefore __only administrators__ with the __manage_options__ capability can have access to perform actions with this plugin.
 
