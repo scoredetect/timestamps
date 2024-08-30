@@ -20,13 +20,13 @@ import QRCode from 'easyqrcodejs'; // eslint-disable-line import/no-extraneous-d
 import { PUBLIC_SCOREDETECT_URL } from '../lib/constants';
 
 /**
- * Displays a HUD with the public ledger URL and a QR code.
+ * Displays a HUD with the certificate ID and a QR code.
  *
- * @param {string} publicLedgerUrl - The public ledger URL.
+ * @param {string} certificateId - The certificate ID.
  *
  * @returns {void}
  */
-function displayHud({ publicLedgerUrl = '' }) {
+function displayHud({ certificateId = '' }) {
 	// Create a canvas element.
 	const canvas = document.createElement('canvas');
 	canvas.id = 'sdcom_timestamps_hud';
@@ -61,6 +61,8 @@ function displayHud({ publicLedgerUrl = '' }) {
 
 	document.getElementById(qrCodeId).style.display = 'none';
 
+	const publicLedgerUrl = `${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`;
+
 	// Create QR Code Object.
 	const qrcode = new QRCode(document.getElementById(qrCodeId), {
 		text: publicLedgerUrl,
@@ -91,9 +93,6 @@ function displayHud({ publicLedgerUrl = '' }) {
 		}
 	}
 
-	// Display the date and time to the bottom but inside the square.
-	const now = new Date();
-	const dateTimeString = `${now.toUTCString()} UTC+0`;
 	ctx.fillStyle = 'black';
 	ctx.textAlign = 'center';
 	ctx.font = '20px Arial';
@@ -110,7 +109,13 @@ function displayHud({ publicLedgerUrl = '' }) {
 
 	ctx.font = '12px Arial';
 
-	wrapText(ctx, dateTimeString, canvas.width / 2, canvas.height - 15, maxWidth, lineHeight, 40);
+	// Display the date and time to the bottom but inside the square.
+	const now = new Date();
+	const dateTimeString = `${now.toUTCString()} UTC+0`;
+	wrapText(ctx, dateTimeString, canvas.width / 2, canvas.height - 25, maxWidth, lineHeight, 40);
+
+	// Display the certificate ID to the bottom but inside the square.
+	wrapText(ctx, certificateId, canvas.width / 2, canvas.height - 10, maxWidth, lineHeight, 40);
 
 	// Display the canvas element.
 	document.body.appendChild(canvas);
@@ -500,9 +505,11 @@ function onClick(btn) {
 
 				const { uuid } = data.data;
 
+				const certificateId = uuid;
+
 				// Display the HUD.
 				displayHud({
-					publicLedgerUrl: `${PUBLIC_SCOREDETECT_URL}/certificate/${uuid}`,
+					certificateId,
 				});
 
 				// Wait a bit for the HUD to be displayed before taking the screenshot.
