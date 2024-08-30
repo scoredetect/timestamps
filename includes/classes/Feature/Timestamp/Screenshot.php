@@ -190,7 +190,7 @@ class Screenshot extends Feature {
 	}
 
 	/**
-	 * AJAX handler for generating the screenshot timestamp hash.
+	 * AJAX handler for generating the screenshot certificate id.
 	 *
 	 * @since 1.7.0
 	 */
@@ -213,7 +213,7 @@ class Screenshot extends Feature {
 
 		// Handle the case where the method returned false.
 		if ( $generate_certificate_id === false ) {
-			throw new \Exception( 'Generate checksum failed.' );
+			throw new \Exception( 'Generate certificate ID failed.' );
 		}
 
 		if ( empty( $generate_certificate_id->{'uuid'} ) ) {
