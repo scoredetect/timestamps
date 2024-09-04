@@ -177,10 +177,10 @@ class Command extends WP_CLI_Command {
 			// Increment the progress bar.
 			$this->progress_bar->tick();
 
-            usleep( 500 );
+			usleep( 500 );
 
-            // Avoid running out of memory.
-            $this->stop_the_insanity();
+			// Avoid running out of memory.
+			$this->stop_the_insanity();
 		}
 
 		$sync_time_in_ms = Utility::timer_stop();
@@ -203,8 +203,8 @@ class Command extends WP_CLI_Command {
 
 	/**
 	 * Resets some values to reduce memory footprint.
-     * 
-     * @since 1.8.0
+	 *
+	 * @since 1.8.0
 	 */
 	protected function stop_the_insanity() {
 		global $wpdb, $wp_object_cache, $wp_actions;
@@ -254,10 +254,10 @@ class Command extends WP_CLI_Command {
 		$wp_actions = $this->temporary_wp_actions;
 		// phpcs:enable
 
-        /*
-         * It's high memory consuming as WP_Query instance holds all query results inside itself
-         * and in theory $wp_filter will not stop growing until Out Of Memory exception occurs.
-         */
+		/*
+		 * It's high memory consuming as WP_Query instance holds all query results inside itself
+		 * and in theory $wp_filter will not stop growing until Out Of Memory exception occurs.
+		 */
 		remove_filter( 'get_term_metadata', [ wp_metadata_lazyloader(), 'lazyload_term_meta' ] );
 
 		/**
