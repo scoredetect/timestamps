@@ -4,7 +4,7 @@ Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
 Tested up to: 6.6.1
 Requires PHP: 7.4
-Stable tag: 1.7.0
+Stable tag: 1.8.0
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -67,7 +67,7 @@ The API Documentation is available here: https://docs.scoredetect.com/
 We are transparent - here are our Terms and Conditions: https://www.scoredetect.com/terms-and-conditions
 We value privacy - here is our Privacy Policy: https://www.scoredetect.com/privacy-policy
 
-Example Verification Certificate: https://www.scoredetect.com/certificate/99f8b221-ff5c-4bea-b39a-a63b99880837
+Example Verification Certificate: https://explorer.scoredetect.com/certificate/3ccfc7fd-bf8a-44c8-b2a3-3b3bd09a24b8
 
 == Installation ==
 1. First, you will need to properly install the Timestamps plugin.

@@ -166,7 +166,7 @@ function get_certificate_url_wc_order( $order ): string {
 		return '';
 	}
 
-	return apply_filters( 'get_certificate_url_wc_order', esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ), $order );
+	return apply_filters( 'get_certificate_url_wc_order', esc_url( 'https://explorer.scoredetect.com/certificate/' . $sdcom_previous_certificate_id ), $order );
 }
 
 /**

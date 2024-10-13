@@ -14,6 +14,15 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.8.0] - 2024-10-13
+
+### Added
+* WP-CLI command to bulk generate timestamps by @michael-sumner in #42
+
+### Changed
+* Updated the certificates explorer URL by @michael-sumner in #43
+
+<!-- ... -->
 ## [1.7.0] - 2024-08-30
 
 ### Changed
@@ -105,6 +114,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.8.0]: https://github.com/scoredetect/timestamps/compare/1.7.0...1.8.0
 [1.7.0]: https://github.com/scoredetect/timestamps/compare/1.6.0...1.7.0
 [1.6.0]: https://github.com/scoredetect/timestamps/compare/1.5.0...1.6.0
 [1.5.0]: https://github.com/scoredetect/timestamps/compare/1.4.1...1.5.0
