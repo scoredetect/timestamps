@@ -25,6 +25,8 @@
 
 namespace SDCOM_Timestamps;
 
+use WP_CLI;
+
 // If this file is called directly, abort.
 if ( ! defined( 'WPINC' ) ) {
 	die;
@@ -118,6 +120,13 @@ require_once SDCOM_TIMESTAMPS_INC . 'blocks.php';
  * Setup screen.
  */
 Screen::factory();
+
+/**
+ * WP CLI Commands.
+ */
+if ( defined( 'WP_CLI' ) && WP_CLI ) {
+	WP_CLI::add_command( 'timestamps', __NAMESPACE__ . '\Command' );
+}
 
 /**
  * Load text domain.
