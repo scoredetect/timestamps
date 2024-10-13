@@ -2,14 +2,14 @@
 # This file is distributed under the AGPL-3.0-only.
 msgid ""
 msgstr ""
-"Project-Id-Version: Timestamps 1.6.0\n"
+"Project-Id-Version: Timestamps 1.8.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/timestamps\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-08-19T13:10:48+00:00\n"
+"POT-Creation-Date: 2024-10-13T21:38:16+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.10.0\n"
 "X-Domain: timestamps\n"
@@ -17,6 +17,7 @@ msgstr ""
 #. Plugin Name of the plugin
 #: timestamps.php
 #: includes/classes/Screen/Settings.php:74
+#: dist/blocks/block-timestamp-post/editor.js:1
 #: includes/blocks/timestamp-post/edit.js:16
 msgid "Timestamps"
 msgstr ""
@@ -41,6 +42,23 @@ msgstr ""
 msgid "The Timestamps plugin is almost ready. Click to <a href=\"%s\">enter your settings here</a>."
 msgstr ""
 
+#: includes/classes/Command.php:110
+msgid "Are you sure you want to generate timestamps for all posts?"
+msgstr ""
+
+#. translators: %d: number of posts
+#: includes/classes/Command.php:167
+msgid "Generating timestamps for %d objects:"
+msgstr ""
+
+#: includes/classes/Command.php:200
+msgid "Total time elapsed: "
+msgstr ""
+
+#: includes/classes/Command.php:202
+msgid "Done!"
+msgstr ""
+
 #: includes/classes/Feature/Timestamp/Screenshot.php:38
 msgid "Screenshot Timestamp"
 msgstr ""
@@ -55,23 +73,24 @@ msgstr ""
 msgid "https://docs.scoredetect.com/"
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Screenshot.php:117
+#: includes/classes/Feature/Timestamp/Screenshot.php:120
 msgid "The file is not set."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Screenshot.php:126
+#: includes/classes/Feature/Timestamp/Screenshot.php:129
 msgid "The file type is not allowed."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Screenshot.php:135
+#: includes/classes/Feature/Timestamp/Screenshot.php:138
 msgid "The file is not an image."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Screenshot.php:145
+#: includes/classes/Feature/Timestamp/Screenshot.php:150
+#: includes/classes/Feature/Timestamp/Screenshot.php:207
 msgid "The API key is not set."
 msgstr ""
 
-#: includes/classes/Feature/Timestamp/Screenshot.php:201
+#: includes/classes/Feature/Timestamp/Screenshot.php:246
 msgctxt "timestamps screenshot button"
 msgid "Create Timestamp"
 msgstr ""
@@ -87,11 +106,13 @@ msgstr ""
 #. translators: %s: post type name
 #: includes/classes/Feature/Timestamp/Timestamp.php:197
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:223
+#: dist/js/timestamp-post.js:1
 msgid "Enable timestamps for this %s"
 msgstr ""
 
 #: includes/classes/Feature/Timestamp/Timestamp.php:202
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:226
+#: dist/js/timestamp-post.js:1
 msgid "Timestamps prove that you keep your content regularly up-to-date."
 msgstr ""
 
@@ -175,6 +196,7 @@ msgstr ""
 #: includes/classes/Screen/Settings.php:293
 #: assets/js/settings.js:20
 #: assets/js/settings.js:33
+#: dist/js/settings-script.js:1
 msgid "by %s"
 msgstr ""
 
@@ -240,43 +262,47 @@ msgstr ""
 
 #. translators: %s: error message
 #: assets/js/authenticate.js:88
+#: dist/js/authenticate-script.js:1
 msgid "Error: %s. Refresh the page to continue."
 msgstr ""
 
 #: assets/js/timestamp-post/editor/plugins/timestamp-post.js:204
+#: dist/js/timestamp-post.js:1
 msgid "Certificate created successfully."
 msgstr ""
 
-#: assets/js/timestamps-screenshot-shortcode/index.js:43
-msgid "Loading"
-msgstr ""
-
-#: assets/js/timestamps-screenshot-shortcode/index.js:62
-msgid "screenshot-ORIGINAL"
-msgstr ""
-
-#: assets/js/timestamps-screenshot-shortcode/index.js:114
-msgid "certificate"
-msgstr ""
-
-#: assets/js/timestamps-screenshot-shortcode/index.js:115
-msgid "Verification Certificate"
-msgstr ""
-
-#: assets/js/timestamps-screenshot-shortcode/index.js:293
+#: assets/js/timestamps-screenshot-shortcode/index.js:102
+#: dist/js/timestamps-screenshot-shortcode.js:2
 msgid "Blockchain Safety"
 msgstr ""
 
-#. translators: %s: Created at date
-#: assets/js/timestamps-screenshot-shortcode/index.js:335
-msgid "Created at: %s UTC+0"
+#: assets/js/timestamps-screenshot-shortcode/index.js:157
+#: dist/js/timestamps-screenshot-shortcode.js:2
+msgid "Loading"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:176
+#: dist/js/timestamps-screenshot-shortcode.js:2
+msgid "screenshot-ORIGINAL"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:235
+#: dist/js/timestamps-screenshot-shortcode.js:2
+msgid "certificate"
+msgstr ""
+
+#: assets/js/timestamps-screenshot-shortcode/index.js:236
+#: dist/js/timestamps-screenshot-shortcode.js:2
+msgid "Verification Certificate"
 msgstr ""
 
 #. translators: %1$s: current page number, %2$s: total number of pages
-#: assets/js/timestamps-screenshot-shortcode/index.js:361
+#: assets/js/timestamps-screenshot-shortcode/index.js:415
+#: dist/js/timestamps-screenshot-shortcode.js:2
 msgid "Page %1$s of %2$s"
 msgstr ""
 
-#: assets/js/timestamps-screenshot-shortcode/index.js:375
+#: assets/js/timestamps-screenshot-shortcode/index.js:429
+#: dist/js/timestamps-screenshot-shortcode.js:2
 msgid "Reference only. Valid original image is downloaded separately for security purposes."
 msgstr ""

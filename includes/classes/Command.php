@@ -163,6 +163,7 @@ class Command extends WP_CLI_Command {
 
 		// Progress bar.
 		$this->progress_bar = WP_CLI\Utils\make_progress_bar(
+			/* translators: %d: number of posts */
 			sprintf( __( 'Generating timestamps for %d objects:', 'timestamps' ), $found_posts ),
 			$found_posts
 		);
