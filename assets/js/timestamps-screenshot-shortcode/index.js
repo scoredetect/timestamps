@@ -17,7 +17,7 @@ import QRCode from 'easyqrcodejs'; // eslint-disable-line import/no-extraneous-d
 /**
  * Internal dependencies.
  */
-import { PUBLIC_SCOREDETECT_URL } from '../lib/constants';
+import { PUBLIC_CERTIFICATES_EXPLORER_URL } from '../lib/constants';
 
 /**
  * Displays a HUD with the certificate ID and a QR code.
@@ -61,7 +61,7 @@ function displayHud({ certificateId = '' }) {
 
 	document.getElementById(qrCodeId).style.display = 'none';
 
-	const publicLedgerUrl = `${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`;
+	const publicLedgerUrl = `${PUBLIC_CERTIFICATES_EXPLORER_URL}/certificate/${certificateId}`;
 
 	// Create QR Code Object.
 	const qrcode = new QRCode(document.getElementById(qrCodeId), {
@@ -234,7 +234,7 @@ function handleScreenshot({ body, btn, certificateId }) {
 						const certificateId = certificate.id;
 						const filename = `${__('certificate', 'timestamps')}-${certificateId}.pdf`;
 						const docTitle = __('Verification Certificate', 'timestamps');
-						const publicLedgerUrl = `${PUBLIC_SCOREDETECT_URL}/certificate/${certificateId}`;
+						const publicLedgerUrl = `${PUBLIC_CERTIFICATES_EXPLORER_URL}/certificate/${certificateId}`;
 
 						const doc = new jsPDF(); // eslint-disable-line new-cap
 
