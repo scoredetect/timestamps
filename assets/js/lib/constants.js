@@ -1,5 +1,7 @@
 export const PUBLIC_SCOREDETECT_URL = 'https://www.scoredetect.com';
 
+export const PUBLIC_CERTIFICATES_EXPLORER_URL = 'https://explorer.scoredetect.com';
+
 export const PUBLIC_API_URL = 'https://api.scoredetect.com';
 
 export const PUBLIC_SUPABASE_URL = 'https://jtiipfmpqosvwdjjbhnc.supabase.co';

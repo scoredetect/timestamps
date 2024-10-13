@@ -108,7 +108,7 @@ class Orders extends Feature {
 
 		printf(
 			'<a class="button-link" href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a>',
-			esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
+			esc_url( 'https://explorer.scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
 			esc_html__( 'View Certificate', 'timestamps' )
 		);
 	}
@@ -545,7 +545,7 @@ class Orders extends Feature {
 				'timestamps_placeholder_wc_email',
 				sprintf(
 					'<a class="button-link" href="%s" target="_blank" rel="nofollow noopener noreferrer">%s</a>',
-					esc_url( 'https://scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
+					esc_url( 'https://explorer.scoredetect.com/certificate/' . $sdcom_previous_certificate_id ),
 					esc_html__( 'View Certificate', 'timestamps' )
 				),
 				$order
