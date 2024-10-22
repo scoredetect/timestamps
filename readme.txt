@@ -2,9 +2,9 @@
 Contributors: scoredetect, xmic
 Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
-Tested up to: 6.6.1
+Tested up to: 6.7
 Requires PHP: 7.4
-Stable tag: 1.8.0
+Stable tag: 1.8.1
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -12,6 +12,14 @@ No blockchain skills needed. Timestamp your WordPress content to empower your co
 
 == Description ==
 Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
+
+### SCOREDETECT: THE #1 WORDPRESS TIMESTAMPING PLUGIN
+
+Since 2023, ScoreDetect has helped several users protect their digital assets and increase their content authenticity.
+
+Now, we are bringing the power to **WordPress** with the Timestamps plugin. With fresh features, an eco-friendly and secure blockchain, active plugin updates, and active customer support.
+
+### FEATURES
 
 Here is a list of features included in the plugin:
 
@@ -31,25 +39,27 @@ __Gutenberg / Block Editor Ready__: We aim for the latest technology. The plugin
 
 __Classic Editor Ready__: The plugin is also ready for the __Classic Editor__, so you can use it with the editor you prefer.
 
+__Timestamps Shortcode__: You can use the `[timestamps]` shortcode to display the verification certificate on your posts, pages, or custom post types. In Gutenberg, type `/shortcode`, press Enter, and input the `[timestamps]` shortcode.
+
 __Screenshots Button__: Allow your users to easily timestamp their screenshots by adding a `[timestamps_screenshot]` shortcode button. Each screenshot is unique with a QR code, date/time, and certificate ID.
 
 __Privacy Protection__: We strive for privacy, therefore __only administrators__ with the __manage_options__ capability can have access to perform actions with this plugin.
 
 The plugin connects to the api.scoredetect.com service to create and update the verification certificates. The service is free to use with a 7-day free trial guarantee, and the plugin is free to use.
 
-### WooCommerce
+### WOOCOMMERCE SUPPORT
 
 The plugin is compatible with WooCommerce. You can timestamp your orders and products and protect your digital assets.
 
-### GDPR Compliant
+### GDPR COMPLIANT
 
 The plugin is GDPR compliant. It does not store any personal data. The plugin only stores the SHA-256 checksum of the content on the blockchain. The plugin does not store any personal data of the users. The plugin does not track any user data. The plugin does not use cookies. You can view all of the plugin code on https://plugins.svn.wordpress.org/timestamps/
 
-### SEO Friendly
+### SEO FRIENDLY
 
 We aim to make the plugin SEO friendly. By improving SEO in a way that enhances the user experience. Upon displaying timestamps of content, it encourages others to view you as having authority in your niche — intentionally standing out against the rest.
 
-### How to Use the Plugin
+### HOW TO GET STARTED
 
 1. First, you will need to properly install the Timestamps plugin.
 2. Activate the plugin in WordPress.
@@ -57,7 +67,7 @@ We aim to make the plugin SEO friendly. By improving SEO in a way that enhances 
 4. Click the "Save Changes" button.
 5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
 
-### Need Help?
+### NEED HELP?
 
 The plugin provides comprehensive customer support through email support@scoredetect.com.
 You can reach out to our support team at any time for assistance.

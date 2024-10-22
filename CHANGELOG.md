@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.8.1] - 2024-10-22
+
+### Changed
+* Updated readme.txt documentation by @michael-sumner in #46
+
+<!-- ... -->
 ## [1.8.0] - 2024-10-13
 
 ### Added
@@ -114,6 +120,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.8.1]: https://github.com/scoredetect/timestamps/compare/1.8.0...1.8.1
 [1.8.0]: https://github.com/scoredetect/timestamps/compare/1.7.0...1.8.0
 [1.7.0]: https://github.com/scoredetect/timestamps/compare/1.6.0...1.7.0
 [1.6.0]: https://github.com/scoredetect/timestamps/compare/1.5.0...1.6.0
