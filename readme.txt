@@ -13,6 +13,14 @@ No blockchain skills needed. Timestamp your WordPress content to empower your co
 == Description ==
 Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
 
+### SCOREDETECT: THE #1 WORDPRESS TIMESTAMPING PLUGIN
+
+Since 2023, ScoreDetect has helped several users protect their digital assets and increase their content authenticity.
+
+Now, we are bringing the power to **WordPress** with the Timestamps plugin. With fresh features, an eco-friendly and secure blockchain, active plugin updates, and active customer support.
+
+### FEATURES
+
 Here is a list of features included in the plugin:
 
 __Create a verification certificate__: You can enable timestamps for each post you work on. Upon every save, a __verification certificate__ is generated.
@@ -39,19 +47,19 @@ __Privacy Protection__: We strive for privacy, therefore __only administrators__
 
 The plugin connects to the api.scoredetect.com service to create and update the verification certificates. The service is free to use with a 7-day free trial guarantee, and the plugin is free to use.
 
-### WooCommerce
+### WOOCOMMERCE SUPPORT
 
 The plugin is compatible with WooCommerce. You can timestamp your orders and products and protect your digital assets.
 
-### GDPR Compliant
+### GDPR COMPLIANT
 
 The plugin is GDPR compliant. It does not store any personal data. The plugin only stores the SHA-256 checksum of the content on the blockchain. The plugin does not store any personal data of the users. The plugin does not track any user data. The plugin does not use cookies. You can view all of the plugin code on https://plugins.svn.wordpress.org/timestamps/
 
-### SEO Friendly
+### SEO FRIENDLY
 
 We aim to make the plugin SEO friendly. By improving SEO in a way that enhances the user experience. Upon displaying timestamps of content, it encourages others to view you as having authority in your niche — intentionally standing out against the rest.
 
-### How to Use the Plugin
+### HOW TO GET STARTED
 
 1. First, you will need to properly install the Timestamps plugin.
 2. Activate the plugin in WordPress.
@@ -59,7 +67,7 @@ We aim to make the plugin SEO friendly. By improving SEO in a way that enhances 
 4. Click the "Save Changes" button.
 5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
 
-### Need Help?
+### NEED HELP?
 
 The plugin provides comprehensive customer support through email support@scoredetect.com.
 You can reach out to our support team at any time for assistance.
