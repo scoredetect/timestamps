@@ -2,14 +2,14 @@
 /**
  * Screenshot feature.
  *
- * @since 1.5.0
+ * @since 1.9.0
  * @package  SDCOM_Timestamps
  */
 
 namespace SDCOM_Timestamps\Feature\Timestamp;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Utils as Psr7Utils;
+use SDCOM_Timestamps\Vendor_Prefixed\GuzzleHttp\Client;
+use SDCOM_Timestamps\Vendor_Prefixed\GuzzleHttp\Psr7\Utils as Psr7Utils;
 use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
