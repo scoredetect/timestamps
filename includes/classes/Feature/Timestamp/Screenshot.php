@@ -8,8 +8,8 @@
 
 namespace SDCOM_Timestamps\Feature\Timestamp;
 
-use GuzzleHttp\Client;
-use GuzzleHttp\Psr7\Utils as Psr7Utils;
+use SDCOM_Timestamps\Vendor_Prefixed\GuzzleHttp\Client;
+use SDCOM_Timestamps\Vendor_Prefixed\GuzzleHttp\Psr7\Utils as Psr7Utils;
 use SDCOM_Timestamps\Feature;
 use SDCOM_Timestamps\Utils;
 
