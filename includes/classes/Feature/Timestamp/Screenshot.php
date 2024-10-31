@@ -2,7 +2,7 @@
 /**
  * Screenshot feature.
  *
- * @since 1.5.0
+ * @since 1.9.0
  * @package  SDCOM_Timestamps
  */
 
