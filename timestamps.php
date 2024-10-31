@@ -51,8 +51,8 @@ if ( $is_local && file_exists( __DIR__ . '/dist/fast-refresh.php' ) ) {
 }
 
 // Require Composer autoloader if it exists.
-if ( file_exists( SDCOM_TIMESTAMPS_PATH . 'vendor/autoload.php' ) ) {
-	require_once SDCOM_TIMESTAMPS_PATH . 'vendor/autoload.php';
+if ( file_exists( __DIR__ . '/vendor-prefixed/autoload.php' ) ) {
+	require_once __DIR__ . '/vendor-prefixed/autoload.php';
 }
 
 /**
