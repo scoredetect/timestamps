@@ -71,6 +71,9 @@ class Timestamp extends Feature {
 		add_action( 'rest_insert_post', array( $this, 'save_post_meta_rest' ), 10, 2 );
 		add_filter( 'is_protected_meta', array( $this, 'is_protected_meta' ), 10, 3 );
 		add_shortcode( 'timestamps', array( $this, 'shortcode' ) );
+
+		// Oxygen Builder.
+		add_action( 'save_post', array( $this, 'save_post_meta_oxygenbuilder' ), 10, 2 );
 	}
 
 	/**
@@ -405,17 +408,92 @@ class Timestamp extends Feature {
 	}
 
 	/**
+	 * Save post meta data during an Oxygen Builder request.
+	 *
+	 * @param int     $post_id The post ID.
+	 * @param WP_Post $post The post object.
+	 * @since Oxygen Builder 4.9
+	 * @return void
+	 * @throws \Exception If an error occurs during the process.
+	 */
+	public function save_post_meta_oxygenbuilder( $post_id, $post ) {
+
+		if ( ! isset( $_GET['action'] ) || $_GET['action'] !== 'ct_save_components_tree' ) {
+			return;
+		}
+
+		$nonce   = isset( $_REQUEST['nonce'] ) ? sanitize_text_field( wp_unslash( $_REQUEST['nonce'] ) ) : '';
+		$post_id = isset( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : 0;
+
+		// Check nonce.
+		if ( ! isset( $nonce, $post_id ) || ! wp_verify_nonce( $nonce, 'oxygen-nonce-' . $post_id ) ) {
+			// This nonce is not valid.
+			die( 'Security check' );
+		}
+
+		// Check if user can edit this post.
+		if ( ! oxygen_vsb_current_user_can_access() ) {
+			die( 'Security check' );
+		}
+
+		$sdcom_timestamp_post = get_post_meta( $post_id, 'sdcom_timestamp_post', true );
+
+		$_ct_builder_json = get_post_meta( $post_id, '_ct_builder_json', true );
+
+		if ( ! empty( $sdcom_timestamp_post ) && ! empty( $_ct_builder_json ) ) {
+			try {
+				update_post_meta( $post_id, 'sdcom_timestamp_post', true );
+
+				$create_certificate = $this->create_certificate_post( $post, $_ct_builder_json );
+
+				// Handle the case where the method returned false.
+				if ( $create_certificate === false ) {
+					throw new \Exception( 'Create certificate failed.' );
+				}
+
+				$certificate_id = ! empty( $create_certificate->{'certificate'}->{'id'} ) ? $create_certificate->{'certificate'}->{'id'} : '';
+
+				// Handle the case where the certificate id is empty.
+				if ( empty( $certificate_id ) ) {
+					throw new \Exception( 'Certificate id is empty.' );
+				}
+
+				$update_certificate = $this->update_certificate_post( $post, $certificate_id, $_ct_builder_json );
+
+				// Handle the case where the method returned false.
+				if ( $update_certificate === false ) {
+					throw new \Exception( 'Update certificate failed.' );
+				}
+
+				// Bail early if the certificate id is empty.
+				if ( empty( $certificate_id ) ) {
+					throw new \Exception( 'Certificate id is empty.' );
+				}
+
+				// Update the post meta with the new certificate id.
+				update_post_meta( $post_id, 'sdcom_previous_certificate_id', $certificate_id );
+			} catch ( \Exception $e ) {
+				// Handle the exception
+				error_log( 'An error occurred: ' . $e->getMessage() );
+			}
+		} else {
+			delete_post_meta( $post_id, 'sdcom_timestamp_post' );
+		}
+	}
+
+	/**
 	 * Creates a certificate for a post.
 	 *
 	 * @param WP_Post $post The post to create a certificate for.
+	 * @param string  $post_content The post content. If empty, the post content will be used.
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Throwable If an exception occurs during the process.
 	 * @throws \Exception If the options, post content, or API key is empty.
 	 */
-	private function create_certificate_post( $post ) {
+	private function create_certificate_post( $post, $post_content = null ) {
 		try {
 			$post_id                       = $post->ID;
-			$post_content                  = $post->post_content;
+			$post_content                  = ! empty( $post_content ) ? $post_content : $post->post_content;
 			$sdcom_timestamps              = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 			$sdcom_previous_certificate_id = get_post_meta( $post_id, 'sdcom_previous_certificate_id', true );
 
@@ -507,13 +585,14 @@ class Timestamp extends Feature {
 	 *
 	 * @param WP_Post $post The post to update a certificate for.
 	 * @param string  $certificate_id The id of the certificate to update.
+	 * @param string  $post_content The post content. If empty, the post content will be used.
 	 * @return object|false The data returned by the API on success, or false on failure.
 	 * @throws \Exception If the certificate id, options, post content, or API key is empty.
 	 * @throws \Throwable If an exception occurs during the process.
 	 */
-	private function update_certificate_post( $post, $certificate_id ) {
+	private function update_certificate_post( $post, $certificate_id, $post_content = null ) {
 		try {
-			$post_content     = $post->post_content;
+			$post_content     = ! empty( $post_content ) ? $post_content : $post->post_content;
 			$sdcom_timestamps = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 
 			// Bail early if the certificate id is empty.
