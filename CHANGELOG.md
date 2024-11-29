@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.10.0] - 2024-11-29
+
+### Added
+* Added Oxygen Builder support by @michael-sumner in #55
+
+<!-- ... -->
 ## [1.9.0] - 2024-10-31
 
 ### Changed
@@ -126,6 +132,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.10.0]: https://github.com/scoredetect/timestamps/compare/1.9.0...1.10.0
 [1.9.0]: https://github.com/scoredetect/timestamps/compare/1.8.1...1.9.0
 [1.8.1]: https://github.com/scoredetect/timestamps/compare/1.8.0...1.8.1
 [1.8.0]: https://github.com/scoredetect/timestamps/compare/1.7.0...1.8.0
