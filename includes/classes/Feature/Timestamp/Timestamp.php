@@ -412,6 +412,7 @@ class Timestamp extends Feature {
 	 *
 	 * @param int     $post_id The post ID.
 	 * @param WP_Post $post The post object.
+	 * @since 1.10.0
 	 * @since Oxygen Builder 4.9
 	 * @return void
 	 * @throws \Exception If an error occurs during the process.
