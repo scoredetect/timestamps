@@ -527,7 +527,7 @@ class Timestamp extends Feature {
 		$sdcom_timestamp_post = get_post_meta( $post_id, 'sdcom_timestamp_post', true );
 
 		// Bail early if the sdcom_timestamp_post post meta is not set.
-		if ( ! empty( $sdcom_timestamp_post ) ) {
+		if ( empty( $sdcom_timestamp_post ) ) {
 			return;
 		}
 
