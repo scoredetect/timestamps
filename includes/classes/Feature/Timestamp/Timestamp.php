@@ -74,6 +74,9 @@ class Timestamp extends Feature {
 
 		// Oxygen Builder.
 		add_action( 'save_post', array( $this, 'save_post_meta_oxygenbuilder' ), 10, 2 );
+
+		// Thrive Themes Architect Page Builder.
+		add_filter( 'save_post', array( $this, 'save_post_meta_thrivethemesbuilder' ), 10, 2 );
 	}
 
 	/**
@@ -479,6 +482,95 @@ class Timestamp extends Feature {
 			}
 		} else {
 			delete_post_meta( $post_id, 'sdcom_timestamp_post' );
+		}
+	}
+
+	/**
+	 * Save post meta data during the Thrive Themes Architect Page Builder request.
+	 *
+	 * @param int     $post_id The post ID.
+	 * @param WP_Post $post The post object.
+	 * @since 1.11.0
+	 * @since Thrive Themes Architect Page Builder 10.4.2
+	 * @return void
+	 * @throws \Exception If an error occurs during the process.
+	 */
+	public function save_post_meta_thrivethemesbuilder( $post_id, $post ) {
+
+		// Bail early if it is a revision.
+		if ( wp_is_post_revision( $post_id ) ) {
+			return;
+		}
+
+		// Bail early if any function does not exist.
+		if ( ! function_exists( 'tve_get_post_meta' ) || ! function_exists( 'tve_update_post_meta' ) ) {
+			return;
+		}
+
+		$tcb_content = tve_get_post_meta( $post_id, 'tve_globals' );
+
+		// Bail early if the tcb_content is empty. This means that the post is not created with Thrive Themes Architect.
+		if ( empty( $tcb_content ) ) {
+			return;
+		}
+
+		// Bail early if the user does not have the required capabilities.
+		if ( ! current_user_can( 'edit_post', $post_id ) ) {
+			return;
+		}
+
+		// Bail early if we are not updating the post.
+		if ( ! isset( $_POST['update'] ) || $_POST['update'] !== 'true' ) {
+			return;
+		}
+
+		$sdcom_timestamp_post = get_post_meta( $post_id, 'sdcom_timestamp_post', true );
+
+		// Bail early if the sdcom_timestamp_post post meta is not set.
+		if ( ! empty( $sdcom_timestamp_post ) ) {
+			return;
+		}
+
+		// Check if 'TCB_Post' class is in the extracted classes.
+		$has_tcb_post_class = in_array( 'TCB_Post', array_column( debug_backtrace( DEBUG_BACKTRACE_IGNORE_ARGS ), 'class' ), true );
+
+		// Bail early if there is no TCB_Post class.
+		if ( ! $has_tcb_post_class ) {
+			return;
+		}
+
+		try {
+			$create_certificate = $this->create_certificate_post( $post );
+
+			// Handle the case where the method returned false.
+			if ( $create_certificate === false ) {
+				throw new \Exception( 'Create certificate failed.' );
+			}
+
+			$certificate_id = ! empty( $create_certificate->{'certificate'}->{'id'} ) ? $create_certificate->{'certificate'}->{'id'} : '';
+
+			// Handle the case where the certificate id is empty.
+			if ( empty( $certificate_id ) ) {
+				throw new \Exception( 'Certificate id is empty.' );
+			}
+
+			$update_certificate = $this->update_certificate_post( $post, $certificate_id );
+
+			// Handle the case where the method returned false.
+			if ( $update_certificate === false ) {
+				throw new \Exception( 'Update certificate failed.' );
+			}
+
+			// Bail early if the certificate id is empty.
+			if ( empty( $certificate_id ) ) {
+				throw new \Exception( 'Certificate id is empty.' );
+			}
+
+			// Update the post meta with the new certificate id.
+			tve_update_post_meta( $post_id, 'sdcom_previous_certificate_id', $certificate_id );
+		} catch ( \Exception $e ) {
+			// Handle the exception
+			error_log( 'An error occurred: ' . $e->getMessage() );
 		}
 	}
 
