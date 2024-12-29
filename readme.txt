@@ -1,10 +1,10 @@
-=== Timestamps – Blockchain Integration for WordPress ===
+=== Timestamps – SEO-friendly Blockchain Integration for WordPress ===
 Contributors: scoredetect, xmic
 Tags: timestamp, blockchain, content, authenticity, copyright
 Requires at least: 6.0.0
-Tested up to: 6.7
+Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 1.10.0
+Stable tag: 1.11.0
 License: AGPL-3.0-only
 License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 
@@ -15,7 +15,7 @@ Timestamps allow you to increase content authenticity by displaying a rich timel
 
 ### SCOREDETECT: THE #1 WORDPRESS TIMESTAMPING PLUGIN
 
-Since 2023, ScoreDetect has helped several users protect their digital assets and increase their content authenticity.
+Since 2023, ScoreDetect has helped several users and businesses protect their digital assets and increase their content authenticity.
 
 Now, we are bringing the power to **WordPress** with the Timestamps plugin. With fresh features, an eco-friendly and secure blockchain, active plugin updates, and active customer support.
 
@@ -68,6 +68,9 @@ We aim to make the plugin SEO friendly. By improving SEO in a way that enhances 
 5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
 
 ### NEED HELP?
+
+There are lots of Page Builders. We aim to make the plugin compatible with all of them.
+You can view the documentation for your Page Builder on https://docs.scoredetect.com/ for instructions.
 
 The plugin provides comprehensive customer support through email support@scoredetect.com.
 You can reach out to our support team at any time for assistance.
