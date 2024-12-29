@@ -1,4 +1,4 @@
-# Timestamps – Blockchain Integration for WordPress
+# Timestamps – SEO-friendly Blockchain Integration for WordPress
 
 > No blockchain skills needed. Timestamp your WordPress content to empower your content authenticity and increase user trust.
 
