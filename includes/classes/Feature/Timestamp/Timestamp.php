@@ -76,7 +76,7 @@ class Timestamp extends Feature {
 		add_action( 'save_post', array( $this, 'save_post_meta_oxygenbuilder' ), 10, 2 );
 
 		// Thrive Themes Architect Page Builder.
-		add_filter( 'save_post', array( $this, 'save_post_meta_thrivethemesbuilder' ), 10, 2 );
+		add_action( 'save_post', array( $this, 'save_post_meta_thrivethemesbuilder' ), 10, 2 );
 	}
 
 	/**
