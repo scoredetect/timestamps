@@ -589,6 +589,8 @@ class Timestamp extends Feature {
 			$post_content                  = ! empty( $post_content ) ? $post_content : $post->post_content;
 			$sdcom_timestamps              = get_option( SDCOM_TIMESTAMPS_OPTIONS );
 			$sdcom_previous_certificate_id = get_post_meta( $post_id, 'sdcom_previous_certificate_id', true );
+			$post_permalink                = get_permalink( $post_id );
+			$user_agent                    = isset( $_SERVER['HTTP_USER_AGENT'] ) ? sanitize_text_field( wp_unslash( $_SERVER['HTTP_USER_AGENT'] ) ) : '';
 
 			// Bail early if the options are empty.
 			if ( empty( $sdcom_timestamps ) ) {
@@ -630,13 +632,23 @@ class Timestamp extends Feature {
 				$form_data['previous_certificate_id'] = $sdcom_previous_certificate_id;
 			}
 
+			$headers = [
+				'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
+			];
+
+			if ( ! empty( $user_agent ) ) {
+				$headers['User-Agent'] = $user_agent;
+			}
+
+			if ( ! empty( $post_permalink ) ) {
+				$headers['X-ScoreDetect-Referer'] = $post_permalink;
+			}
+
 			$request = wp_remote_post(
 				$url,
 				array(
 					'timeout' => 30,
-					'headers' => array(
-						'Authorization' => 'Bearer ' . $sdcom_timestamps_api_key,
-					),
+					'headers' => $headers,
 					'body'    => $form_data,
 				)
 			);
