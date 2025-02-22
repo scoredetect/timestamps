@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.12.0] - 2025-02-22
+
+### Added
+* Added Badge URL to Certificate by @michael-sumner in #65
+
+<!-- ... -->
 ## [1.11.0] - 2024-12-29
 
 ### Added
@@ -138,6 +144,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.12.0]: https://github.com/scoredetect/timestamps/compare/1.11.0...1.12.0
 [1.11.0]: https://github.com/scoredetect/timestamps/compare/1.10.0...1.11.0
 [1.10.0]: https://github.com/scoredetect/timestamps/compare/1.9.0...1.10.0
 [1.9.0]: https://github.com/scoredetect/timestamps/compare/1.8.1...1.9.0
