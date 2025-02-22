@@ -287,7 +287,7 @@ class Screenshot extends Feature {
 				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : 'anonymous';
 			}
 
-			$url = 'https://api.scoredetect.com/create-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/create-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'file_upload',
@@ -383,7 +383,7 @@ class Screenshot extends Feature {
 				throw new \Exception( 'API key is empty.' );
 			}
 
-			$url = 'https://api.scoredetect.com/generate-certificate-id';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/generate-certificate-id';
 
 			$client = new Client();
 
@@ -459,7 +459,7 @@ class Screenshot extends Feature {
 				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : $sdcom_timestamps_username;
 			}
 
-			$url = 'https://api.scoredetect.com/update-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/update-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'file_upload',
@@ -548,7 +548,7 @@ class Screenshot extends Feature {
 				throw new \Exception( 'API key is empty.' );
 			}
 
-			$url = 'https://api.scoredetect.com/get-certificate/?id=' . $certificate_id;
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/get-certificate/?id=' . $certificate_id;
 
 			$request = wp_remote_get(
 				$url,
