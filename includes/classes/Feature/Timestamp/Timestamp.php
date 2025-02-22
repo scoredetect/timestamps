@@ -615,7 +615,7 @@ class Timestamp extends Feature {
 				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : 'anonymous';
 			}
 
-			$url = 'https://api.scoredetect.com/create-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/create-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'plain_text_upload',
@@ -728,7 +728,7 @@ class Timestamp extends Feature {
 				$sdcom_timestamps_username = ! empty( $sdcom_timestamps['username'] ) ? $sdcom_timestamps['username'] : $sdcom_timestamps_username;
 			}
 
-			$url = 'https://api.scoredetect.com/update-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/update-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'plain_text_upload',
