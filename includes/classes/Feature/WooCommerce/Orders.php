@@ -340,7 +340,7 @@ class Orders extends Feature {
 				$sdcom_timestamps_username = get_plugin_option( 'username', $sdcom_timestamps_username );
 			}
 
-			$url = 'https://api.scoredetect.com/create-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/create-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'plain_text_upload',
@@ -462,7 +462,7 @@ class Orders extends Feature {
 				$sdcom_timestamps_username = get_plugin_option( 'username', $sdcom_timestamps_username );
 			}
 
-			$url = 'https://api.scoredetect.com/update-certificate';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/update-certificate';
 
 			$metadata = array(
 				'certificateType'  => 'plain_text_upload',
@@ -726,7 +726,7 @@ class Orders extends Feature {
 				throw new \Exception( 'API key is empty.' );
 			}
 
-			$url = 'https://api.scoredetect.com/certificates/batch-delete';
+			$url = SDCOM_TIMESTAMPS_PUBLIC_API_URL . '/certificates/batch-delete';
 
 			$body = wp_json_encode(
 				array(
