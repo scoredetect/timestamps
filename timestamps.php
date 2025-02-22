@@ -40,6 +40,7 @@ define( 'SDCOM_TIMESTAMPS_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SDCOM_TIMESTAMPS_INC', SDCOM_TIMESTAMPS_PATH . 'includes/' );
 define( 'SDCOM_TIMESTAMPS_DIST_URL', SDCOM_TIMESTAMPS_URL . 'dist/' );
 define( 'SDCOM_TIMESTAMPS_DIST_PATH', SDCOM_TIMESTAMPS_PATH . 'dist/' );
+define( 'SDCOM_TIMESTAMPS_PUBLIC_API_URL', 'https://api.scoredetect.com' );
 
 $is_local_env = in_array( wp_get_environment_type(), array( 'local', 'development' ), true );
 $is_local_url = strpos( home_url(), '.test' ) || strpos( home_url(), '.local' );

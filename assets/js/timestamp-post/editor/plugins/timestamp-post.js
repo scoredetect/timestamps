@@ -39,6 +39,7 @@ export default () => {
 	);
 
 	const postId = useSelect((select) => select('core/editor').getCurrentPostId(), []);
+	const postPermalink = useSelect((select) => select('core/editor').getPermalink(), []);
 
 	// Check if it is a new post by checking if the post status is 'auto-draft'.
 	const isNewPost = useSelect(
@@ -55,9 +56,12 @@ export default () => {
 	const createCertificate = async ({ apiKey, formData }) => {
 		try {
 			const url = `${PUBLIC_API_URL}/create-certificate`;
+			const { userAgent } = navigator;
 
 			const headers = new Headers({
 				Authorization: `Bearer ${apiKey}`,
+				'User-Agent': userAgent,
+				'X-ScoreDetect-Referer': `${postPermalink}`,
 			});
 
 			const res = await fetch(url, {
