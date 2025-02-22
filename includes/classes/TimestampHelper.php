@@ -31,7 +31,6 @@ class TimestampHelper {
 	 *                               return the current global post inside the loop. A numerically valid post ID that
 	 *                               points to a non-existent post returns `null`. Defaults to global $post.
 	 * @return object|false          The data returned by the API on success, or false on failure.
-	 * @throws \Throwable            If an exception occurs during the process.
 	 * @throws \Exception            If the options, post content, or API key is empty.
 	 */
 	public function generate_timestamp_for_post( $post = null ) {
