@@ -74,11 +74,6 @@ class Screenshot extends Feature {
 	 */
 	public function scripts() {
 
-		// Bail early if the shortcode is not present.
-		if ( ! has_shortcode( get_the_content(), $this->shortcode ) ) {
-			return;
-		}
-
 		wp_enqueue_script(
 			'timestamps-screenshot-shortcode',
 			SDCOM_TIMESTAMPS_URL . '/dist/js/timestamps-screenshot-shortcode.js',
