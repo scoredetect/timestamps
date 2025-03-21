@@ -1,5 +1,5 @@
 === Timestamps – SEO-friendly Blockchain Integration for WordPress ===
-Contributors: scoredetect, xmic
+Contributors: scoredetect
 Tags: timestamp, seo, blockchain, content, authenticity
 Requires at least: 6.0.0
 Tested up to: 6.7.2
