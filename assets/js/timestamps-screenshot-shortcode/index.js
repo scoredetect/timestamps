@@ -9,7 +9,7 @@ import { __, sprintf } from '@wordpress/i18n';
 /**
  * External dependencies.
  */
-import html2canvas from 'html2canvas';
+import html2canvas from 'html2canvas-pro';
 import jsPDF from 'jspdf'; // eslint-disable-line import/no-extraneous-dependencies
 import autoTable from 'jspdf-autotable'; // eslint-disable-line import/no-extraneous-dependencies
 import QRCode from 'easyqrcodejs'; // eslint-disable-line import/no-extraneous-dependencies
