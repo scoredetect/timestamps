@@ -14,6 +14,16 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.12.1] - 2025-03-21
+
+### Fixed
+* Timestamps screenshot by @michael-sumner in #72 and #77
+
+### Changed
+* Readme updates by @michael-sumner in #73
+* Chore updates by @michael-sumner in #71
+
+<!-- ... -->
 ## [1.12.0] - 2025-02-22
 
 ### Added
@@ -144,6 +154,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.12.1]: https://github.com/scoredetect/timestamps/compare/1.12.0...1.12.1
 [1.12.0]: https://github.com/scoredetect/timestamps/compare/1.11.0...1.12.0
 [1.11.0]: https://github.com/scoredetect/timestamps/compare/1.10.0...1.11.0
 [1.10.0]: https://github.com/scoredetect/timestamps/compare/1.9.0...1.10.0
