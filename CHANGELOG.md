@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 ## [1.12.1] - 2025-03-21
 
 ### Fixed
-* Timestamps screenshot script by @michael-sumner in #72
+* Timestamps screenshot by @michael-sumner in #72 and #77
 
 ### Changed
 * Readme updates by @michael-sumner in #73
