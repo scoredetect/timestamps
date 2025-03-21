@@ -2,7 +2,7 @@
 /**
  * @license MIT
  *
- * Modified by ScoreDetect on 22-February-2025 using Strauss.
+ * Modified by ScoreDetect on 21-March-2025 using Strauss.
  * @see https://github.com/BrianHenryIE/strauss
  */
 
