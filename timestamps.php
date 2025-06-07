@@ -130,16 +130,6 @@ if ( defined( 'WP_CLI' ) && WP_CLI ) {
 }
 
 /**
- * Load text domain.
- *
- * @since 1.0.0
- */
-function setup_misc() {
-	load_plugin_textdomain( 'timestamps', false, basename( __DIR__ ) . '/languages' ); // Load any available translations first.
-}
-add_action( 'plugins_loaded', __NAMESPACE__ . '\setup_misc' );
-
-/**
  * Fires after the plugin is loaded.
  *
  * @since 1.0.0
