@@ -8,13 +8,13 @@
  * that starts the plugin.
  *
  * @link              https://www.scoredetect.com/
- * @since             1.12.1
+ * @since             1.13.0
  * @package           SDCOM_Timestamps
  *
  * @wordpress-plugin
  * Plugin Name:       Timestamps
  * Description:       Timestamp your WordPress content to empower your content authenticity and increase user trust. No blockchain skills needed.
- * Version:           1.12.1
+ * Version:           1.13.0
  * Author:            ScoreDetect.com
  * Author URI:        https://www.scoredetect.com/
  * License:           AGPL-3.0-only
@@ -33,7 +33,7 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 // Useful global constants.
-define( 'SDCOM_TIMESTAMPS_VERSION', '1.12.1' );
+define( 'SDCOM_TIMESTAMPS_VERSION', '1.13.0' );
 define( 'SDCOM_TIMESTAMPS_OPTIONS', 'sdcom_timestamps' );
 define( 'SDCOM_TIMESTAMPS_URL', plugin_dir_url( __FILE__ ) );
 define( 'SDCOM_TIMESTAMPS_PATH', plugin_dir_path( __FILE__ ) );
@@ -128,16 +128,6 @@ Screen::factory();
 if ( defined( 'WP_CLI' ) && WP_CLI ) {
 	WP_CLI::add_command( 'timestamps', __NAMESPACE__ . '\Command' );
 }
-
-/**
- * Load text domain.
- *
- * @since 1.0.0
- */
-function setup_misc() {
-	load_plugin_textdomain( 'timestamps', false, basename( __DIR__ ) . '/languages' ); // Load any available translations first.
-}
-add_action( 'plugins_loaded', __NAMESPACE__ . '\setup_misc' );
 
 /**
  * Fires after the plugin is loaded.
