@@ -7,9 +7,6 @@
 
 namespace SDCOM_Timestamps\Blocks\TimestampPost;
 
-use function SDCOM_Timestamps\Utils\is_block_editor_active;
-use function SDCOM_Timestamps\Utils\is_platform_script_in_content;
-
 /**
  * Hooks into WordPress lifecycle.
  */
@@ -22,10 +19,7 @@ function setup() {
  * Enqueue scripts.
  */
 function scripts() {
-	// Only enqueue the script if the block is being used and the platform script is not already in the content.
-	if ( ! is_platform_script_in_content() && is_block_editor_active() ) {
-		wp_enqueue_script( 'sdcom-timestamp-post-block', 'https://platform.scoredetect.com/widgets.js', array(), SDCOM_TIMESTAMPS_VERSION, true );
-	}
+	wp_enqueue_script( 'sdcom-timestamp-post-block', 'https://platform.scoredetect.com/widgets.js', array(), SDCOM_TIMESTAMPS_VERSION, true );
 }
 
 /**
