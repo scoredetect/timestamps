@@ -14,6 +14,16 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.13.0] - 2025-06-07
+
+### Fixed
+* Platform Script by @michael-sumner in #86
+
+### Changed
+* i18n improvements by @michael-sumner in #84 and #85
+* Chore updates by @michael-sumner in #87
+
+<!-- ... -->
 ## [1.12.1] - 2025-03-21
 
 ### Fixed
@@ -154,6 +164,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.13.0]: https://github.com/scoredetect/timestamps/compare/1.12.1...1.13.0
 [1.12.1]: https://github.com/scoredetect/timestamps/compare/1.12.0...1.12.1
 [1.12.0]: https://github.com/scoredetect/timestamps/compare/1.11.0...1.12.0
 [1.11.0]: https://github.com/scoredetect/timestamps/compare/1.10.0...1.11.0
