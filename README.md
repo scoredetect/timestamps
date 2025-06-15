@@ -1,6 +1,6 @@
 # Timestamps – SEO-friendly Blockchain Integration for WordPress
 
-> No blockchain skills needed. Timestamp your WordPress content to empower your content authenticity and increase user trust.
+> Help boost SEO. Timestamp your WordPress content to empower your content authenticity and increase user trust.
 
 [![Support Level](https://img.shields.io/badge/support-active-green.svg)](#support-level) [![Release Version](https://img.shields.io/github/release/scoredetect/timestamps.svg)](https://github.com/scoredetect/timestamps/releases/latest) [![AGPL-3.0-only](https://img.shields.io/github/license/scoredetect/timestamps.svg)](https://github.com/scoredetect/timestamps/blob/develop/LICENSE.md)
 
@@ -9,6 +9,8 @@
 ## Overview
 
 Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
+
+[![Plugin Walkthrough Video](https://img.youtube.com/vi/VLEu33H9jzs/maxresdefault.jpg)](https://www.youtube.com/watch?v=VLEu33H9jzs)
 
 ## Documentation
 
