@@ -15,6 +15,8 @@ Timestamps allow you to increase content authenticity by displaying a rich timel
 
 The Timestamps plugin offers SEO-friendly blockchain timestamping for content, enhancing Google’s E-E-A-T signals: Experience, Expertise, Authoritativeness, and Trustworthiness. It provides tamper-proof evidence of content creation time, boosting content authenticity and protecting intellectual property from theft. The plugin supports automated workflows for consistent timestamping, enabling real-time verification and improving user trust and engagement. ScoreDetect’s eco-friendly, gas-free system generates verification certificates quickly, helping businesses demonstrate verified content history and authority. This technology is positioned as a future-proof strategy for SEO and content protection in the evolving digital landscape.
 
+https://www.youtube.com/watch?v=VLEu33H9jzs
+
 ### SCOREDETECT: THE #1 WORDPRESS TIMESTAMPING PLUGIN
 
 Since 2023, ScoreDetect has helped several users and businesses protect their digital assets and increase their content authenticity.
