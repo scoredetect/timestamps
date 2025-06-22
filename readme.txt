@@ -11,9 +11,9 @@ License URI: https://spdx.org/licenses/AGPL-3.0-only.html
 Help boost SEO. Timestamp your WordPress content to empower your content authenticity and increase user trust.
 
 == Description ==
-Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
+__Timestamps allow you to increase content authenticity__ by displaying a __rich timeline of your post updates__. The timeline can be __independently verified by the public__.
 
-The Timestamps plugin offers SEO-friendly blockchain timestamping for content, enhancing Google’s E-E-A-T signals: Experience, Expertise, Authoritativeness, and Trustworthiness. It provides tamper-proof evidence of content creation time, boosting content authenticity and protecting intellectual property from theft. The plugin supports automated workflows for consistent timestamping, enabling real-time verification and improving user trust and engagement. ScoreDetect’s eco-friendly, gas-free system generates verification certificates quickly, helping businesses demonstrate verified content history and authority. This technology is positioned as a future-proof strategy for SEO and content protection in the evolving digital landscape.
+The __Timestamps plugin offers SEO-friendly blockchain timestamping__ for content, enhancing Google’s __E-E-A-T signals: Experience, Expertise, Authoritativeness, and Trustworthiness__. It provides __tamper-proof evidence of content creation time__, boosting content authenticity and __protecting intellectual property from theft__. The plugin supports __automated workflows for consistent timestamping__, enabling __real-time verification__ and improving __user trust and engagement__. ScoreDetect’s __eco-friendly, gas-free system__ generates verification certificates quickly, helping businesses __demonstrate verified content history and authority__. This technology is positioned as a __future-proof strategy for SEO and content protection__ in the evolving digital landscape.
 
 https://www.youtube.com/watch?v=VLEu33H9jzs
 
