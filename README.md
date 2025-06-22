@@ -10,7 +10,7 @@
 
 Timestamps allow you to increase content authenticity by displaying a rich timeline of your post updates. The timeline can be independently verified by the public.
 
-[![Plugin Walkthrough Video](https://img.youtube.com/vi/VLEu33H9jzs/maxresdefault.jpg)](https://www.youtube.com/watch?v=VLEu33H9jzs)
+[![Plugin Walkthrough Video](https://github.com/scoredetect/timestamps/blob/develop/docs/readme-video-walkthrough.png)](https://www.youtube.com/watch?v=VLEu33H9jzs)
 
 ## Documentation
 
