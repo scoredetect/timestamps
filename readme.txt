@@ -92,11 +92,16 @@ __Sample Verification Certificate in-action__: [https://explorer.scoredetect.com
 5. Enjoy! You can now visit any post, page, or custom post type; and timestamp your content!
 
 == Screenshots ==
-1. Connect to your ScoreDetect.com account - if you don’t have one yet, you can register at www.scoredetect.com
-2. Enable Timestamps for any WordPress content
-3. Display a Timestamp to improve your content authenticity and user experience
-4. Output a Verification Certificate to prove your content authenticity with a rich timeline
-5. Also works with any WordPress eCommerce plugin to help prove ownership and copyright protection of your products
+1. Search "scoredetect" and install and activate the plugin.
+2. Go to: Settings > Timestamps, and click the "Authenticate" button.
+3. Go through the Sign-in process. You can sign in with Gmail / Email and select a plan. We also offer a 7-day free trial guarantee.
+4. Adjust your settings as needed. For example, you will want to set the "Display Created By" to Active. This will show your authorship in all certificates in the WordPress site.
+5. Create a new post, or Edit an existing post. Make sure "Enable timestamps for this post" is Active. Wait 3-6 seconds. And you will see a popup appear. Your certificate has been created successfully!
+6. To display your hyperlinked Timestamp for the post, you can either use the [timestamps] shortcode. Or, use the "Timestamps" block. Both will display your Timestamp.
+7. The Timestamp will appear. Whenever you update this post, a new Timestamp will be generated. We associate the "previous timestamp" with the "new timestamp" to create a rich history of your content changing.
+8. The version here associates this timestamp certificate with a previous timestamp certificate. All the information here is additional proof of your 1 timestamp. We store this in the blockchain so it is publicly available and secure. Only the "Hash" of the content is stored. Never the content itself, for security purposes.
+9. The post we created earlier in the demo, gets referenced in the blockchain too. This makes it extremely difficult for someone else to claim the WordPress content as their own!
+10. The blockchain information. Everything here is what is found in the Timestamp certificate.
 
 == Frequently Asked Questions ==
 = What is the Timestamps plugin, and how can it benefit me? =
