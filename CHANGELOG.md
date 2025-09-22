@@ -14,6 +14,12 @@ All notable changes to this project will be documented in this file, per [the Ke
 -->
 
 <!-- ... -->
+## [1.13.3] - 2025-09-22
+
+### Fixed
+* Add null checks to prevent fatal errors in WooCommerce order object access by @michael-sumner in #98
+
+<!-- ... -->
 ## [1.13.2] - 2025-06-22
 
 ### Changed
@@ -176,6 +182,7 @@ All notable changes to this project will be documented in this file, per [the Ke
 - Initial plugin release
 
 [Unreleased]: https://github.com/scoredetect/timestamps/compare/trunk...develop
+[1.13.3]: https://github.com/scoredetect/timestamps/compare/1.13.2...1.13.3
 [1.13.2]: https://github.com/scoredetect/timestamps/compare/1.13.1...1.13.2
 [1.13.1]: https://github.com/scoredetect/timestamps/compare/1.13.0...1.13.1
 [1.13.0]: https://github.com/scoredetect/timestamps/compare/1.12.1...1.13.0
