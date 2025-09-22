@@ -96,6 +96,11 @@ class Orders extends Feature {
 		// Get the order object. Backwards compatibility for CPT-based orders.
 		$order = $order_or_order_id instanceof \WC_Order ? $order_or_order_id : wc_get_order( $order_or_order_id );
 
+		// Bail early if there is no valid order object.
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
+
 		if ( 'order_timestamps' !== $column_name ) {
 			return;
 		}
@@ -124,6 +129,11 @@ class Orders extends Feature {
 	public function woocommerce_new_order( $order_id ) {
 
 		$order = wc_get_order( $order_id );
+
+		// Bail early if there is no valid order object.
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
 
 		// Bail early if the order has already been timestamped.
 		$sdcom_is_timestamped = $order->get_meta( 'sdcom_is_timestamped' );
@@ -179,6 +189,11 @@ class Orders extends Feature {
 	public function woocommerce_update_order( $order_id ) {
 
 		$order = wc_get_order( $order_id );
+
+		// Bail early if there is no valid order object.
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return;
+		}
 
 		// Bail early if the the order has __not__ already been timestamped.
 		$sdcom_is_timestamped = $order->get_meta( 'sdcom_is_timestamped' );
@@ -532,6 +547,11 @@ class Orders extends Feature {
 	 */
 	public function timestamps_placeholder_wc_email( $_string, $email ): string {
 		$order = $email->object;
+
+		// Bail early if there is no order object (e.g., during email class initialization).
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return $_string;
+		}
 
 		$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
 
