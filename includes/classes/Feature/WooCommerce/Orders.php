@@ -533,6 +533,11 @@ class Orders extends Feature {
 	public function timestamps_placeholder_wc_email( $_string, $email ): string {
 		$order = $email->object;
 
+		// Bail early if there is no order object (e.g., during email class initialization).
+		if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+			return $_string;
+		}
+
 		$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
 
 		// Bail early if there is no previous certificate id.
