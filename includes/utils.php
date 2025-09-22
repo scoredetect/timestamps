@@ -93,6 +93,11 @@ function is_timestamps_woocommerce_orders_active(): bool {
  * @return string The certificate URL.
  */
 function get_certificate_url_wc_order( $order ): string {
+	// Bail early if there is no valid order object.
+	if ( ! $order || ! is_a( $order, 'WC_Order' ) ) {
+		return '';
+	}
+
 	$sdcom_previous_certificate_id = $order->get_meta( 'sdcom_previous_certificate_id' );
 
 	// Bail early if there is no previous certificate id.
